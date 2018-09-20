@@ -35,21 +35,38 @@ class Login extends React.Component {
     this.props.history.push('/signup')
   }
 
-  // handleOnSubmit = (e) => {
-  //   e.preventDefault();
-  //   fetch("http://localhost:3001/users", {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Accept': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       email: e.target.querySelector('input[name="email"]').value,
-  //       password: e.target.querySelector('input[name="password"]').value
-  //     })
-  //   })
-  //   this.props.history.push('/profile')
-  // }
+  handleSubmit = (e) => {
+    // debugger
+      e.preventDefault();
+      let data = JSON.stringify({
+        email: e.target.parentElement.querySelector('input[name="email"]').value,
+        password: e.target.parentElement.querySelector('input[name="password"]').value
+      });
+      fetch("http://localhost:3001/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: data
+      })
+        .then(res => {
+          // debugger
+          if (res.status === 204) {
+            alert("login failed");
+          } else {
+            return res.json();
+          }
+        })
+        .then(json => {
+          if(json !== undefined){
+            this.props.updateUser(json.user);
+            localStorage.setItem("token", json.token);
+            // console.log(json)
+          }
+        });
+      this.props.history.push('/profile')
+    };
 
 
   render() {
@@ -64,7 +81,7 @@ class Login extends React.Component {
                 <Form.Input onChange={this.handleChangePassword} fluid name='password' label='Password' placeholder='password' />
                 </Form.Group>
              <br/>
-              <Button primary>Log in</Button>
+              <Button primary onClick={this.handleSubmit}>Log in</Button>
               <Button onClick={this.signUpForm}>Sign up</Button>
           </Form>
         </div>

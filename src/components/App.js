@@ -59,7 +59,7 @@ updateUser = user => {
         <React.Fragment>
           <Route exact path="/signup" render={props=> <Signup {...props} updateUser= {this.updateUser} />} />
           <Route exact path="/profile" render={props=> <Profile user={this.state.user} />} />
-          <Route exact path='/login' render={props=> <Login {...props} updateUser={this.updateUser} />} /> 
+          <Route exact path='/login' render={props=> <Login {...props} updateUser={this.updateUser} />} />
         </React.Fragment>
       </BrowserRouter>
       <Navbar />
