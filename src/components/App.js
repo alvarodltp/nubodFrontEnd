@@ -4,7 +4,7 @@ import Signup from './Signup'
 import Login from './Login'
 import Profile from './Profile'
 import { BrowserRouter, Route } from 'react-router-dom'
-import Navbar from './Navbar'
+import Footer from './Footer'
 import ExerciseContainer from './ExerciseContainer'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
@@ -78,7 +78,7 @@ getAllExercises = () => {
             {this.state.user ? <Route exact path="/profile" render={props=> <Profile {...props} user={this.state.user} logOut={this.logOut} />} /> : null}
             <Route exact path='/login' render={props=> <Login {...props} updateUser={this.updateUser} />} />
             <Route exact path='/all-exercises' render={props=> <ExerciseContainer {...props} exercises={this.state.exercises}/>} />
-            <Navbar />
+            <Footer />
           </React.Fragment>
         </BrowserRouter>
       </div>

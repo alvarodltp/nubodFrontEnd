@@ -5,8 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Container } from 'semantic-ui-react'
 import { Header } from 'semantic-ui-react'
 
-
-
 class Signup extends React.Component {
 
   constructor(){
@@ -25,7 +23,6 @@ class Signup extends React.Component {
       [e.target.name]: e.target.value
     })
   }
-
 
   loginForm = () => {
     this.props.history.push('/login')
@@ -54,7 +51,7 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <Container>
+      <Container id="signup">
         <div className="ui one column stackable center aligned page grid">
           <div id="column-login" className="column twelve wide">
           <Form onSubmit={this.handleOnSubmit}>

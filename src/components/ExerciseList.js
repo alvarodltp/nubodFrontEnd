@@ -1,5 +1,5 @@
 import React from 'react'
-import { List, Container, Checkbox, Dropdown, Header, Icon, Modal, Image  } from 'semantic-ui-react'
+import { List, Container, Checkbox, Dropdown, Header, Icon, Modal, Image, Rating } from 'semantic-ui-react'
 
 class ExerciseList extends React.Component {
 
@@ -24,17 +24,20 @@ class ExerciseList extends React.Component {
       </Header>
 
 
-      <Modal trigger={<List divided selection>
+      <Modal trigger={
+      <List divided selection>
         {this.props.exercises.map(exercise => <List.Item onClick={() => this.props.exerciseInfo(exercise)}> {exercise.name} <Checkbox /> </List.Item> )}
       </List>}>
+      { this.props.clickedExercise ? <Modal.Header>{this.props.clickedExercise.name}</Modal.Header> :null }
 
-      <Modal.Header>Select a Photo</Modal.Header>
       <Modal.Content image>
-        <Image wrapped size='medium' src='/images/avatar/large/rachel.png' />
+         { this.props.clickedExercise ? <Image wrapped size='medium' src={this.props.clickedExercise.instruction_image}/> :null }
         <Modal.Description>
-          { this.props.clickedExercise ? <Header>{this.props.clickedExercise.name}</Header> :null }
-          <p>We've found the following gravatar image associated with your e-mail address.</p>
-          <p>Is it okay to use this photo?</p>
+          { this.props.clickedExercise ? <Header>Muscle Group: {this.props.clickedExercise.muscle_group.toUpperCase()}</Header> :null }
+          { this.props.clickedExercise ? <Header>Target: {this.props.clickedExercise.target.split("_").join(" ").toUpperCase()}</Header> :null }
+          { this.props.clickedExercise ? <p>Instructions: {this.props.clickedExercise.instructions}</p> :null }
+          { this.props.clickedExercise ? <p>Equipment: {this.props.clickedExercise.equipment_needed}</p> :null }
+          { this.props.clickedExercise ? <Rating maxRating={5} defaultRating={this.props.clickedExercise.rating} icon='star' size='small' /> :null }
         </Modal.Description>
       </Modal.Content>
       </Modal>
