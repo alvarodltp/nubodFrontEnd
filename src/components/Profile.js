@@ -3,7 +3,14 @@ import { Grid, Image, Form } from 'semantic-ui-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class Profile extends React.Component {
+
+
+handleSubmit= () => {
+  this.props.logOut()
+  this.props.history.push('/login')
+}
   render() {
+    // debugger
     return (
       <Grid>
         <Grid.Row>
@@ -52,6 +59,8 @@ class Profile extends React.Component {
           <Form.Select fluid label='Gender' placeholder='Gender' />
       </Grid.Column>
       </Grid.Row>
+
+        <button onClick={this.handleSubmit}>Log Out</button>
 
   </Grid>
     )

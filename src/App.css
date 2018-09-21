@@ -1,22 +1,36 @@
-html{
- background-color: white
+
+.App {
+ text-align: center;
 }
 
 body{
   background-color: white
 }
 
-#column-login{
+/* #column-login{
   margin-top: 200px;
-}
-
-/* #form-group {
-    margin-top: 200px;
 } */
+
+#form-group {
+    position: relative;
+}
 
 .profile-container {
   margin-top: 30px;
   width: 300px;
   margin: 0 auto
+}
 
+.navbar{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0;
+  text-align: center;
+  background-color: red;
+}
+
+#login-card {
+  margin: 400px;
 }

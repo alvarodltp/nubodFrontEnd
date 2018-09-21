@@ -19,33 +19,13 @@ class Signup extends React.Component {
     }
   }
 
-  handleChangeEmail = (e) => {
-    let email = e.target.value
+  handleChange = (e) => {
+
     this.setState({
-      email: email
+      [e.target.name]: e.target.value
     })
   }
 
-  handleChangePassword = (e) => {
-    let password = e.target.value
-    this.setState({
-      password: password
-    })
-  }
-
-  handleChangeName = (e) => {
-    let name = e.target.value
-    this.setState({
-      name: name
-    })
-  }
-
-  handleChangeLastName = (e) => {
-    let lastName = e.target.value
-    this.setState({
-      lastName: lastName
-    })
-  }
 
   loginForm = () => {
     this.props.history.push('/login')
@@ -55,10 +35,10 @@ class Signup extends React.Component {
     e.preventDefault();
     // debugger
     let userData = {user: {
-      first_name: e.target.querySelector('input[name="name"]').value,
-      last_name: e.target.querySelector('input[name="last-name"]').value,
-      email: e.target.querySelector('input[name="email"]').value,
-      password: e.target.querySelector('input[name="password"]').value
+      first_name: this.state.name,
+      last_name: this.state.lastName,
+      email: this.state.email,
+      password: this.state.password
     }}
     fetch("http://localhost:3001/users", {
       method: 'POST',
@@ -78,12 +58,12 @@ class Signup extends React.Component {
         <div className="ui one column stackable center aligned page grid">
           <div id="column-login" className="column twelve wide">
           <Form onSubmit={this.handleOnSubmit}>
-             <Form.Group id="form-group" widths='equal'>
+             <Form.Group>
                 <Header as='h2'>Sign Up!</Header>
-                <Form.Input id="name" onChange={this.handleChangeName} fluid name='name' label='Name' placeholder='name' />
-                <Form.Input onChange={this.handleChangeLastName} fluid name='last-name' label='Last Name' placeholder='last name' />
-                <Form.Input onChange={this.handleChangeEmail} fluid name='email' label='Email' placeholder='email' />
-                <Form.Input onChange={this.handleChangePassword} fluid name='password' label='Password' placeholder='password' />
+                <Form.Input value={this.state.name} id="name" onChange={this.handleChange} fluid name='name' label='Name' placeholder='name' />
+                <Form.Input value={this.state.lastName} onChange={this.handleChange} fluid name='lastName' label='Last Name' placeholder='last name' />
+                <Form.Input value={this.state.email} onChange={this.handleChange} fluid name='email' label='Email' placeholder='email' />
+                <Form.Input value={this.state.password} onChange={this.handleChange} fluid name='password' label='Password' placeholder='password' />
                 </Form.Group>
              <br/>
               <Button primary >Sign up</Button>

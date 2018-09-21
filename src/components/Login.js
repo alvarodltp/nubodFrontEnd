@@ -2,10 +2,8 @@ import React from 'react'
 import { Form } from 'semantic-ui-react'
 import { Button } from 'semantic-ui-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Container } from 'semantic-ui-react'
-import { Header } from 'semantic-ui-react'
-
-
+import { Container, Card } from 'semantic-ui-react'
+import { Header, Segment, Divider } from 'semantic-ui-react'
 
 class Login extends React.Component {
 
@@ -62,31 +60,33 @@ class Login extends React.Component {
           if(json !== undefined){
             this.props.updateUser(json.user);
             localStorage.setItem("token", json.token);
-            // console.log(json)
+            console.log(json)
+            this.props.history.push('/profile')
           }
         });
-      this.props.history.push('/profile')
     };
 
 
   render() {
-    return (
-      <Container>
-        <div className="ui one column stackable center aligned page grid">
-          <div id="column-login" className="column twelve wide">
-          <Form onSubmit={this.handleOnSubmit}>
-             <Form.Group id="form-group" widths='equal'>
-                <Header as='h2'>Login</Header>
-                <Form.Input onChange={this.handleChangeEmail} fluid name='email' label='Email' placeholder='email' />
-                <Form.Input onChange={this.handleChangePassword} fluid name='password' label='Password' placeholder='password' />
-                </Form.Group>
-             <br/>
-              <Button primary onClick={this.handleSubmit}>Log in</Button>
-              <Button onClick={this.signUpForm}>Sign up</Button>
-          </Form>
-        </div>
-      </div>
-    </Container>
+  return (
+
+<Card id="login-card" centered>
+  <Form onSubmit={this.handleOnSubmit}>
+    <Segment padded>
+    <Form.Group id="form-group" widths='equal'>
+       <Form.Input onChange={this.handleChangeEmail} fluid name='email' label='Email' placeholder='email' />
+       <Form.Input onChange={this.handleChangePassword} fluid name='password' label='Password' placeholder='password' />
+     </Form.Group>
+      <Button onClick={this.handleSubmit} primary fluid>
+        Login
+      </Button>
+      <Divider horizontal>Or</Divider>
+      <Button onClick={this.signUpForm} secondary fluid>
+        Sign Up Now
+      </Button>
+    </Segment>
+  </Form>
+</Card>
     )
   }
 }
