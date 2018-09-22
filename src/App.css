@@ -71,3 +71,12 @@ body{
 #profile-icons {
   padding-top: 60px;
 }
+
+#profile-info {
+  padding-top: 20px;
+  text-align: center;
+}
+
+#exercise-page {
+  text-align: center;
+}

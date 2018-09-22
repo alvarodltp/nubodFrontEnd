@@ -48,7 +48,7 @@ componentDidMount() {
   }
 
 updateUser = user => {
-  this.setState({ user });
+  this.setState( {user: user.user} );
 };
 
 logOut = () => {
@@ -68,17 +68,16 @@ getAllExercises = () => {
   })
 }
 
-
   render() {
     return (
       <div className="App">
         <BrowserRouter>
           <React.Fragment>
             <Route exact path="/signup" render={props=> <Signup {...props} updateUser= {this.updateUser} />} />
-            {this.state.user ? <Route exact path="/profile" render={props=> <Profile {...props} user={this.state.user} logOut={this.logOut} />} /> : null}
+            {this.state.user ? <Route exact path="/profile" render={props=> <Profile {...props} user={this.state.user} logOut={this.logOut}/>} /> : null}
             <Route exact path='/login' render={props=> <Login {...props} updateUser={this.updateUser} />} />
             <Route exact path='/all-exercises' render={props=> <ExerciseContainer {...props} exercises={this.state.exercises}/>} />
-            <Footer />
+            {this.state.user ? <Footer /> : null}
           </React.Fragment>
         </BrowserRouter>
       </div>

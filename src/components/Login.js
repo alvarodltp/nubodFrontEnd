@@ -57,10 +57,10 @@ class Login extends React.Component {
           }
         })
         .then(json => {
+          // debugger
           if(json !== undefined){
             this.props.updateUser(json.user);
             localStorage.setItem("token", json.token);
-            console.log(json)
             this.props.history.push('/profile')
           }
         });
