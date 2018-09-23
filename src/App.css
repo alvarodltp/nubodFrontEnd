@@ -12,7 +12,7 @@ body{
 } */
 
 #form-group {
-    position: relative;
+  position: relative;
 }
 
 .profile-container {
@@ -79,4 +79,5 @@ body{
 
 #exercise-page {
   text-align: center;
+  margin: 0 auto
 }

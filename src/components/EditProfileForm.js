@@ -20,7 +20,7 @@ class EditProfileForm extends React.Component {
           <Form.Input label="Bmr" name="bmr" onChange={this.props.handleChange} defaultValue={this.props.user.bmr}/>
           <Form.Input label="Calories" name="calories" onChange={this.props.handleChange} defaultValue={this.props.user.calories}/>
            <Form.Input label="Gender" name="gender" onChange={this.props.handleChange} defaultValue={this.props.user.gender}/>
-          <Form.Button color="blue">Save</Form.Button>
+          <Form.Button color="blue" onClick={this.props.updateUser(this.props.user)}>Save</Form.Button>
           </Form.Group>
         </Form>
     </Container>

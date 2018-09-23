@@ -1,5 +1,6 @@
 import React from 'react'
 import ExerciseList from './ExerciseList'
+import { Input } from 'semantic-ui-react'
 
 class ExerciseContainer extends React.Component {
   constructor(){
@@ -29,7 +30,8 @@ class ExerciseContainer extends React.Component {
     render(){
     return(
     <div>
-      {this.props.exercises ? <ExerciseList exercises={this.props.exercises} exerciseInfo={this.exerciseInfo} clickedExercise={this.state.clickedExercise}/> : null }
+      <Input onChange={this.props.filterExercises} icon='search' placeholder='Search...' />
+      {this.props.exercises ? <ExerciseList searchedExerciseArr={this.props.searchedExerciseArr} exercises={this.props.exercises} exerciseInfo={this.exerciseInfo} clickedExercise={this.state.clickedExercise} /> : null }
     </div>
     )
   }

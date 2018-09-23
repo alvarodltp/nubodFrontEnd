@@ -6,10 +6,10 @@ class Footer extends React.Component {
     return(
         <div id="footer" className="ui vertical footer segment form-page">
           <div className="container space-around">
-            <FontAwesomeIcon icon="user" size="3x"/>
+            <FontAwesomeIcon onClick={this.props.userPage} icon="user" size="3x"/>
             <FontAwesomeIcon icon="calendar" size="3x"/>
             <FontAwesomeIcon icon="plus" size="3x"/>
-            <FontAwesomeIcon icon="dumbbell" size="3x"/>
+            <FontAwesomeIcon onClick={this.props.exercisesPage} icon="dumbbell" size="3x"/>
             <FontAwesomeIcon icon="heart" size="3x"/>
           </div>
         </div>

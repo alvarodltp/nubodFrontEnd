@@ -32,7 +32,8 @@ class App extends Component {
       super();
       this.state = {
         user: null,
-        exercises: []
+        exercises: null,
+        searchedExerciseArr: null
       };
     }
 
@@ -63,8 +64,26 @@ getAllExercises = () => {
   .then(response => response.json())
   .then(json => {
     this.setState({
-      exercises: json
+      exercises: json,
+      searchedExerciseArr: json
     })
+  })
+}
+
+exercisesPage = (e) => {
+  this.props.history.push('/all-exercises')
+}
+
+userPage = () => {
+  this.props.history.push('/profile')
+}
+
+filterExercises = (e) => {
+  let searchedTerm = e.target.value.toLowerCase()
+  let allExercises = [...this.state.exercises]
+  let filtered = allExercises.filter(exercise => exercise.name.toLowerCase().includes(searchedTerm))
+  this.setState({
+  searchedExerciseArr: filtered
   })
 }
 
@@ -76,8 +95,8 @@ getAllExercises = () => {
             <Route exact path="/signup" render={props=> <Signup {...props} updateUser= {this.updateUser} />} />
             {this.state.user ? <Route exact path="/profile" render={props=> <Profile {...props} user={this.state.user} logOut={this.logOut}/>} /> : null}
             <Route exact path='/login' render={props=> <Login {...props} updateUser={this.updateUser} />} />
-            <Route exact path='/all-exercises' render={props=> <ExerciseContainer {...props} exercises={this.state.exercises}/>} />
-            {this.state.user ? <Footer /> : null}
+            <Route exact path='/all-exercises' render={props=> <ExerciseContainer {...props} exercises={this.state.exercises} filterExercises={this.filterExercises} searchedExerciseArr={this.state.searchedExerciseArr}/>} />
+            {this.state.user ? <Footer exercisesPage={this.exercisesPage} user={this.userPage} /> : null }
           </React.Fragment>
         </BrowserRouter>
       </div>

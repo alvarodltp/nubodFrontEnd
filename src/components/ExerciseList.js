@@ -4,32 +4,14 @@ import { List, Container, Checkbox, Dropdown, Header, Icon, Modal, Image, Rating
 class ExerciseList extends React.Component {
 
   render(){
-    // debugger
     return(
-      <Container id="exercise-page">
-      <Header as='h4'>
-        <Icon name='search' />
-        <Header.Content>
-          Muscle Group
-          <Dropdown inline header='Adjust time span' />
-        </Header.Content>
-      </Header>
-
-      <Header as='h4'>
-        <Icon name='search' />
-        <Header.Content>
-        Category
-          <Dropdown inline header='Adjust time span' />
-        </Header.Content>
-      </Header>
-
-
+      <div id="exercise-page">
       <Modal trigger={
       <List divided selection>
-        {this.props.exercises.map(exercise => <List.Item onClick={() => this.props.exerciseInfo(exercise)}> {exercise.name} <Checkbox /> </List.Item> )}
+        {this.props.searchedExerciseArr.map(exercise => <List.Item onClick={() => this.props.exerciseInfo(exercise)}> {exercise.name} </List.Item> )}
       </List>}>
-      { this.props.clickedExercise ? <Modal.Header>{this.props.clickedExercise.name}</Modal.Header> :null }
 
+      { this.props.clickedExercise ? <Modal.Header>{this.props.clickedExercise.name}</Modal.Header> :null }
       <Modal.Content image>
          { this.props.clickedExercise ? <Image wrapped size='medium' src={this.props.clickedExercise.instruction_image}/> :null }
         <Modal.Description>
@@ -42,7 +24,7 @@ class ExerciseList extends React.Component {
       </Modal.Content>
       </Modal>
 
-      </Container>
+      </div>
     )
   }
 }

@@ -42,9 +42,32 @@ handleChange = (e) => {
   })
 }
 
-// updateUser = () => {
-//   fetch()
-// }
+updateUser = (user) => {
+  let id = user.id
+  fetch(`http://localhost:3001/user/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        user: {
+          first_name: this.state.first_name,
+          last_name: this.state.last_name,
+          user_name: this.state.user_name,
+          weight: this.state.weight,
+          age: this.state.age,
+          goal: this.state.goal,
+          gender: this.state.gender,
+          activity_level: this.state.activity_level,
+          email: this.state.email,
+          location: this.state.location,
+          bmr: this.state.bmr,
+          calories: this.state.calories,
+          body_fat: this.state.body_fat
+        }
+      })
+    });
+}
 
   render() {
 
@@ -79,7 +102,7 @@ handleChange = (e) => {
         {this.props.user ? <h1>Bmr: {this.props.user.bmr}</h1> : null}
         {this.props.user ? <h1>Calories: {this.props.user.calories}</h1> : null}
         {this.props.user ? <h1>Gender: {this.props.user.gender}</h1> : null}
-      </div> : <EditProfileForm user={this.props.user} handleChange={this.handleChange}/>}
+      </div> : <EditProfileForm user={this.props.user} handleChange={this.handleChange} updateUser={this.updateUser}/>}
 
       </React.Fragment>
 
