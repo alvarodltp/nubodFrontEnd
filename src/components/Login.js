@@ -58,6 +58,7 @@ class Login extends React.Component {
         .then(json => {
           // debugger
           if(json !== undefined){
+            console.log("handleSubmit")
             this.props.updateUser(json.user);
             localStorage.setItem("token", json.token);
             this.props.history.push('/profile')

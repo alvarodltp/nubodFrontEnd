@@ -1,7 +1,5 @@
 import React from 'react'
-import { Container, Form, Grid, Button } from 'semantic-ui-react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import { Form, Grid, Button } from 'semantic-ui-react'
 
 class EditProfileForm extends React.Component {
   render(){
@@ -48,16 +46,11 @@ class EditProfileForm extends React.Component {
             <Grid.Column>
               <Form.Input label="Bmr" name="bmr" onChange={this.props.handleChange} defaultValue={this.props.user.bmr}/>
             </Grid.Column>
-            <Grid.Column>
-              <Form.Input label="Calories" name="calories" onChange={this.props.handleChange} defaultValue={this.props.user.calories}/>
-            </Grid.Column>
           </Grid.Row>
 
           <div id="profile-edit-button">
-            <Button id="edit-button" color="gray" onClick={this.props.updateUser(this.props.user)}>Save</Button>
-            <FontAwesomeIcon icon="arrow-left" size="2x"/>
+            <Button id="edit-button" color="gray">Save</Button>
           </div>
-
         </Grid>
 
 

@@ -10,7 +10,8 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import WorkoutContainer from './WorkoutContainer'
 import Navbar from './Navbar'
-// import { far } from '@fortawesome/pro-regular-svg-icons'
+import EditProfileForm from './EditProfileForm'
+
 library.add(fas)
 
 const requestHelper = url =>
@@ -99,15 +100,6 @@ addExerciseToWorkout = (exercise) => {
   }
   )
 }
-//
-// changeColor = () => {
-//   const exercisesNames = this.state.exercises.map(exercise => exercise.name)
-//   const exercisesNamesToChangeColor = this.state.newWorkout.map(exercise => exercise.name)
-//   let check =  exercisesNamesToChangeColor.some(r=> exercisesNames.includes(r))
-//   //for each exercise in exercisesNames, change color of the one clicked
-//
-//   }
-
 
   render() {
     return (
@@ -116,11 +108,11 @@ addExerciseToWorkout = (exercise) => {
           <React.Fragment>
             <Route render={props=> <Navbar {...props} logOut={this.logOut} user={this.state.user} />} />
             <Route exact path="/signup" render={props=> <Signup {...props} updateUser= {this.updateUser} />} />
-            {this.state.user ? <Route exact path="/profile" render={props=> <Profile {...props} user={this.state.user} />} /> : null}
+            <Route exact path="/profile" render={props=> <Profile {...props} user={this.state.user} updateUser={this.updateUser}/> } />
             <Route exact path='/login' render={props=> <Login {...props} updateUser={this.updateUser} />} />
             <Route exact path='/all-exercises' render={props=> <ExerciseContainer {...props} changeColor={this.changeColor} displayNewWorkout={this.displayNewWorkout} addExerciseToWorkout={this.addExerciseToWorkout} exercises={this.state.exercises} filterExercises={this.filterExercises} searchedExerciseArr={this.state.searchedExerciseArr}/>} />
             <Route exact path='/workout' render={props=> <WorkoutContainer {...props} newWorkout={this.state.newWorkout} />} />
-            {this.state.user ? <Footer exercisesPage={this.exercisesPage} user={this.userPage} /> : null }
+            { this.state.user ? <Footer exercisesPage={this.exercisesPage} user={this.userPage} /> : null }
           </React.Fragment>
         </BrowserRouter>
       </div>
