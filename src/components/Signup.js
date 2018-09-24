@@ -1,7 +1,6 @@
 import React from 'react'
 import { Form } from 'semantic-ui-react'
 import { Button } from 'semantic-ui-react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Container } from 'semantic-ui-react'
 import { Header } from 'semantic-ui-react'
 

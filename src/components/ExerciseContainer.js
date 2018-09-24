@@ -17,21 +17,11 @@ class ExerciseContainer extends React.Component {
     })
   }
 
-  // showModal = () => {
-  //   this.setState({ show: true });
-  // };
-  //
-  // hideModal = () => {
-  //   this.setState({ show: false });
-  // };
-
-  //create a function that will show the modal with the exercise objext on click of the exercise. Use event? How will you get the exercise object?
-
     render(){
     return(
-    <div>
-      <Input onChange={this.props.filterExercises} icon='search' placeholder='Search...' />
-      {this.props.exercises ? <ExerciseList searchedExerciseArr={this.props.searchedExerciseArr} exercises={this.props.exercises} exerciseInfo={this.exerciseInfo} clickedExercise={this.state.clickedExercise} /> : null }
+    <div id="all-exercises">
+      <Input id="seach-bar" onChange={this.props.filterExercises} icon='search' placeholder='Search...' />
+      {this.props.exercises ? <ExerciseList changeColor={this.props.changeColor} displayNewWorkout={this.props.displayNewWorkout} addExerciseToWorkout={this.props.addExerciseToWorkout} searchedExerciseArr={this.props.searchedExerciseArr} exercises={this.props.exercises} exerciseInfo={this.exerciseInfo} clickedExercise={this.state.clickedExercise} /> : null }
     </div>
     )
   }

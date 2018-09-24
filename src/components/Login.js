@@ -1,9 +1,8 @@
 import React from 'react'
 import { Form } from 'semantic-ui-react'
 import { Button } from 'semantic-ui-react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Container, Card } from 'semantic-ui-react'
-import { Header, Segment, Divider } from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react'
+import { Segment, Divider } from 'semantic-ui-react'
 
 class Login extends React.Component {
 
