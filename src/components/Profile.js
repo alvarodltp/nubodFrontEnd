@@ -134,7 +134,7 @@ updateUser = (user) => {
           </div>
 
         </Grid>
-          : <EditProfileForm user={this.props.user} handleChange={this.handleChange} updateUser={this.updateUser}/>}
+          : <EditProfileForm user={this.props.user} handleChange={this.handleChange} />}
         </React.Fragment>
     )
   }

@@ -35,6 +35,7 @@ class App extends Component {
       super();
       this.state = {
         user: null,
+        userToUpdate: null,
         exercises: null,
         searchedExerciseArr: null,
         newWorkout: []
@@ -55,6 +56,10 @@ componentDidMount() {
 updateUser = user => {
   this.setState( {user: user.user} );
 };
+
+userToUpdateOnForm = (user) => {
+  this.setState( {user: user.user } )
+}
 
 logOut = () => {
   localStorage.clear()
@@ -78,9 +83,6 @@ exercisesPage = (e) => {
   this.props.history.push('/all-exercises')
 }
 
-userPage = () => {
-  this.props.history.push('/profile')
-}
 
 filterExercises = (e) => {
   let searchedTerm = e.target.value.toLowerCase()
@@ -108,10 +110,11 @@ addExerciseToWorkout = (exercise) => {
           <React.Fragment>
             <Route render={props=> <Navbar {...props} logOut={this.logOut} user={this.state.user} />} />
             <Route exact path="/signup" render={props=> <Signup {...props} updateUser= {this.updateUser} />} />
-            <Route exact path="/profile" render={props=> <Profile {...props} user={this.state.user} updateUser={this.updateUser}/> } />
+            <Route exact path="/profile" render={props=> <Profile {...props} user={this.state.user} /> } />
             <Route exact path='/login' render={props=> <Login {...props} updateUser={this.updateUser} />} />
             <Route exact path='/all-exercises' render={props=> <ExerciseContainer {...props} changeColor={this.changeColor} displayNewWorkout={this.displayNewWorkout} addExerciseToWorkout={this.addExerciseToWorkout} exercises={this.state.exercises} filterExercises={this.filterExercises} searchedExerciseArr={this.state.searchedExerciseArr}/>} />
             <Route exact path='/workout' render={props=> <WorkoutContainer {...props} newWorkout={this.state.newWorkout} />} />
+            
             { this.state.user ? <Footer exercisesPage={this.exercisesPage} user={this.userPage} /> : null }
           </React.Fragment>
         </BrowserRouter>

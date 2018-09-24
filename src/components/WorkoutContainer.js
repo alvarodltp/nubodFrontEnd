@@ -3,6 +3,15 @@ import WorkoutDetail from './WorkoutDetail'
 
 class WorkoutContainer extends React.Component {
 
+  getUserWorkouts = () => {
+    fetch("http://localhost:3001/workouts")
+    .then(response => response.json())
+    .then(json => {
+      console.log(json)
+    })
+  }
+
+
   render(){
     return(
     <div>
