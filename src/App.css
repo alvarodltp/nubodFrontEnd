@@ -141,3 +141,15 @@ body{
    background-position: 100% 100%;
    background-repeat: no-repeat;
 }
+
+#workout-container {
+  text-align: center;
+  padding-top: 30px;
+  margin: 0 auto
+}
+
+#workout-history{
+  text-align: center;
+  padding-top: 30px;
+  margin: 0 auto
+}
