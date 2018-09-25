@@ -58,7 +58,6 @@ class Login extends React.Component {
         .then(json => {
           // debugger
           if(json !== undefined){
-            console.log("handleSubmit")
             this.props.updateUser(json.user);
             localStorage.setItem("token", json.token);
             this.props.history.push('/profile')
@@ -77,11 +76,11 @@ class Login extends React.Component {
        <Form.Input onChange={this.handleChangeEmail} fluid name='email' label='Email' placeholder='email' />
        <Form.Input onChange={this.handleChangePassword} fluid name='password' label='Password' placeholder='password' />
      </Form.Group>
-      <Button onClick={this.handleSubmit} primary fluid>
+      <Button id="log-in" onClick={this.handleSubmit} primary fluid>
         Login
       </Button>
       <Divider horizontal>Or</Divider>
-      <Button onClick={this.signUpForm} secondary fluid>
+      <Button id="sign-up" onClick={this.signUpForm} secondary fluid>
         Sign Up Now
       </Button>
     </Segment>

@@ -7,19 +7,6 @@ class Profile extends React.Component {
     super()
     this.state = {
       edit: false,
-      first_name: "",
-      last_name: "",
-      user_name: "",
-      weight: "",
-      age: "",
-      goal: "",
-      gender: "",
-      activity_level: "",
-      email: "",
-      location: "",
-      bmr: "",
-      calories: "",
-      body_fat: ""
     }
   }
 
@@ -36,7 +23,7 @@ handleChange = (e) => {
   })
 }
 
-updateUser = (user) => {
+updateUser = () => {
   fetch(`http://localhost:3001/user-update`, {
       method: "PATCH",
       headers: {
@@ -64,6 +51,7 @@ updateUser = (user) => {
 }
 
   render() {
+    // debugger
     return (
       <React.Fragment>
       <div id='header-site'>
@@ -134,10 +122,12 @@ updateUser = (user) => {
           </div>
 
         </Grid>
-          : <EditProfileForm user={this.props.user} handleChange={this.handleChange} />}
+          : <EditProfileForm user={this.props.user} handleChange={this.handleChange} updateUser={this.updateUser} />}
         </React.Fragment>
     )
   }
 }
+
+
 
 export default Profile

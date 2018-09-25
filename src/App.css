@@ -12,7 +12,9 @@ body{
 } */
 
 #form-group {
-  position: relative;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
 .profile-container {
@@ -33,7 +35,7 @@ body{
 
 #login-card {
  position: fixed;
- top: 50%;
+ top: 40%;
  left: 50%;
  transform: translate(-50%, -50%);
 }
@@ -148,8 +150,24 @@ body{
   margin: 0 auto
 }
 
-#workout-history{
-  text-align: center;
-  padding-top: 30px;
-  margin: 0 auto
+#workout-options {
+  padding-top: 230px;
+  font-size: 30px;
+}
+
+#date-container{
+  padding-top: 50px;
+  float: left;
+}
+
+#date-segment {
+  font-size: 15px;
+}
+
+#date-segment:hover {
+background-color: lightgray;
+}
+
+#close-icon-modal {
+  float: right;
 }

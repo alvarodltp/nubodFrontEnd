@@ -2,13 +2,14 @@ import React from 'react'
 import { Form, Grid, Button } from 'semantic-ui-react'
 
 class EditProfileForm extends React.Component {
-  render(){
+  render (){
+  console.log(this.props)
     return(
     <React.Fragment>
       <Grid id="profile-info" columns='three' divided>
           <Grid.Row>
             <Grid.Column>
-              <Form.Input label="First Name" name='first_name' onChange={this.props.handleChange} defaultValue={this.props.user.first_name} name="first_name" />
+              <Form.Input label="First Name" name='first_name' onChange={this.props.handleChange} defaultValue={this.props.user.first_name}/>
             </Grid.Column>
             <Grid.Column>
               <Form.Input label="Last Name" name="last_name" onChange={this.props.handleChange} defaultValue={this.props.user.last_name}/>
@@ -49,7 +50,7 @@ class EditProfileForm extends React.Component {
           </Grid.Row>
 
           <div id="profile-edit-button">
-            <Button id="edit-button" color="gray">Save</Button>
+          <Button id="edit-button" color="gray" onClick={this.props.updateUser}>Save</Button>
           </div>
         </Grid>
 

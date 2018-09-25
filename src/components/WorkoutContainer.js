@@ -6,8 +6,8 @@ class WorkoutContainer extends React.Component {
   render(){
     return(
     <div id="workout-container">
-      <WorkoutHistory />
-      <WorkoutDetail newWorkout={this.props.newWorkout} addExerciseToWorkout={this.props.addExerciseToWorkout}/>
+      <WorkoutHistory workouts={this.props.workouts} />
+      <WorkoutDetail newWorkout={this.props.newWorkout} addExerciseToWorkout={this.props.addExerciseToWorkout} />
     </div>
     )
   }

@@ -26,7 +26,6 @@ class ExerciseList extends React.Component {
   }
 
 
-
   render(){
     return(
       <div  id="exercise-page">
@@ -35,7 +34,7 @@ class ExerciseList extends React.Component {
           {this.props.searchedExerciseArr.map(exercise =>
         <List.Item id={exercise.id} onClick={() => {this.props.exerciseInfo(exercise); this.open();}}> {exercise.name} </List.Item> )}
         </List>}>
-        { this.props.clickedExercise ? <Modal.Header>{this.props.clickedExercise.name}</Modal.Header> :null }
+        { this.props.clickedExercise ? <Modal.Header>{this.props.clickedExercise.name} <FontAwesomeIcon onClick={this.close} id="close-icon-modal" icon="times" size="1x"/> </Modal.Header> :null }
         <Modal.Content image>
            { this.props.clickedExercise ? <Image wrapped size='medium' src={this.props.clickedExercise.instruction_image}/> :null }
           <Modal.Description>
@@ -45,6 +44,7 @@ class ExerciseList extends React.Component {
             { this.props.clickedExercise ? <p>Equipment: {this.props.clickedExercise.equipment_needed}</p> :null }
             { this.props.clickedExercise ? <Rating maxRating={5} defaultRating={this.props.clickedExercise.rating} icon='star' size='small' /> :null }
             { this.props.clickedExercise ? <FontAwesomeIcon id={this.props.clickedExercise.id} onClick={() => {this.props.addExerciseToWorkout(this.props.clickedExercise); this.close();}} icon="plus-circle" size="2x"/> : null }
+
           </Modal.Description>
         </Modal.Content>
         </Modal>

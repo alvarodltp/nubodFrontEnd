@@ -11,6 +11,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import WorkoutContainer from './WorkoutContainer'
 import Navbar from './Navbar'
 import WorkoutHistory from './WorkoutHistory'
+import WorkoutOptions from './WorkoutOptions'
 
 library.add(fas)
 
@@ -39,9 +40,11 @@ class App extends Component {
         exercises: null,
         searchedExerciseArr: null,
         newWorkout: [],
-        workouts: null
+        workouts: null,
+        selectedWorkoutHistory: null
       };
     }
+
 
 fetchUser = () => {
   requestHelper("http://localhost:3001/profile").then(this.updateUser);
@@ -85,7 +88,6 @@ getUserWorkouts = () => {
   fetch("http://localhost:3001/workouts")
   .then(response => response.json())
   .then(workouts => {
-    console.log(workouts)
       this.setState({
       workouts: workouts
     })
@@ -115,6 +117,11 @@ addExerciseToWorkout = (exercise) => {
   )
 }
 
+displayWorkout = (workoutObj) => {
+  this.setState({
+    selectedWorkoutHistory: workoutObj
+  })
+}
 
   render() {
     return (
@@ -123,11 +130,12 @@ addExerciseToWorkout = (exercise) => {
           <React.Fragment>
             <Route render={props=> <Navbar {...props} logOut={this.logOut} user={this.state.user} />} />
             <Route exact path="/signup" render={props=> <Signup {...props} updateUser= {this.updateUser} />} />
-            <Route exact path="/profile" render={props=> <Profile {...props} user={this.state.user} /> } />
+            {this.state.user ? <Route exact path="/profile" render={props=> <Profile {...props} user={this.state.user} first_name={this.state.first_name}/> } /> : null }
             <Route exact path='/login' render={props=> <Login {...props} updateUser={this.updateUser} />} />
-            <Route exact path='/all-exercises' render={props=> <ExerciseContainer {...props} changeColor={this.changeColor} displayNewWorkout={this.displayNewWorkout} addExerciseToWorkout={this.addExerciseToWorkout} exercises={this.state.exercises} filterExercises={this.filterExercises} searchedExerciseArr={this.state.searchedExerciseArr}/>} />
-            <Route exact path='/workout' render={props=> <WorkoutContainer {...props} newWorkout={this.state.newWorkout} />} />
-            { this.state.workouts ? <Route exact path='/workout-history' render={props=> <WorkoutHistory {...props} workouts={this.state.workouts}/>} /> : null }
+            { this.props.workouts ? <Route exact path='/all-exercises' render={props=> <ExerciseContainer {...props} changeColor={this.changeColor} displayNewWorkout={this.displayNewWorkout} addExerciseToWorkout={this.addExerciseToWorkout} exercises={this.state.exercises} filterExercises={this.filterExercises} searchedExerciseArr={this.state.searchedExerciseArr}/>} /> : null }
+            <Route exact path='/workout' render={props=> <WorkoutContainer {...props} newWorkout={this.state.newWorkout} workouts={this.state.workouts} />} />
+            <Route exact path='/new-workout' render={props=> <WorkoutOptions {...props}  />} />
+            <Route exact path='/workout-history' render={props=> <WorkoutHistory {...props} workouts={this.state.workouts} displayWorkout={this.displayWorkout} selectedWorkoutHistory={this.state.selectedWorkoutHistory}/>} />
             { this.state.user ? <Footer exercisesPage={this.exercisesPage} user={this.userPage} /> : null }
           </React.Fragment>
         </BrowserRouter>
