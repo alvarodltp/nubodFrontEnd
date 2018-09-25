@@ -18,8 +18,9 @@ constructor(){
         <ul>
             {this.props.workouts.map(workout => <li onClick={() => this.props.displayWorkout(workout)}>{workout.date} </li>)}
         </ul> : <p>No Workouts!</p> }
+
         <div id="workout-info">
-        {this.props.selectedWorkoutHistory ? <OldWorkoutDetail selectedWorkoutHistory={this.props.selectedWorkoutHistory} /> : null}
+          {this.props.selectedWorkoutHistory ? <OldWorkoutDetail selectedWorkoutHistory={this.props.selectedWorkoutHistory} /> : null}
         </div>
       </div>
     )
