@@ -2,13 +2,6 @@ import React from 'react'
 import OldWorkoutDetail from './OldWorkoutDetail'
 
 class WorkoutHistory extends React.Component {
-constructor(){
-  super()
-  this.state={
-    show: null
-  }
-}
-
 
   render(){
     return(

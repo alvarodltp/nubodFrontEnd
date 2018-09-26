@@ -41,7 +41,8 @@ class App extends Component {
         searchedExerciseArr: null,
         newWorkout: [],
         workouts: null,
-        selectedWorkoutHistory: null
+        selectedWorkoutHistory: null,
+        quote: null
       };
     }
 
@@ -56,6 +57,7 @@ componentDidMount() {
     }
     this.getAllExercises()
     this.getUserWorkouts()
+    this.quoteOfTheDay()
   }
 
 updateUser = user => {
@@ -77,11 +79,22 @@ getAllExercises = () => {
   fetch("http://localhost:3001/exercises")
   .then(response => response.json())
   .then(json => {
+    console.log(json)
     this.setState({
       exercises: json,
       searchedExerciseArr: json
     })
   })
+}
+
+quoteOfTheDay = () => {
+  fetch("https://quotes.rest/qod")
+  .then(response => response.json())
+  .then(json => {
+  this.setState({
+    quote:json
+  })
+})
 }
 
 getUserWorkouts = () => {
@@ -111,6 +124,7 @@ filterExercises = (e) => {
 addExerciseToWorkout = (exercise) => {
   let workoutArr = [...this.state.newWorkout]
   workoutArr.push(exercise)
+  console.log(workoutArr)
   this.setState({
     newWorkout: workoutArr
   }
@@ -132,8 +146,8 @@ displayWorkout = (workoutObj) => {
             <Route exact path="/signup" render={props=> <Signup {...props} updateUser= {this.updateUser} />} />
             {this.state.user ? <Route exact path="/profile" render={props=> <Profile {...props} user={this.state.user} first_name={this.state.first_name}/> } /> : null }
             <Route exact path='/login' render={props=> <Login {...props} updateUser={this.updateUser} />} />
-            { this.props.workouts ? <Route exact path='/all-exercises' render={props=> <ExerciseContainer {...props} changeColor={this.changeColor} displayNewWorkout={this.displayNewWorkout} addExerciseToWorkout={this.addExerciseToWorkout} exercises={this.state.exercises} filterExercises={this.filterExercises} searchedExerciseArr={this.state.searchedExerciseArr}/>} /> : null }
-            <Route exact path='/workout' render={props=> <WorkoutContainer {...props} newWorkout={this.state.newWorkout} workouts={this.state.workouts} />} />
+            { this.state.exercises ? <Route exact path='/all-exercises' render={props=> <ExerciseContainer {...props} newWorkout={this.state.newWorkout} changeColor={this.changeColor} displayNewWorkout={this.displayNewWorkout} addExerciseToWorkout={this.addExerciseToWorkout} exercises={this.state.exercises} filterExercises={this.filterExercises} searchedExerciseArr={this.state.searchedExerciseArr}/>} /> : null }
+            {this.state.quote ? <Route exact path='/workout' render={props=> <WorkoutContainer {...props} newWorkout={this.state.newWorkout} workouts={this.state.workouts} quoteOfTheDay={this.state.quote}/>} /> : null}
             <Route exact path='/new-workout' render={props=> <WorkoutOptions {...props}  />} />
             <Route exact path='/workout-history' render={props=> <WorkoutHistory {...props} workouts={this.state.workouts} displayWorkout={this.displayWorkout} selectedWorkoutHistory={this.state.selectedWorkoutHistory}/>} />
             { this.state.user ? <Footer exercisesPage={this.exercisesPage} user={this.userPage} /> : null }

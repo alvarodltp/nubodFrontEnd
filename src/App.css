@@ -171,3 +171,24 @@ background-color: lightgray;
 #close-icon-modal {
   float: right;
 }
+
+#old-workout-detail{
+
+}
+
+#html-input {
+  border-top: 0px solid transparent;
+}
+
+#add-set {
+  padding-top: 10px;
+  color: blue;
+}
+
+#form {
+  padding-top: 10px;
+}
+
+#motivation-button{
+  margin-bottom: 30px;
+}

@@ -1,6 +1,6 @@
 import React from 'react'
 import ExerciseList from './ExerciseList'
-import { Input } from 'semantic-ui-react'
+import { Input, Button } from 'semantic-ui-react'
 
 class ExerciseContainer extends React.Component {
   constructor(){
@@ -20,6 +20,8 @@ class ExerciseContainer extends React.Component {
     render(){
     return(
     <div id="all-exercises">
+      {this.props.newWorkout.length > 0 ? <Button onClick={() => this.props.history.push('/workout')}>Go To Workout</Button> : null }
+      {this.props.newWorkout.length > 0 ? <Button>Save For Later</Button> :null }
       <Input id="seach-bar" onChange={this.props.filterExercises} icon='search' placeholder='Search...' />
       {this.props.exercises ? <ExerciseList changeColor={this.props.changeColor} displayNewWorkout={this.props.displayNewWorkout} addExerciseToWorkout={this.props.addExerciseToWorkout} searchedExerciseArr={this.props.searchedExerciseArr} exercises={this.props.exercises} exerciseInfo={this.exerciseInfo} clickedExercise={this.state.clickedExercise} /> : null }
     </div>

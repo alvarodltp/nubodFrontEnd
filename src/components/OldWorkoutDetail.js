@@ -1,4 +1,5 @@
 import React from 'react'
+import { Table } from 'semantic-ui-react'
 
 class OldWorkoutDetail extends React.Component {
   render(){
@@ -6,15 +7,20 @@ class OldWorkoutDetail extends React.Component {
     return(
       <div id="old-workout-details">
         {oldWorkout.exercises.map(exercise =>
-          <div>
-            <h2>{exercise.name}</h2>
-            <p>{oldWorkout.exercise_sets.find(set => set.exercise_id === exercise.id).id}</p>
-            <p>Reps: {oldWorkout.exercise_sets.find(set => set.exercise_id === exercise.id).reps}</p>
-            <p>Weight: {oldWorkout.exercise_sets.find(set => set.exercise_id === exercise.id).weight}</p>
-
-
-
-          </div>)}
+          <div id="old-workout-detail">
+          <Table>
+            <Table.Header>
+              <Table.Row>
+              <Table.Cell collapsing>
+              </Table.Cell>
+                <Table.Cell>{exercise.name}</Table.Cell>
+                <Table.Cell>{oldWorkout.exercise_sets.find(set => set.exercise_id === exercise.id).reps}</Table.Cell>
+                <Table.Cell>{oldWorkout.exercise_sets.find(set => set.exercise_id === exercise.id).weight}</Table.Cell>
+              </Table.Row>
+            </Table.Header>
+          </Table>
+          </div>
+        )}
       </div>
     )
   }

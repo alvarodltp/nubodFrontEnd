@@ -1,13 +1,12 @@
 import React from 'react'
 import WorkoutDetail from './WorkoutDetail'
-import WorkoutHistory from './WorkoutHistory'
 
 class WorkoutContainer extends React.Component {
   render(){
+    
     return(
     <div id="workout-container">
-      <WorkoutHistory workouts={this.props.workouts} />
-      <WorkoutDetail newWorkout={this.props.newWorkout} addExerciseToWorkout={this.props.addExerciseToWorkout} />
+      <WorkoutDetail newWorkout={this.props.newWorkout} quote={this.props.quoteOfTheDay}/>
     </div>
     )
   }
