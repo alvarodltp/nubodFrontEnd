@@ -23,7 +23,8 @@ handleChange = (e) => {
   })
 }
 
-updateUser = () => {
+updateUser = (e) => {
+  // debugger
   fetch(`http://localhost:3001/user-update`, {
       method: "PATCH",
       headers: {
@@ -32,22 +33,22 @@ updateUser = () => {
       },
       body: JSON.stringify({
         user: {
-          first_name: this.state.first_name,
-          last_name: this.state.last_name,
-          user_name: this.state.user_name,
-          weight: this.state.weight,
-          age: this.state.age,
-          goal: this.state.goal,
-          gender: this.state.gender,
-          activity_level: this.state.activity_level,
-          email: this.state.email,
-          location: this.state.location,
-          bmr: this.state.bmr,
-          calories: this.state.calories,
-          body_fat: this.state.body_fat
+          first_name: e.target.parentElement.parentElement.elements[0].value,
+          last_name: e.target.parentElement.parentElement.elements[1].value,
+          user_name: e.target.parentElement.parentElement.elements[2].value,
+          email: e.target.parentElement.parentElement.elements[3].value,
+          age: e.target.parentElement.parentElement.elements[4].value,
+          weight: e.target.parentElement.parentElement.elements[5].value,
+          body_fat: e.target.parentElement.parentElement.elements[6].value,
+          location: e.target.parentElement.parentElement.elements[7].value,
+          goal: e.target.parentElement.parentElement.elements[8].value,
+          activity_level: e.target.parentElement.parentElement.elements[9].value,
+          bmr: e.target.parentElement.parentElement.elements[10].value,
+          gender: e.target.parentElement.parentElement.elements[11].value
         }
       })
-    });
+    }).then(response => response.json())
+    .then(user => this.props.updateUser(user))
 }
 
   render() {

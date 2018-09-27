@@ -74,7 +74,7 @@ class Login extends React.Component {
     <Segment padded>
     <Form.Group id="form-group" widths='equal'>
        <Form.Input onChange={this.handleChangeEmail} fluid name='email' label='Email' placeholder='email' />
-       <Form.Input onChange={this.handleChangePassword} fluid name='password' label='Password' placeholder='password' />
+       <Form.Input onChange={this.handleChangePassword} fluid name='password' label='Password' type="password" placeholder='password' />
      </Form.Group>
       <Button id="log-in" onClick={this.handleSubmit} primary fluid>
         Login

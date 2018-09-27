@@ -32,7 +32,7 @@ class ExerciseList extends React.Component {
         <Modal id="exercise-modal" open={this.state.open} trigger={
         <List divided selection>
           {this.props.searchedExerciseArr.map(exercise =>
-        <List.Item id={exercise.id} onClick={() => {this.props.exerciseInfo(exercise); this.open();}}> {exercise.name} </List.Item> )}
+        <List.Item id={exercise.id} onClick={() => {this.props.exerciseInfo(exercise); this.open();}}> {exercise.name} {this.props.newWorkout.includes(exercise) ? "added" : null} </List.Item> )}
         </List>}>
         { this.props.clickedExercise ? <Modal.Header>{this.props.clickedExercise.name} <FontAwesomeIcon onClick={this.close} id="close-icon-modal" icon="times" size="1x"/> </Modal.Header> :null }
         <Modal.Content image>

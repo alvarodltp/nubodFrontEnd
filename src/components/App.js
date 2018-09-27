@@ -4,6 +4,7 @@ import Signup from './Signup'
 import Login from './Login'
 import Profile from './Profile'
 import { BrowserRouter, Route } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 import Footer from './Footer'
 import ExerciseContainer from './ExerciseContainer'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -40,6 +41,7 @@ class App extends Component {
         exercises: null,
         searchedExerciseArr: null,
         newWorkout: [],
+        newWorkoutId: null,
         workouts: null,
         selectedWorkoutHistory: null,
         quote: null
@@ -79,7 +81,6 @@ getAllExercises = () => {
   fetch("http://localhost:3001/exercises")
   .then(response => response.json())
   .then(json => {
-    console.log(json)
     this.setState({
       exercises: json,
       searchedExerciseArr: json
@@ -107,6 +108,14 @@ getUserWorkouts = () => {
   })
 }
 
+addWorkoutToState = (workout) => {
+  let workouts = [...this.state.workouts, workout]
+  this.setState({
+    workouts: workouts,
+    newWorkoutId: workout.id,
+  })
+}
+
 exercisesPage = (e) => {
   this.props.history.push('/all-exercises')
 }
@@ -124,10 +133,9 @@ filterExercises = (e) => {
 addExerciseToWorkout = (exercise) => {
   let workoutArr = [...this.state.newWorkout]
   workoutArr.push(exercise)
-  console.log(workoutArr)
   this.setState({
     newWorkout: workoutArr
-  }
+    }
   )
 }
 
@@ -137,19 +145,28 @@ displayWorkout = (workoutObj) => {
   })
 }
 
+
   render() {
     return (
       <div className="App">
         <BrowserRouter>
           <React.Fragment>
             <Route render={props=> <Navbar {...props} logOut={this.logOut} user={this.state.user} />} />
+
             <Route exact path="/signup" render={props=> <Signup {...props} updateUser= {this.updateUser} />} />
-            {this.state.user ? <Route exact path="/profile" render={props=> <Profile {...props} user={this.state.user} first_name={this.state.first_name}/> } /> : null }
+
+            {this.state.user ? <Route exact path="/profile" render={props=> <Profile {...props} user={this.state.user} first_name={this.state.first_name} updateUser={this.updateUser}/> } /> : null }
+
             <Route exact path='/login' render={props=> <Login {...props} updateUser={this.updateUser} />} />
-            { this.state.exercises ? <Route exact path='/all-exercises' render={props=> <ExerciseContainer {...props} newWorkout={this.state.newWorkout} changeColor={this.changeColor} displayNewWorkout={this.displayNewWorkout} addExerciseToWorkout={this.addExerciseToWorkout} exercises={this.state.exercises} filterExercises={this.filterExercises} searchedExerciseArr={this.state.searchedExerciseArr}/>} /> : null }
-            {this.state.quote ? <Route exact path='/workout' render={props=> <WorkoutContainer {...props} newWorkout={this.state.newWorkout} workouts={this.state.workouts} quoteOfTheDay={this.state.quote}/>} /> : null}
-            <Route exact path='/new-workout' render={props=> <WorkoutOptions {...props}  />} />
+
+            { this.state.exercises ? <Route exact path='/all-exercises' render={props=> <ExerciseContainer {...props} addWorkoutToState={this.addWorkoutToState} user={this.state.user} saveWorkout={this.saveWorkout} newWorkout={this.state.newWorkout} changeColor={this.changeColor} displayNewWorkout={this.displayNewWorkout} addExerciseToWorkout={this.addExerciseToWorkout} exercises={this.state.exercises} filterExercises={this.filterExercises} searchedExerciseArr={this.state.searchedExerciseArr}/>} /> : null }
+
+            {this.state.quote ? <Route exact path='/workout' render={props=> <WorkoutContainer {...props}  newWorkout={this.state.newWorkout} workouts={this.state.workouts} newWorkoutId={this.state.newWorkoutId} quoteOfTheDay={this.state.quote} user={this.state.user}/>} /> : null}
+
+            <Route exact path='/new-workout' render={props=> <WorkoutOptions {...props} />} />
+
             <Route exact path='/workout-history' render={props=> <WorkoutHistory {...props} workouts={this.state.workouts} displayWorkout={this.displayWorkout} selectedWorkoutHistory={this.state.selectedWorkoutHistory}/>} />
+
             { this.state.user ? <Footer exercisesPage={this.exercisesPage} user={this.userPage} /> : null }
           </React.Fragment>
         </BrowserRouter>

@@ -2,14 +2,14 @@
 import React from 'react'
 import Input from './Input'
 
-let counter = 0
+
+let counter = 1
 
 class WorkoutDetailItem extends React.Component {
 constructor(){
   super()
   this.state = {
     addSet: 1,
-    checked: false,
     inputArr: []
   }
 }
@@ -20,18 +20,37 @@ addSet = () => {
   })
 }
 
-completeSet = (e) => {
-  this.setState({
-    checked: !this.state.checked
-  })
-}
 
+saveSet = (weight, reps) => {
+  debugger
+  fetch(`http://localhost:3001/create-set`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      },
+      body: JSON.stringify({
+        exercise_sets: {
+          workout_id: this.props.newWorkoutId,
+          exercise_id: this.props.exercise.id,
+          weight: weight,
+          reps: reps
+        }
+      })
+    })
+    .then(response => response.json())
+    .then(console.log)
+}
 
 calculateInputs = () => {
   let arr = []
-  for(let i=0; i < this.state.addSet; i++){
-    let id=counter++
-    arr.push(<Input handleChange={this.props.handleChange} inputId={id}/>)
+
+  for(var i=0; i < this.state.addSet; i++){
+    let id = counter
+    counter++
+    debugger
+    arr.push(<Input
+       deleteInput={this.deleteInput} id={"form-"+id} saveSet={this.saveSet}/>)
   }
   return arr
 }
@@ -44,6 +63,7 @@ inputArrNum = () => {
   })
 }
 
+
 render(){
 
   return(
@@ -51,7 +71,7 @@ render(){
     <form>
       <h3>{this.props.exercise.name}</h3>
       {this.state.inputArr}
-     <p onClick={this.addSet} onClick={this.inputArrNum} id="add-set">Add Set</p>
+     <p id="add-set" onClick={this.addSet} onClick={this.inputArrNum} id="add-set">Add Set</p>
     </form>
     </div>
   )
