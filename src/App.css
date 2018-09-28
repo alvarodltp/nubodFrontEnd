@@ -156,8 +156,9 @@ body{
 }
 
 #date-container{
+  margin: 0 auto;
   padding-top: 50px;
-  float: left;
+  width: 80%;
 }
 
 #date-segment {
@@ -195,4 +196,23 @@ background-color: lightgray;
 
 #add-set {
   padding-bottom: 20px;
+}
+
+#check {
+  color: #A8FC00;
+}
+
+#workout-info{
+  margin: 0 auto;
+  width: 80%;
+  margin-top: 40px;
+}
+
+#wo-name-input {
+  font-size: 60px ;
+  color: white;
+}
+
+#wo-name-input::placeholder{
+  color: white;
 }

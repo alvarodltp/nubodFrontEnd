@@ -16,8 +16,8 @@ class WorkoutDetail extends React.Component {
     })
   }
 
-
   render(){
+    
     let quote = this.props.quote.contents.quotes[0].quote
     let author = this.props.quote.contents.quotes[0].author
 

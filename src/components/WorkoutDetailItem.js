@@ -22,7 +22,8 @@ addSet = () => {
 
 
 saveSet = (weight, reps) => {
-  debugger
+  // console.log(this.props)
+  // debugger
   fetch(`http://localhost:3001/create-set`, {
       method: "POST",
       headers: {
@@ -44,11 +45,10 @@ saveSet = (weight, reps) => {
 
 calculateInputs = () => {
   let arr = []
-
   for(var i=0; i < this.state.addSet; i++){
     let id = counter
     counter++
-    debugger
+    // debugger
     arr.push(<Input
        deleteInput={this.deleteInput} id={"form-"+id} saveSet={this.saveSet}/>)
   }
