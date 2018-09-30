@@ -76,6 +76,22 @@ class Input extends React.Component {
     })
   }
 
+  substract = () => {
+    if(this.state.seconds > 30){
+      this.setState({
+        seconds: this.state.seconds - 30
+      })
+    }
+  }
+
+  add = () => {
+    if(this.state.seconds < 30){
+      this.setState({
+        seconds: this.state.seconds + 30
+      })
+    }
+  }
+
   render(){
     return(
       <form id={this.props.id}>
@@ -96,28 +112,19 @@ class Input extends React.Component {
               </Modal.Content>
 
               <Modal.Actions>
-                <Button color='green' onClick={this.handleClose} inverted>
-                  <Icon name='checkmark' /> Got it
+              <Button color='green' onClick={this.substract} inverted>
+                <Icon name='minus' /> 30 Sec
+              </Button>
+              <Button color='green' onClick={this.add} inverted>
+                <Icon name='add' /> 30 Sec
+              </Button>
+                <Button color='red' onClick={this.handleClose} inverted>
+                  <Icon name='close' /> Skip
                 </Button>
               </Modal.Actions>
             </Modal>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          <Icon onClick={this.props.deleteInput} name="close"/>
+            <Icon onClick={this.props.removeSet} name="close"/>
       </form>
     )
   }

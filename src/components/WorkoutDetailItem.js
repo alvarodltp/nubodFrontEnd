@@ -22,8 +22,6 @@ addSet = () => {
 
 
 saveSet = (weight, reps) => {
-  // console.log(this.props)
-  // debugger
   fetch(`http://localhost:3001/create-set`, {
       method: "POST",
       headers: {
@@ -43,14 +41,22 @@ saveSet = (weight, reps) => {
     .then(console.log)
 }
 
+removeSet = (e) => {
+  let id = e.target.parentElement.id
+  let inputArr = this.state.inputArr.filter(input => input.props.id != id)
+  // debugger
+    this.setState({
+      inputArr: inputArr
+    })
+  }
+
 calculateInputs = () => {
   let arr = []
   for(var i=0; i < this.state.addSet; i++){
     let id = counter
     counter++
     // debugger
-    arr.push(<Input
-       deleteInput={this.deleteInput} id={"form-"+id} saveSet={this.saveSet}/>)
+    arr.push(<Input removeSet={this.removeSet} id={"form-"+id} saveSet={this.saveSet}/>)
   }
   return arr
 }

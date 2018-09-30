@@ -1,6 +1,6 @@
 import React from 'react'
 import OldWorkoutDetail from './OldWorkoutDetail'
-import { Input, Dropdown } from 'semantic-ui-react'
+import { Dropdown } from 'semantic-ui-react'
 
 class WorkoutHistory extends React.Component {
 

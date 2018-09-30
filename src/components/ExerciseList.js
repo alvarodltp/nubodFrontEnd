@@ -1,5 +1,5 @@
 import React from 'react'
-import { List, Header, Modal, Image, Rating } from 'semantic-ui-react'
+import { List, Header, Modal, Image, Button, Message } from 'semantic-ui-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class ExerciseList extends React.Component {
@@ -42,9 +42,7 @@ class ExerciseList extends React.Component {
             { this.props.clickedExercise ? <Header>Target: {this.props.clickedExercise.target.split("_").join(" ").toUpperCase()}</Header> :null }
             { this.props.clickedExercise ? <p>Instructions: {this.props.clickedExercise.instructions}</p> :null }
             { this.props.clickedExercise ? <p>Equipment: {this.props.clickedExercise.equipment_needed}</p> :null }
-            { this.props.clickedExercise ? <Rating maxRating={5} defaultRating={this.props.clickedExercise.rating} icon='star' size='small' /> :null }
-            { this.props.clickedExercise ? <FontAwesomeIcon id={this.props.clickedExercise.id} onClick={() => {this.props.addExerciseToWorkout(this.props.clickedExercise); this.close();}} icon="plus-circle" size="2x"/> : null }
-
+            { this.props.clickedExercise ? <Button color="blue" size='tiny' floated="right" id={this.props.clickedExercise.id} onClick={() => {this.props.addExerciseToWorkout(this.props.clickedExercise); this.close();}}>Add To Workout</Button> : null }
           </Modal.Description>
         </Modal.Content>
         </Modal>

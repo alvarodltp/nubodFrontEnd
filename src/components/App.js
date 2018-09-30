@@ -4,7 +4,6 @@ import Signup from './Signup'
 import Login from './Login'
 import Profile from './Profile'
 import { BrowserRouter, Route } from 'react-router-dom'
-import { withRouter } from 'react-router-dom';
 import Footer from './Footer'
 import ExerciseContainer from './ExerciseContainer'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -13,6 +12,7 @@ import WorkoutContainer from './WorkoutContainer'
 import Navbar from './Navbar'
 import WorkoutHistory from './WorkoutHistory'
 import WorkoutOptions from './WorkoutOptions'
+import Home from './Home'
 
 library.add(fas)
 
@@ -47,7 +47,11 @@ class App extends Component {
         quote: null,
         endWorkoutTime: "",
         startWorkoutTime: "",
-        totalDuration: ""
+        totalDuration: "",
+        allWeightLifted: "",
+        allRepsLifted: "",
+        allSets: null,
+        workoutsCompleted: ""
       };
     }
 
@@ -63,6 +67,7 @@ componentDidMount() {
     this.getAllExercises()
     this.getUserWorkouts()
     this.quoteOfTheDay()
+    this.getAllSets()
   }
 
 updateUser = user => {
@@ -91,6 +96,16 @@ getAllExercises = () => {
   })
 }
 
+getAllSets = () => {
+  fetch("http://localhost:3001/exercise_sets")
+  .then(response => response.json())
+  .then(json => {
+    this.setState({
+      allSets: json
+    }, () => this.calculateRepsAndSets())
+  })
+}
+
 quoteOfTheDay = () => {
   fetch("https://quotes.rest/qod")
   .then(response => response.json())
@@ -104,11 +119,11 @@ quoteOfTheDay = () => {
 getUserWorkouts = () => {
   fetch("http://localhost:3001/workouts")
   .then(response => response.json())
-  .then(workouts => {
-      this.setState({
-      workouts: workouts
-    })
-  })
+  .then(workouts =>
+    {this.setState({
+    workouts: workouts
+  }, () => this.workoutsCompleted())
+})
 }
 
 addWorkoutToState = (workout) => {
@@ -185,7 +200,10 @@ emptyNewWorkoutArr = () => {
 //   })
 // }
 
-removeWorkout = (e, id) => {
+removeWorkout = () => {
+  let id = this.state.newWorkoutId
+  let copyOfWorkouts = [...this.state.workouts]
+  let workouts = copyOfWorkouts.filter(workout => workout.id != id)
   return fetch(`http://localhost:3001/workouts/${id}`, {
     method: 'delete',
     headers: {
@@ -193,7 +211,31 @@ removeWorkout = (e, id) => {
       Authorization: `Bearer ${localStorage.getItem("token")}`
     },
   })
-  .then(response => response.json());
+  .then(response => response.json())
+  .then(json => (
+    this.setState({
+      workouts: workouts
+    })
+  ))
+}
+
+calculateRepsAndSets = () => {
+  let allSets = [...this.state.allSets]
+  let allWeightArr = allSets.map(set => set.weight).flat()
+  let allRepsArr = allSets.map(set => set.reps).flat()
+  let totalWeight = allWeightArr.reduce((a, b) => a + b, 0)
+  let totalReps = allRepsArr.reduce((a, b) => a + b, 0)
+  this.setState({
+    allWeightLifted: totalWeight,
+    allRepsLifted: totalReps
+  })
+}
+
+workoutsCompleted = () => {
+  let totalWorkouts = [...this.state.workouts].length
+  this.setState({
+    workoutsCompleted: totalWorkouts
+  })
 }
 
   render() {
@@ -201,17 +243,19 @@ removeWorkout = (e, id) => {
       <div className="App">
         <BrowserRouter>
           <React.Fragment>
+            {this.state.exercises ? <Route exact path='/' render={props=> <Home {...props} exercises={this.state.exercises} />} /> : null }
+
             <Route render={props=> <Navbar {...props} logOut={this.logOut} user={this.state.user} />} />
 
-            <Route exact path="/signup" render={props=> <Signup {...props} updateUser= {this.updateUser} />} />
+            <Route exact path='/signup' render={props=> <Signup {...props} updateUser= {this.updateUser} />} />
 
-            {this.state.user ? <Route exact path="/profile" render={props=> <Profile {...props} user={this.state.user} first_name={this.state.first_name} updateUser={this.updateUser}/> } /> : null }
+            {this.state.user ? <Route exact path="/profile" render={props=> <Profile {...props} workoutsCompleted={this.state.workoutsCompleted} allRepsLifted={this.state.allRepsLifted} allWeightLifted={this.state.allWeightLifted} user={this.state.user} first_name={this.state.first_name} updateUser={this.updateUser} workouts={this.state.workouts}/> } /> : null }
 
             <Route exact path='/login' render={props=> <Login {...props} updateUser={this.updateUser} />} />
 
-            { this.state.exercises ? <Route exact path='/all-exercises' render={props=> <ExerciseContainer {...props} startWorkoutTime={this.startWorkoutTime} emptyNewWorkoutArr={this.emptyNewWorkoutArr} addWorkoutToState={this.addWorkoutToState} user={this.state.user} saveWorkout={this.saveWorkout} newWorkout={this.state.newWorkout} changeColor={this.changeColor} displayNewWorkout={this.displayNewWorkout} addExerciseToWorkout={this.addExerciseToWorkout} exercises={this.state.exercises} filterExercises={this.filterExercises} searchedExerciseArr={this.state.searchedExerciseArr}/>} /> : null }
+            { this.state.exercises ? <Route exact path='/all-exercises' render={props=> <ExerciseContainer {...props} fetchUser={this.fetchUser} startWorkoutTime={this.startWorkoutTime} emptyNewWorkoutArr={this.emptyNewWorkoutArr} addWorkoutToState={this.addWorkoutToState} user={this.state.user} saveWorkout={this.saveWorkout} newWorkout={this.state.newWorkout} changeColor={this.changeColor} displayNewWorkout={this.displayNewWorkout} addExerciseToWorkout={this.addExerciseToWorkout} exercises={this.state.exercises} filterExercises={this.filterExercises} searchedExerciseArr={this.state.searchedExerciseArr}/>} /> : null }
 
-            {this.state.quote ? <Route exact path='/workout' render={props=> <WorkoutContainer {...props}  getTotalWorkoutTime={this.getTotalWorkoutTime} totalDuration={this.state.totalDuration} endWorkoutTime={this.endWorkoutTime} newWorkout={this.state.newWorkout} workouts={this.state.workouts} newWorkoutId={this.state.newWorkoutId} quoteOfTheDay={this.state.quote} user={this.state.user}/>} /> : null}
+            {this.state.quote ? <Route exact path='/workout' render={props=> <WorkoutContainer {...props} calculateRepsAndSets={this.calculateRepsAndSets} emptyNewWorkoutArr={this.emptyNewWorkoutArr} removeWorkout={this.removeWorkout} getTotalWorkoutTime={this.getTotalWorkoutTime} totalDuration={this.state.totalDuration} endWorkoutTime={this.endWorkoutTime} newWorkout={this.state.newWorkout} workouts={this.state.workouts} newWorkoutId={this.state.newWorkoutId} quoteOfTheDay={this.state.quote} user={this.state.user}/>} /> : null}
 
             <Route exact path='/new-workout' render={props=> <WorkoutOptions {...props} />} />
 

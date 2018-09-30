@@ -45,6 +45,7 @@ class ExerciseContainer extends React.Component {
       .then(json => {
         this.props.addWorkoutToState(json)
       })
+
   }
 
   getName = (e) => {
@@ -71,17 +72,23 @@ class ExerciseContainer extends React.Component {
           </Modal.Content>
           <Modal.Actions>
             <Button color='green' onClick={() => {this.handleClose(); this.saveWorkout(); this.props.history.push('/workout')}} inverted>
-              <Icon name='checkmark' /> Done
+              <Icon name='checkmark' /> Start
             </Button>
           </Modal.Actions>
         </Modal>
          : null }
 
+         {this.props.newWorkout.length > 0 ?
+          <Button onClick={() => {this.handleClose(); this.saveWorkout(); this.props.emptyNewWorkoutArr(); this.props.history.push('/workout-history')}}>
+            Save For Later
+          </Button>
+            : null }
 
-      {this.props.newWorkout.length > 0 ? <Button>Save For Later</Button> :null }
+
+
       {this.props.newWorkout.length > 0 ? <Button onClick={this.props.emptyNewWorkoutArr}>Cancel</Button> :null }
       <Input id="seach-bar" onChange={this.props.filterExercises} icon='search' placeholder='Search...' />
-      {this.props.exercises ? <ExerciseList changeColor={this.props.changeColor} newWorkout={this.props.newWorkout} displayNewWorkout={this.props.displayNewWorkout} addExerciseToWorkout={this.props.addExerciseToWorkout} searchedExerciseArr={this.props.searchedExerciseArr} exercises={this.props.exercises} exerciseInfo={this.exerciseInfo} clickedExercise={this.state.clickedExercise} /> : null }
+      {this.props.exercises ? <ExerciseList changeColor={this.props.changeColor} user={this.props.user} newWorkout={this.props.newWorkout} displayNewWorkout={this.props.displayNewWorkout} addExerciseToWorkout={this.props.addExerciseToWorkout} searchedExerciseArr={this.props.searchedExerciseArr} exercises={this.props.exercises} exerciseInfo={this.exerciseInfo} clickedExercise={this.state.clickedExercise} /> : null }
     </div>
     )
   }
