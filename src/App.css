@@ -202,3 +202,10 @@ body{
 #add-button {
   background-color: #A8FC00;
 }
+
+#already-added {
+  float: right;
+  color: #A8FC00;
+  font-style: italic;
+  background-color: gray;
+}

@@ -51,7 +51,8 @@ class App extends Component {
         allWeightLifted: "",
         allRepsLifted: "",
         allSets: null,
-        workoutsCompleted: ""
+        workoutsCompleted: "",
+        lastTwoWorkouts: null
       };
     }
 
@@ -68,6 +69,7 @@ componentDidMount() {
     this.getUserWorkouts()
     this.quoteOfTheDay()
     this.getAllSets()
+
   }
 
 updateUser = user => {
@@ -119,11 +121,12 @@ quoteOfTheDay = () => {
 getUserWorkouts = () => {
   fetch("http://localhost:3001/workouts")
   .then(response => response.json())
-  .then(workouts =>
-    {this.setState({
-    workouts: workouts
-  }, () => this.workoutsCompleted())
-})
+  .then(workouts => {
+    this.setState({
+      lastTwoWorkouts: workouts.slice(Math.max(workouts.length - 2, 0)),
+      workouts: workouts
+    }, () => this.workoutsCompleted())
+  })
 }
 
 addWorkoutToState = (workout) => {
@@ -238,7 +241,15 @@ workoutsCompleted = () => {
   })
 }
 
+getInfoToRedoWorkout = (workoutObj) => {
+  this.setState({
+    newWorkout: workoutObj.exercises
+  })
+}
+
+
   render() {
+
     return (
       <div className="App">
         <BrowserRouter>
@@ -257,9 +268,9 @@ workoutsCompleted = () => {
 
             {this.state.quote ? <Route exact path='/workout' render={props=> <WorkoutContainer {...props} calculateRepsAndSets={this.calculateRepsAndSets} emptyNewWorkoutArr={this.emptyNewWorkoutArr} removeWorkout={this.removeWorkout} getTotalWorkoutTime={this.getTotalWorkoutTime} totalDuration={this.state.totalDuration} endWorkoutTime={this.endWorkoutTime} newWorkout={this.state.newWorkout} workouts={this.state.workouts} newWorkoutId={this.state.newWorkoutId} quoteOfTheDay={this.state.quote} user={this.state.user}/>} /> : null}
 
-            <Route exact path='/new-workout' render={props=> <WorkoutOptions {...props} />} />
+            {this.state.lastTwoWorkouts ? <Route exact path='/new-workout' render={props=> <WorkoutOptions {...props} lastTwoWorkouts={this.state.lastTwoWorkouts}/>} /> : null}
 
-            <Route exact path='/workout-history' render={props=> <WorkoutHistory {...props} workouts={this.state.workouts} displayWorkout={this.displayWorkout} selectedWorkoutHistory={this.state.selectedWorkoutHistory}/>} />
+            <Route exact path='/workout-history' render={props=> <WorkoutHistory {...props} getInfoToRedoWorkout={this.getInfoToRedoWorkout} workouts={this.state.workouts} displayWorkout={this.displayWorkout} selectedWorkoutHistory={this.state.selectedWorkoutHistory}/>} />
 
             { this.state.user ? <Footer exercisesPage={this.exercisesPage} user={this.userPage} /> : null }
           </React.Fragment>

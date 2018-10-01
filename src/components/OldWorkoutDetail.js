@@ -5,7 +5,6 @@ class OldWorkoutDetail extends React.Component {
 
   render(){
   let oldWorkout = this.props.selectedWorkoutHistory
-  debugger
     return(
       <Table celled compact definition>
           <Table.Header fullWidth>
@@ -33,7 +32,7 @@ class OldWorkoutDetail extends React.Component {
             <Table.Row>
               <Table.HeaderCell />
               <Table.HeaderCell colSpan='4'>
-                <Button floated='right' primary size='small'>Redo</Button>
+                <Button floated='right' primary size='small' onClick={() => {this.props.getInfoToRedoWorkout(oldWorkout); this.props.history.push('/all-exercises')}}>Redo</Button>
               </Table.HeaderCell>
             </Table.Row>
           </Table.Footer>

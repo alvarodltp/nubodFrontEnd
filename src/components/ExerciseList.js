@@ -27,6 +27,7 @@ class ExerciseList extends React.Component {
 
 
   render(){
+    let newWorkoutArrIds = this.props.newWorkout.map(exercise => exercise.id)
     return(
       <div  id="exercise-page">
         <Modal id="exercise-modal" open={this.state.open} trigger={
@@ -42,7 +43,7 @@ class ExerciseList extends React.Component {
             { this.props.clickedExercise ? <Header>Target: {this.props.clickedExercise.target.split("_").join(" ").toUpperCase()}</Header> :null }
             { this.props.clickedExercise ? <p>Instructions: {this.props.clickedExercise.instructions}</p> :null }
             { this.props.clickedExercise ? <p>Equipment: {this.props.clickedExercise.equipment_needed}</p> :null }
-            { this.props.clickedExercise ? <Button color="blue" size='tiny' floated="right" id={this.props.clickedExercise.id} onClick={() => {this.props.addExerciseToWorkout(this.props.clickedExercise); this.close();}}>Add To Workout</Button> : null }
+            { this.props.clickedExercise && !newWorkoutArrIds.includes(this.props.clickedExercise.id) ?  <Button color="blue" size='tiny' floated="right" id={this.props.clickedExercise.id} onClick={() => {this.props.addExerciseToWorkout(this.props.clickedExercise); this.close();}}>Add To Workout</Button> : <h3 id="already-added">Already Added</h3> }
           </Modal.Description>
         </Modal.Content>
         </Modal>
