@@ -56,6 +56,7 @@ render(){
         size='small'
       >
         <Modal.Content>
+          <h1 style={{ fontSize: 40, marginLeft:100}}>Rest Time</h1>
           <h1 style={{ fontSize: 100, marginLeft:100}}>{this.minutes}:{this.seconds}</h1>
         </Modal.Content>
 

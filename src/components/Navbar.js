@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button } from "semantic-ui-react";
+import { Link } from 'react-router-dom';
 
 
 class Navbar extends React.Component {
@@ -13,7 +14,11 @@ class Navbar extends React.Component {
     return(
 
   <div id="navbar" className="ui secondary menu">
-    {this.props.user ? <Button size="small" id="logout-button" onClick={this.handleSubmit}>Log Out</Button> : null }
+    <Link to="/profile">Profile</Link>
+    <Link to="/workout-history">WO History</Link>
+    <Link to="/new-workout">New Workout</Link>
+    <Link to="/all-exercises">All Exercises</Link>
+    <Link to="/user-stats">Progress</Link>
   </div>
 
     )

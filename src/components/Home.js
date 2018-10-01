@@ -1,6 +1,7 @@
 import React from 'react'
 import SearchBar from './SearchBar'
 import {Segment} from 'semantic-ui-react'
+import SearchResults from './SearchResults'
 
 class Home extends React.Component {
   constructor(){
@@ -42,13 +43,10 @@ class Home extends React.Component {
 
   render(){
     return(
-      <div>
-        <SearchBar exercises={this.props.exercises} handleChange={this.handleChange} />
-        {this.state.results ?
-          <div>
-            {this.state.results.map(exercise => <li>{exercise.name}</li>)}
-          </div> : null }
-        <img id="main-image" src="https://uc1bce3e04b1efd2eaf2b685d23f.dl.dropboxusercontent.com/cd/0/inline/ARzPr0LWBdtXuKFkmqmcJe6ORbz6XKECdybMITaINBgTvDhzT7av7mnstseGTwIbdF3Bt2D4o9__RF45q2er0mo2tMSMvCUHs1k_6ceccxYrw3KfN27TT38Z4gBxGq6aPfg-C2N3M2CJC27P8cwVdzc29XhDARTvT57IjBdPnKwgHpBuxgjXilJ08OwYXsacrw4/file" alt="me"/>
+      <div id="background-img">
+        <div id="search-bar">
+          <SearchBar />
+        </div>
       </div>
     )
   }

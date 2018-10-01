@@ -108,7 +108,8 @@ class Input extends React.Component {
               size='small'
             >
               <Modal.Content>
-                <h1 id="timer" style={{ fontSize: 200}}>{this.state.minutes}:{this.state.seconds}</h1>
+                <h1 style={{ fontSize: 80}}>Rest Time</h1>
+                <h1 id="timer" style={{ fontSize: 150}}>{this.state.minutes}:{this.state.seconds}</h1>
               </Modal.Content>
 
               <Modal.Actions>
