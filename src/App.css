@@ -205,6 +205,10 @@ body{
   margin: 10px 15px 15px 10px;
 } */
 
+#wo-name-input {
+  font-size: 40px;
+}
+
 #home-search {
   margin: 0 auto;
   display: block;
@@ -257,4 +261,8 @@ body{
 
 #nav {
   background-color: #A8FC00;
+}
+
+#table-cell{
+  background-color: lightgray;
 }

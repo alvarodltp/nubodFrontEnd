@@ -1,7 +1,24 @@
 import React from 'react'
-import { Table, Button, Icon } from 'semantic-ui-react'
+import { Table, Button, Icon, Modal, Input } from 'semantic-ui-react'
 
 class OldWorkoutDetail extends React.Component {
+  constructor(){
+    super()
+    this.state = {
+      modalOpen: false,
+      workoutName: ""
+    }
+  }
+
+  getWorkoutName = (e) => {
+    this.setState({
+      workoutName: e.target.value
+    })
+  }
+
+  handleOpen = () => this.setState({ modalOpen: true })
+
+  handleClose = () => this.setState({ modalOpen: false })
 
   render(){
   let oldWorkout = this.props.selectedWorkoutHistory
@@ -9,11 +26,11 @@ class OldWorkoutDetail extends React.Component {
       <Table celled compact definition>
           <Table.Header fullWidth>
             <Table.Row>
-              <Table.HeaderCell />
-              <Table.HeaderCell>Exercise</Table.HeaderCell>
-              <Table.HeaderCell>Set</Table.HeaderCell>
-              <Table.HeaderCell>Reps</Table.HeaderCell>
-              <Table.HeaderCell>Weight</Table.HeaderCell>
+              <Table.HeaderCell id="table"/>
+              <Table.HeaderCell id="table-cell">Exercise</Table.HeaderCell>
+              <Table.HeaderCell id="table-cell">Set</Table.HeaderCell>
+              <Table.HeaderCell id="table-cell">Reps</Table.HeaderCell>
+              <Table.HeaderCell id="table-cell">Weight</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           {oldWorkout.exercises.map(exercise =>
@@ -32,11 +49,36 @@ class OldWorkoutDetail extends React.Component {
             <Table.Row>
               <Table.HeaderCell />
               <Table.HeaderCell colSpan='4'>
-                <Button floated='right' primary size='small' onClick={() => {this.props.getInfoToRedoWorkout(oldWorkout); this.props.history.push('/all-exercises')}}>Redo</Button>
+              <Button negative floated='right' size='tiny' onClick={(e) => this.props.removeWorkout(e, oldWorkout.id)}>Delete</Button>
+
+              <Modal
+                trigger={<Button floated='right' size='tiny' onClick={() => {this.props.getInfoToRedoWorkout(oldWorkout); this.handleOpen()}}>Redo</Button>}
+                open={this.state.modalOpen}
+                onClose={this.handleClose}
+                basic
+                size='small'
+              >
+
+                <Modal.Content>
+                  <Input id="wo-name-input" transparent placeholder="Workout Name..." onChange={this.getWorkoutName} value={this.state.workoutName}/>
+                </Modal.Content>
+                <Modal.Actions>
+                  <Button color='green' onClick={() => {this.handleClose(); this.props.saveWorkout(this.state.workoutName); this.props.myCurrentWorkout(); this.props.history.push('/workout')}} inverted>
+                    <Icon name='checkmark' /> Start
+                  </Button>
+                </Modal.Actions>
+              </Modal>
+
+
               </Table.HeaderCell>
             </Table.Row>
           </Table.Footer>
         </Table>
+
+
+
+
+
 
     )
   }
