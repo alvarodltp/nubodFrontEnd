@@ -57,7 +57,7 @@ class ExerciseContainer extends React.Component {
 
     render(){
     return(
-    <div id="all-exercises">
+    <div id="all-exercises" style={{minHeight: "100vh"}}>
       {this.props.newWorkout.length > 0 ?
         <Modal
           trigger={<Button onClick={this.handleOpen}>Go To Workout</Button>}
@@ -71,7 +71,7 @@ class ExerciseContainer extends React.Component {
             <Input id="wo-name-input" transparent placeholder='Workout Name' onChange={this.getName} value={this.state.workoutName}/>
           </Modal.Content>
           <Modal.Actions>
-            <Button color='green' onClick={() => {this.handleClose(); this.saveWorkout(); this.props.history.push('/workout')}} inverted>
+            <Button color='green' onClick={() => {this.handleClose(); this.saveWorkout(); this.props.myCurrentWorkout(); this.props.history.push('/workout')}} inverted>
               <Icon name='checkmark' /> Start
             </Button>
           </Modal.Actions>
@@ -88,7 +88,7 @@ class ExerciseContainer extends React.Component {
 
       {this.props.newWorkout.length > 0 ? <Button onClick={this.props.emptyNewWorkoutArr}>Cancel</Button> :null }
       <Input id="seach-bar" onChange={this.props.filterExercises} icon='search' placeholder='Search...' />
-      {this.props.exercises ? <ExerciseList changeColor={this.props.changeColor} user={this.props.user} newWorkout={this.props.newWorkout} displayNewWorkout={this.props.displayNewWorkout} addExerciseToWorkout={this.props.addExerciseToWorkout} searchedExerciseArr={this.props.searchedExerciseArr} exercises={this.props.exercises} exerciseInfo={this.exerciseInfo} clickedExercise={this.state.clickedExercise} /> : null }
+      {this.props.exercises ? <ExerciseList removeExercise={this.props.removeExercise} changeColor={this.props.changeColor} user={this.props.user} newWorkout={this.props.newWorkout} displayNewWorkout={this.props.displayNewWorkout} addExerciseToWorkout={this.props.addExerciseToWorkout} searchedExerciseArr={this.props.searchedExerciseArr} exercises={this.props.exercises} exerciseInfo={this.exerciseInfo} clickedExercise={this.state.clickedExercise} /> : null }
     </div>
     )
   }

@@ -1,26 +1,51 @@
 import React from 'react'
-import { Button } from "semantic-ui-react";
-import { Link } from 'react-router-dom';
-
+import { Button, Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react'
 
 class Navbar extends React.Component {
-
-  handleSubmit= () => {
-    this.props.logOut()
-    this.props.history.push('/login')
+  constructor(){
+    super()
+    this.state={
+      visible: false
+    }
   }
 
-  render(){
-    return(
+  handleButtonClick = () => this.setState({ visible: !this.state.visible })
 
-  <div id="navbar" className="ui secondary menu">
-    <Link to="/profile">Profile</Link>
-    <Link to="/workout-history">WO History</Link>
-    <Link to="/new-workout">New Workout</Link>
-    <Link to="/all-exercises">All Exercises</Link>
-    <Link to="/user-stats">Progress</Link>
-  </div>
+  handleSidebarHide = () => this.setState({ visible: false })
 
+  render() {
+    const { visible } = this.state
+
+    return (
+      <div>
+        <Button onClick={this.handleButtonClick}>Toggle visibility</Button>
+
+        <Sidebar.Pushable as={Segment}>
+          <Sidebar
+            as={Menu}
+            animation='overlay'
+            icon='labeled'
+            inverted
+            onHide={this.handleSidebarHide}
+            vertical
+            visible={visible}
+            width='thin'
+          >
+            <Menu.Item as='a'>
+              <Icon name='home' />
+              Home
+            </Menu.Item>
+            <Menu.Item as='a'>
+              <Icon name='gamepad' />
+              Games
+            </Menu.Item>
+            <Menu.Item as='a'>
+              <Icon name='camera' />
+              Channels
+            </Menu.Item>
+          </Sidebar>
+        </Sidebar.Pushable>
+      </div>
     )
   }
 }

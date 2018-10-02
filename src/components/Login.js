@@ -33,7 +33,6 @@ class Login extends React.Component {
   }
 
   handleSubmit = (e) => {
-    // debugger
       e.preventDefault();
       let data = JSON.stringify({
         email: e.target.parentElement.querySelector('input[name="email"]').value,

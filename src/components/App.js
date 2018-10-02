@@ -14,6 +14,10 @@ import WorkoutHistory from './WorkoutHistory'
 import WorkoutOptions from './WorkoutOptions'
 import Home from './Home'
 import SearchBar from './SearchBar'
+import { Button, Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Link } from "react-router-dom"
+
 
 library.add(fas)
 
@@ -53,10 +57,15 @@ class App extends Component {
         allRepsLifted: "",
         allSets: null,
         workoutsCompleted: "",
-        lastTwoWorkouts: null
+        lastTwoWorkouts: null,
+        visible: false,
+        myCurrentWorkout: null
       };
     }
 
+  handleButtonClick = () => this.setState({ visible: !this.state.visible })
+
+  handleSidebarHide = () => this.setState({ visible: false })
 
 fetchUser = () => {
   requestHelper("http://localhost:3001/profile").then(this.updateUser);
@@ -131,10 +140,9 @@ getUserWorkouts = () => {
 }
 
 addWorkoutToState = (workout) => {
-  let workouts = [...this.state.workouts, workout]
   this.setState({
-    workouts: workouts,
-    newWorkoutId: workout.id,
+    myCurrentWorkout: workout,
+    newWorkoutId: workout.id
   })
 }
 
@@ -248,17 +256,123 @@ getInfoToRedoWorkout = (workoutObj) => {
   })
 }
 
+removeExercise = (exerciseObj) => {
+  let exerciseArr = [...this.state.newWorkout]
+  let afterRemove = exerciseArr.filter(exercise => exercise.id != exerciseObj.id)
+  this.setState({
+    newWorkout: afterRemove
+  })
+}
+
+myCurrentWorkout = () => {
+  let workouts = [...this.state.workouts]
+  let lastWorkout = workouts.pop()
+  this.setState({
+    myCurrentWorkout: lastWorkout
+  })
+}
+
+updateMyCurrentWorkout = (set) => {
+  let workout = this.state.myCurrentWorkout
+  let addingSets = workout.exercise_sets.push(set)
+  this.setState({
+    myCurrentWorkout: workout
+  })
+}
+
+pushCurrentWorkoutToWorkouts = () => {
+  let workouts = [...this.state.workouts]
+  let myCurrentWorkout = this.state.myCurrentWorkout
+  let updatedWorkouts = workouts.push(myCurrentWorkout)
+  this.setState({
+    workouts: updatedWorkouts
+  })
+}
+
+emptyCurrentWorkout = () => {
+  this.setState({
+    myCurrentWorkout: null
+  })
+}
 
   render() {
-
+    const { visible } = this.state
     return (
       <div className="App">
         <BrowserRouter>
           <React.Fragment>
-        
-            {this.state.exercises ? <Route exact path='/' render={props=> <Home {...props} exercises={this.state.exercises} />} /> : null }
 
-            {this.state.user ? <Route render={props=> <Navbar {...props} logOut={this.logOut} user={this.state.user} />} /> : null }
+
+      <div id="nav">
+       <FontAwesomeIcon id="bar" icon='bars' size="2x" onClick={this.handleButtonClick}/>
+       <Sidebar.Pushable as={Segment}>
+         <Sidebar
+           id="sidebar"
+           as={Menu}
+           animation='overlay'
+           icon='labeled'
+           inverted
+           onHide={this.handleSidebarHide}
+           vertical
+           visible={visible}
+           width='thin'
+         >
+           { this.state.myCurrentWorkout === null ?
+            <Menu.Item as='a'>
+            <Link to="/new-workout">
+              <FontAwesomeIcon id="slide-button" icon="plus" size="2x"/>
+              <br />
+              <br />
+              <label id="menu-text">New Workout</label>
+            </Link>
+           </Menu.Item> :
+
+           <Menu.Item as='a'>
+           <Link to="/new-workout">
+             <FontAwesomeIcon id="slide-button" icon="heartbeat" size="2x"/>
+             <br />
+             <br />
+             <label id="menu-text">Current Workout</label>
+           </Link>
+          </Menu.Item> }
+
+            <Menu.Item as='a'>
+            <Link to="/profile"><FontAwesomeIcon id="slide-button" icon="user" size="2x"/>
+            <br />
+            <br />
+            <label id="menu-text">Profile</label>
+            </Link>
+           </Menu.Item>
+
+           <Menu.Item as='a'>
+            <Link to="/workout-history"><FontAwesomeIcon id="slide-button" icon="calendar" size="2x"/>
+            <br />
+            <br />
+            <label id="menu-text">Workout History</label>
+            </Link>
+           </Menu.Item>
+
+           <Menu.Item as='a'>
+            <Link to="/all-exercises">
+            <FontAwesomeIcon id="slide-button" icon="dumbbell" size="2x"/>
+            <br />
+            <br />
+            <label id="menu-text">All Exercises</label>
+            </Link>
+           </Menu.Item>
+
+           <Menu.Item as='a'>
+            <Link to="/login">
+            <br />
+            <br />
+            <label id="menu-text">Logout</label>
+            </Link>
+           </Menu.Item>
+         </Sidebar>
+
+         <Sidebar.Pusher>
+
+            {this.state.exercises ? <Route exact path='/' render={props=> <Home {...props} exercises={this.state.exercises} />} /> : null }
 
             <Route exact path='/signup' render={props=> <Signup {...props} updateUser= {this.updateUser} />} />
 
@@ -266,16 +380,18 @@ getInfoToRedoWorkout = (workoutObj) => {
 
             <Route exact path='/login' render={props=> <Login {...props} updateUser={this.updateUser} />} />
 
-            { this.state.exercises ? <Route exact path='/all-exercises' render={props=> <ExerciseContainer {...props} fetchUser={this.fetchUser} startWorkoutTime={this.startWorkoutTime} emptyNewWorkoutArr={this.emptyNewWorkoutArr} addWorkoutToState={this.addWorkoutToState} user={this.state.user} saveWorkout={this.saveWorkout} newWorkout={this.state.newWorkout} changeColor={this.changeColor} displayNewWorkout={this.displayNewWorkout} addExerciseToWorkout={this.addExerciseToWorkout} exercises={this.state.exercises} filterExercises={this.filterExercises} searchedExerciseArr={this.state.searchedExerciseArr}/>} /> : null }
+            { this.state.exercises ? <Route exact path='/all-exercises' render={props=> <ExerciseContainer {...props} myCurrentWorkout={this.myCurrentWorkout} removeExercise={this.removeExercise} fetchUser={this.fetchUser} startWorkoutTime={this.startWorkoutTime} emptyNewWorkoutArr={this.emptyNewWorkoutArr} addWorkoutToState={this.addWorkoutToState} user={this.state.user} saveWorkout={this.saveWorkout} newWorkout={this.state.newWorkout} changeColor={this.changeColor} displayNewWorkout={this.displayNewWorkout} addExerciseToWorkout={this.addExerciseToWorkout} exercises={this.state.exercises} filterExercises={this.filterExercises} searchedExerciseArr={this.state.searchedExerciseArr}/>} /> : null }
 
-            {this.state.quote && this.state.newWorkout.length > 0 ? <Route exact path='/workout' render={props=> <WorkoutContainer {...props} calculateRepsAndSets={this.calculateRepsAndSets} emptyNewWorkoutArr={this.emptyNewWorkoutArr} removeWorkout={this.removeWorkout} getTotalWorkoutTime={this.getTotalWorkoutTime} totalDuration={this.state.totalDuration} endWorkoutTime={this.endWorkoutTime} newWorkout={this.state.newWorkout} workouts={this.state.workouts} newWorkoutId={this.state.newWorkoutId} quoteOfTheDay={this.state.quote} user={this.state.user}/>} /> : null}
+            {this.state.quote && this.state.newWorkout.length > 0 ? <Route exact path='/workout' render={props=> <WorkoutContainer {...props} emptyCurrentWorkout={this.emptyCurrentWorkout} updateMyCurrentWorkout={this.updateMyCurrentWorkout} pushCurrentWorkoutToWorkouts={this.pushCurrentWorkoutToWorkouts} calculateRepsAndSets={this.calculateRepsAndSets} emptyNewWorkoutArr={this.emptyNewWorkoutArr} removeWorkout={this.removeWorkout} getTotalWorkoutTime={this.getTotalWorkoutTime} totalDuration={this.state.totalDuration} endWorkoutTime={this.endWorkoutTime} newWorkout={this.state.newWorkout} workouts={this.state.workouts} newWorkoutId={this.state.newWorkoutId} quoteOfTheDay={this.state.quote} user={this.state.user}/>} /> : null}
 
-            {this.state.lastTwoWorkouts ? <Route exact path='/new-workout' render={props=> <WorkoutOptions {...props} lastTwoWorkouts={this.state.lastTwoWorkouts}/>} /> : null}
+            {this.state.lastTwoWorkouts && this.state.user ? <Route exact path='/new-workout' render={props=> <WorkoutOptions {...props} lastTwoWorkouts={this.state.lastTwoWorkouts}/>} /> : null}
 
             <Route exact path='/workout-history' render={props=> <WorkoutHistory {...props} getInfoToRedoWorkout={this.getInfoToRedoWorkout} workouts={this.state.workouts} displayWorkout={this.displayWorkout} selectedWorkoutHistory={this.state.selectedWorkoutHistory}/>} />
 
-            { this.state.user ? <Footer exercisesPage={this.exercisesPage} logOut={this.logOut} user={this.state.user} /> : null }
-          </React.Fragment>
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
+        </div>
+        </React.Fragment>
         </BrowserRouter>
       </div>
 

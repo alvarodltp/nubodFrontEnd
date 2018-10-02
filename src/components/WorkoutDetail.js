@@ -17,7 +17,7 @@ class WorkoutDetail extends React.Component {
   }
 
   render(){
-    
+
     let quote = this.props.quote.contents.quotes[0].quote
     let author = this.props.quote.contents.quotes[0].author
 
@@ -29,7 +29,7 @@ class WorkoutDetail extends React.Component {
         </Segment>
 
         {this.props.newWorkout.map(exercise =>
-          <WorkoutDetailItem handleChange={this.handleChange} newWorkoutId={this.props.newWorkoutId} exercise={exercise}/>
+          <WorkoutDetailItem updateMyCurrentWorkout={this.props.updateMyCurrentWorkout} handleChange={this.handleChange} newWorkoutId={this.props.newWorkoutId} exercise={exercise}/>
         )}
 
       </div>

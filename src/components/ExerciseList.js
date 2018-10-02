@@ -1,6 +1,7 @@
 import React from 'react'
-import { List, Header, Modal, Image, Button, Message } from 'semantic-ui-react'
+import { List, Modal, Message } from 'semantic-ui-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Button, Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react'
 
 class ExerciseList extends React.Component {
   constructor(){
@@ -29,6 +30,7 @@ class ExerciseList extends React.Component {
   render(){
     let newWorkoutArrIds = this.props.newWorkout.map(exercise => exercise.id)
     return(
+
       <div  id="exercise-page">
         <Modal id="exercise-modal" open={this.state.open} trigger={
         <List divided selection>
@@ -43,11 +45,17 @@ class ExerciseList extends React.Component {
             { this.props.clickedExercise ? <Header>Target: {this.props.clickedExercise.target.split("_").join(" ").toUpperCase()}</Header> :null }
             { this.props.clickedExercise ? <p>Instructions: {this.props.clickedExercise.instructions}</p> :null }
             { this.props.clickedExercise ? <p>Equipment: {this.props.clickedExercise.equipment_needed}</p> :null }
-            { this.props.clickedExercise && !newWorkoutArrIds.includes(this.props.clickedExercise.id) ?  <Button color="blue" size='tiny' floated="right" id={this.props.clickedExercise.id} onClick={() => {this.props.addExerciseToWorkout(this.props.clickedExercise); this.close();}}>Add To Workout</Button> : <h3 id="already-added">Already Added</h3> }
+            { this.props.clickedExercise && !newWorkoutArrIds.includes(this.props.clickedExercise.id) ?
+
+              <Button color="blue" size='tiny' floated="right" id={this.props.clickedExercise.id} onClick={() => {this.props.addExerciseToWorkout(this.props.clickedExercise); this.close();}}>Add To Workout</Button> : <h2 onClick={() => {this.props.removeExercise(this.props.clickedExercise); this.close()}}>Remove</h2> }
+
           </Modal.Description>
         </Modal.Content>
         </Modal>
-      </div>
+        </div>
+
+
+
     )
   }
 }

@@ -25,7 +25,6 @@ class Profile extends React.Component {
 }
 
 updateUser = (e) => {
-  // debugger
   fetch(`http://localhost:3001/user-update`, {
       method: "PATCH",
       headers: {

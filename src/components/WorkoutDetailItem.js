@@ -38,7 +38,8 @@ saveSet = (weight, reps) => {
       })
     })
     .then(response => response.json())
-    .then(console.log)
+    .then(json => {this.props.updateMyCurrentWorkout(json)}
+    )
 }
 
 removeSet = (e) => {

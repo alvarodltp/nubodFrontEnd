@@ -30,6 +30,11 @@ body{
   margin: 0 auto
 }
 
+#date-container{
+  width: 70%;
+  margin: 0 auto;
+}
+
 #login-card {
  position: fixed;
  top: 40%;
@@ -47,10 +52,9 @@ body{
 #footer {
   height: 60px;
   background-color: #A8FC00;
-  position:fixed;
-   left:0px;
-   bottom:0px;
-   width:100%;
+  left:0px;
+  bottom:0px;
+  width:100%;
 }
 
 #search-bar {
@@ -232,4 +236,25 @@ body{
   padding-right: 0;
   margin-top: 50px;
   width: 200px;
+}
+
+#bar {
+  color: gray;
+  margin: 0 auto;
+}
+
+#sidebar{
+  background-color: lightgray;
+}
+
+#slide-button{
+  color: #A8FC00;
+}
+
+#menu-text{
+  color: black;
+}
+
+#nav {
+  background-color: #A8FC00;
 }
