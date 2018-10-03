@@ -20,8 +20,8 @@ addSet = () => {
   })
 }
 
-
 saveSet = (weight, reps) => {
+  // debugger
   fetch(`http://localhost:3001/create-set`, {
       method: "POST",
       headers: {
@@ -39,7 +39,7 @@ saveSet = (weight, reps) => {
     })
     .then(response => response.json())
     .then(json => {this.props.updateMyCurrentWorkout(json)}
-    )
+  )
 }
 
 removeSet = (e) => {
@@ -72,11 +72,13 @@ inputArrNum = () => {
 
 
 render(){
-
+  let lastSetForExercise;
+  this.props.lastSets.length > 0 ? lastSetForExercise = this.props.lastSets.filter(set => set.exercise_id === this.props.exercise.id).pop() : lastSetForExercise =  null
   return(
     <div>
     <form>
       <h3>{this.props.exercise.name}</h3>
+      {lastSetForExercise != null ? <p>Previous - Reps: {lastSetForExercise.reps}lb Weight:{lastSetForExercise.weight}</p> : <p>No Previous History</p>}
       {this.state.inputArr}
      <p id="add-set" onClick={this.addSet} onClick={this.inputArrNum} id="add-set">Add Set</p>
     </form>

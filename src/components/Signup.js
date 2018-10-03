@@ -44,30 +44,34 @@ class Signup extends React.Component {
       },
       body: JSON.stringify(userData)
     })
+    .then(res => res.json())
+    .then(this.props.updateUser)
     this.props.history.push('/profile')
   }
 
 
   render() {
     return (
-      <Container id="signup">
-        <div className="ui one column stackable center aligned page grid">
-          <div id="column-login" className="column twelve wide">
-          <Form onSubmit={this.handleOnSubmit}>
-             <Form.Group>
-                <Header as='h2'>Sign Up!</Header>
-                <Form.Input value={this.state.name} id="name" onChange={this.handleChange} fluid name='name' label='Name' placeholder='name' />
-                <Form.Input value={this.state.lastName} onChange={this.handleChange} fluid name='lastName' label='Last Name' placeholder='last name' />
-                <Form.Input value={this.state.email} onChange={this.handleChange} fluid name='email' label='Email' placeholder='email' />
-                <Form.Input value={this.state.password} onChange={this.handleChange} fluid name='password' label='Password' placeholder='password' />
-                </Form.Group>
-             <br/>
-              <Button primary >Sign up</Button>
-              <Button onClick={this.loginForm}>Log in</Button>
-          </Form>
+      <div style={{minHeight: "100vh"}}>
+        <Container id="signup">
+          <div className="ui one column stackable center aligned page grid">
+            <div id="column-login" className="column twelve wide">
+            <Form onSubmit={this.handleOnSubmit}>
+               <Form.Group>
+                  <Header as='h2'>Sign Up!</Header>
+                  <Form.Input value={this.state.name} id="name" onChange={this.handleChange} fluid name='name' label='Name' placeholder='name' />
+                  <Form.Input value={this.state.lastName} onChange={this.handleChange} fluid name='lastName' label='Last Name' placeholder='last name' />
+                  <Form.Input value={this.state.email} onChange={this.handleChange} fluid name='email' label='Email' placeholder='email' />
+                  <Form.Input value={this.state.password} onChange={this.handleChange} fluid name='password' label='Password' placeholder='password' />
+                  </Form.Group>
+               <br/>
+                <Button primary >Sign up</Button>
+                <Button onClick={this.loginForm}>Log in</Button>
+            </Form>
+          </div>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </div>
     )
   }
 }

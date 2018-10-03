@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Segment } from 'semantic-ui-react'
 import WorkoutDetailItem from './WorkoutDetailItem'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class WorkoutDetail extends React.Component {
   constructor(){
@@ -23,13 +24,13 @@ class WorkoutDetail extends React.Component {
 
     return(
       <div>
-        <Button size="tiny" onClick={this.displayQuote} id="motivation-button">Need Some Motivation?</Button>
-        <Segment>
-          {this.state.quote === true ? <p>{quote} - {author}</p> : null}
-        </Segment>
+        <Button size="tiny" onClick={this.displayQuote} id="motivation-button">Quote Of The Day</Button>
+        <p>
+          {this.state.quote === true ? <div><FontAwesomeIcon id="quote-icon" icon="quote-left" size="2x"/><p>{quote} - {author}</p></div> : null}
+        </p>
 
         {this.props.newWorkout.map(exercise =>
-          <WorkoutDetailItem updateMyCurrentWorkout={this.props.updateMyCurrentWorkout} handleChange={this.handleChange} newWorkoutId={this.props.newWorkoutId} exercise={exercise}/>
+          <WorkoutDetailItem updateMyCurrentWorkout={this.props.updateMyCurrentWorkout} handleChange={this.handleChange} newWorkoutId={this.props.newWorkoutId} lastSets={this.props.lastSets} exercise={exercise}/>
         )}
 
       </div>

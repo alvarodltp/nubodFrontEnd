@@ -5,8 +5,8 @@ import { Dropdown } from 'semantic-ui-react'
 class WorkoutHistory extends React.Component {
 
   render(){
-    // debugger
-    let options = this.props.workouts ? this.props.workouts.map(workout => ({key: workout.id, text: `${workout.name}-${workout.date}`, value: workout})) : [{}]
+  
+    let options = this.props.workoutHistory ? this.props.workoutHistory.map(workout => ({key: workout.id, text: `${workout.name}-${workout.date}`, value: workout})) : [{}]
 
     return(
       <div style={{minHeight: "100vh"}}>
@@ -16,7 +16,7 @@ class WorkoutHistory extends React.Component {
         </div>
 
         <div id="workout-info">
-          {this.props.selectedWorkoutHistory ? <OldWorkoutDetail {...this.props} myCurrentWorkout={this.props.myCurrentWorkout} removeWorkout={this.props.removeWorkout} saveWorkout={this.props.saveWorkout} getInfoToRedoWorkout={this.props.getInfoToRedoWorkout} selectedWorkoutHistory={this.props.selectedWorkoutHistory} /> : null}
+          {this.props.selectedWorkoutHistory ? <OldWorkoutDetail {...this.props} updateWorkoutHistory={this.props.updateWorkoutHistory} myCurrentWorkout={this.props.myCurrentWorkout} removeWorkout={this.props.removeWorkout} saveWorkout={this.props.saveWorkout} getInfoToRedoWorkout={this.props.getInfoToRedoWorkout} selectedWorkoutHistory={this.props.selectedWorkoutHistory} /> : null}
         </div>
       </div>
 

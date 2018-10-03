@@ -54,7 +54,7 @@ class ExerciseContainer extends React.Component {
 
       {this.props.newWorkout.length > 0 ? <Button onClick={this.props.emptyNewWorkoutArr}>Cancel</Button> :null }
       <Input id="seach-bar" onChange={this.props.filterExercises} icon='search' placeholder='Search...' />
-      {this.props.exercises ? <ExerciseList removeExercise={this.props.removeExercise} changeColor={this.props.changeColor} user={this.props.user} newWorkout={this.props.newWorkout} displayNewWorkout={this.props.displayNewWorkout} addExerciseToWorkout={this.props.addExerciseToWorkout} searchedExerciseArr={this.props.searchedExerciseArr} exercises={this.props.exercises} exerciseInfo={this.exerciseInfo} clickedExercise={this.state.clickedExercise} /> : null }
+      {this.props.exercises ? <ExerciseList getLastSetStats={this.props.getLastSetStats} removeExercise={this.props.removeExercise} changeColor={this.props.changeColor} user={this.props.user} newWorkout={this.props.newWorkout} displayNewWorkout={this.props.displayNewWorkout} addExerciseToWorkout={this.props.addExerciseToWorkout} searchedExerciseArr={this.props.searchedExerciseArr} exercises={this.props.exercises} exerciseInfo={this.exerciseInfo} clickedExercise={this.state.clickedExercise} /> : null }
     </div>
     )
   }

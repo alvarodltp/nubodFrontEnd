@@ -6,7 +6,7 @@
 
 
 body{
-  background-color: white
+  background-color: white;
 }
 
 /* #column-login{
@@ -36,9 +36,9 @@ body{
 }
 
 #login-card {
- position: fixed;
- top: 40%;
+ top: 50%;
  left: 50%;
+ position: fixed;
  transform: translate(-50%, -50%);
 }
 
@@ -105,7 +105,7 @@ body{
 
 #exercise-page {
   text-align: center;
-  padding-top: 30px;
+  padding-top: 20px;
   margin: 0 auto
 }
 
@@ -156,6 +156,8 @@ body{
 
 #html-input {
   border-top: 0px solid transparent;
+  margin-left:
+  mrgin
 }
 
 #add-set {
@@ -265,4 +267,23 @@ body{
 
 #table-cell{
   background-color: lightgray;
+}
+
+#checkbox {
+  margin-left: 10px;
+}
+
+#input-header h4 {
+  display: inline;
+  margin-left: 40px;
+  margin-right:70px;
+}
+
+#no-exercises-message{
+  margin: 30% auto;
+}
+
+#remove-exercise-text{
+  color: red;
+  float: right;
 }

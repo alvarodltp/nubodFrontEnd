@@ -55,36 +55,36 @@ class Login extends React.Component {
           }
         })
         .then(json => {
-          // debugger
           if(json !== undefined){
             this.props.updateUser(json.user);
             localStorage.setItem("token", json.token);
             this.props.history.push('/profile')
           }
-        });
+        })
     };
 
 
   render() {
   return (
-
-<Card id="login-card" centered>
-  <Form onSubmit={this.handleOnSubmit}>
-    <Segment padded>
-    <Form.Group id="form-group" widths='equal'>
-       <Form.Input onChange={this.handleChangeEmail} fluid name='email' label='Email' placeholder='email' />
-       <Form.Input onChange={this.handleChangePassword} fluid name='password' label='Password' type="password" placeholder='password' />
-     </Form.Group>
-      <Button id="log-in" onClick={this.handleSubmit} primary fluid>
-        Login
-      </Button>
-      <Divider horizontal>Or</Divider>
-      <Button id="sign-up" onClick={this.signUpForm} secondary fluid>
-        Sign Up Now
-      </Button>
-    </Segment>
-  </Form>
-</Card>
+    <div style={{minHeight: "100vh"}}>
+      <Card id="login-card" centered>
+        <Form onSubmit={this.handleOnSubmit}>
+          <Segment padded>
+            <Form.Group id="form-group" widths='equal'>
+              <Form.Input onChange={this.handleChangeEmail} fluid name='email' label='Email' placeholder='email' />
+              <Form.Input onChange={this.handleChangePassword} fluid name='password' label='Password' type="password" placeholder='password' />
+            </Form.Group>
+            <Button id="log-in" onClick={this.handleSubmit} primary fluid>
+            Login
+            </Button>
+            <Divider horizontal>Or</Divider>
+            <Button id="sign-up" onClick={this.signUpForm} secondary fluid>
+            Sign Up Now
+            </Button>
+          </Segment>
+        </Form>
+      </Card>
+    </div>
     )
   }
 }

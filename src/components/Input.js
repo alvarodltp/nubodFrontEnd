@@ -1,5 +1,5 @@
 import React from 'react'
-import { Checkbox, Icon, Modal, Button } from 'semantic-ui-react'
+import { Checkbox, Icon, Modal, Button, Message } from 'semantic-ui-react'
 
 class Input extends React.Component {
   constructor(){
@@ -92,13 +92,20 @@ class Input extends React.Component {
     }
   }
 
+
+
   render(){
     return(
+    <React.Fragment>
       <form id={this.props.id}>
-            Reps
-          <input onChange={this.handleChange} id="html-input" type="text" name="reps" value={this.state.reps}/>
-            Weight
-          <input onChange={this.handleChange} id="html-input" type="text" name="weight" value={this.state.weight}/>
+      <div id="input-header">
+        <h4>Reps</h4>
+        <h4>Weight</h4>
+      </div>
+        <Icon onClick={this.props.removeSet} name="close"/>
+          <input onChange={this.handleChange} id="html-input" type="number" name="reps" value={this.state.reps}/>
+          <input onChange={this.handleChange} id="html-input" type="number" name="weight" value={this.state.weight}/>
+
 
           <Modal
               trigger={<Checkbox onClick={() => {this.completeSet(); this.startCountDown(); this.handleOpen()}} checked={this.state.checked} label='Done'/>}
@@ -109,24 +116,17 @@ class Input extends React.Component {
             >
               <Modal.Content>
                 <h1 style={{ fontSize: 50}}>Rest Time</h1>
-                <h1 id="timer" style={{ fontSize: 150}}>{this.state.minutes}:{this.state.seconds}</h1>
+                <h1 id="timer" style={{fontSize: 150}}>{this.state.minutes}:{this.state.seconds}</h1>
               </Modal.Content>
 
               <Modal.Actions>
-              <Button color='green' onClick={this.substract} inverted>
-                <Icon name='minus' /> 30 Sec
-              </Button>
-              <Button color='green' onClick={this.add} inverted>
-                <Icon name='add' /> 30 Sec
-              </Button>
                 <Button color='red' onClick={this.handleClose} inverted>
                   <Icon name='close' /> Skip
                 </Button>
               </Modal.Actions>
             </Modal>
-
-            <Icon onClick={this.props.removeSet} name="close"/>
       </form>
+      </React.Fragment>
     )
   }
 }
