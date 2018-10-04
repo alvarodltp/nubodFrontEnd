@@ -66,7 +66,7 @@ class Login extends React.Component {
 
   render() {
   return (
-    <div style={{minHeight: "100vh"}}>
+    <div id="login-page" style={{minHeight: "100vh"}}>
       <Card id="login-card" centered>
         <Form onSubmit={this.handleOnSubmit}>
           <Segment padded>
@@ -74,11 +74,11 @@ class Login extends React.Component {
               <Form.Input onChange={this.handleChangeEmail} fluid name='email' label='Email' placeholder='email' />
               <Form.Input onChange={this.handleChangePassword} fluid name='password' label='Password' type="password" placeholder='password' />
             </Form.Group>
-            <Button id="log-in" onClick={this.handleSubmit} primary fluid>
+            <Button id="log-in" onClick={this.handleSubmit} fluid>
             Login
             </Button>
             <Divider horizontal>Or</Divider>
-            <Button id="sign-up" onClick={this.signUpForm} secondary fluid>
+            <Button id="sign-up" onClick={this.signUpForm} fluid>
             Sign Up Now
             </Button>
           </Segment>

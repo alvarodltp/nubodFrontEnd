@@ -98,11 +98,11 @@ logOut = () => {
   localStorage.clear()
   this.setState({
     user: null,
-    workouts: null,
-    workoutHistory: null,
-    allWeightLifted: "",
-    allRepsLifted: "",
-    workoutsCompleted: ""
+    // workouts: null,
+    // workoutHistory: null,
+    // allWeightLifted: "",
+    // allRepsLifted: "",
+    // workoutsCompleted: ""
   })
 }
 
@@ -150,7 +150,9 @@ getUserWorkouts = () => {
 }
 
 addWorkoutToState = (workout) => {
+  let workouts = [...this.state.workouts, workout]
   this.setState({
+    workouts: workouts,
     myCurrentWorkout: workout,
     newWorkoutId: workout.id
   })
@@ -398,6 +400,7 @@ this.setState({
 
            <Menu.Item >
             <Link to="/login">
+            <FontAwesomeIcon id="slide-button" icon="sign-out-alt" size="2x"/>
             <br />
             <br />
             <label onClick={this.logOut} id="menu-text">Logout</label>
@@ -417,7 +420,7 @@ this.setState({
 
             { this.state.exercises ? <Route exact path='/all-exercises' render={props=> <ExerciseContainer {...props} getLastSetStats={this.getLastSetStats} saveWorkout={this.saveWorkout} myCurrentWorkout={this.myCurrentWorkout} removeExercise={this.removeExercise} fetchUser={this.fetchUser} startWorkoutTime={this.startWorkoutTime} emptyNewWorkoutArr={this.emptyNewWorkoutArr} user={this.state.user} saveWorkout={this.saveWorkout} newWorkout={this.state.newWorkout} changeColor={this.changeColor} displayNewWorkout={this.displayNewWorkout} addExerciseToWorkout={this.addExerciseToWorkout} exercises={this.state.exercises} filterExercises={this.filterExercises} searchedExerciseArr={this.state.searchedExerciseArr}/>} /> : null }
 
-            {this.state.quote ? <Route exact path='/workout' render={props=> <WorkoutContainer {...props} lastSets={this.state.lastSets} saveWorkout={this.saveWorkout} emptyCurrentWorkout={this.emptyCurrentWorkout} updateMyCurrentWorkout={this.updateMyCurrentWorkout} pushCurrentWorkoutToWorkouts={this.pushCurrentWorkoutToWorkouts} calculateRepsAndSets={this.calculateRepsAndSets} emptyNewWorkoutArr={this.emptyNewWorkoutArr} removeWorkout={this.removeWorkout} getTotalWorkoutTime={this.getTotalWorkoutTime} totalDuration={this.state.totalDuration} endWorkoutTime={this.endWorkoutTime} newWorkout={this.state.newWorkout} workouts={this.state.workouts} newWorkoutId={this.state.newWorkoutId} quoteOfTheDay={this.state.quote} user={this.state.user}/>} /> : null}
+            {this.state.quote ? <Route exact path='/workout' render={props=> <WorkoutContainer {...props} emptyCurrentWorkout={this.emptyCurrentWorkout} emptyNewWorkoutArr={this.emptyNewWorkoutArr} lastSets={this.state.lastSets} saveWorkout={this.saveWorkout} emptyCurrentWorkout={this.emptyCurrentWorkout} updateMyCurrentWorkout={this.updateMyCurrentWorkout} pushCurrentWorkoutToWorkouts={this.pushCurrentWorkoutToWorkouts} calculateRepsAndSets={this.calculateRepsAndSets} emptyNewWorkoutArr={this.emptyNewWorkoutArr} removeWorkout={this.removeWorkout} getTotalWorkoutTime={this.getTotalWorkoutTime} totalDuration={this.state.totalDuration} endWorkoutTime={this.endWorkoutTime} newWorkout={this.state.newWorkout} workouts={this.state.workouts} newWorkoutId={this.state.newWorkoutId} quoteOfTheDay={this.state.quote} user={this.state.user}/>} /> : null}
 
             {this.state.lastTwoWorkouts && this.state.user ? <Route exact path='/new-workout' render={props=> <WorkoutOptions {...props} lastTwoWorkouts={this.state.lastTwoWorkouts}/>} /> : null}
 

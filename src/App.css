@@ -7,6 +7,7 @@
 
 body{
   background-color: white;
+  font-family: 'Open Sans', sans-serif;
 }
 
 /* #column-login{
@@ -36,10 +37,15 @@ body{
 }
 
 #login-card {
- top: 50%;
+ opacity: 0.5;
+ top: 40%;
  left: 50%;
  position: fixed;
  transform: translate(-50%, -50%);
+}
+
+#login-card:hover {
+  opacity: 1.0;
 }
 
 #signup {
@@ -250,7 +256,8 @@ body{
 }
 
 #sidebar{
-  background-color: lightgray;
+  background-color: blue;
+  opacity: 0.8;
 }
 
 #slide-button{
@@ -258,7 +265,8 @@ body{
 }
 
 #menu-text{
-  color: black;
+  color: white;
+  font-weight: bold;
 }
 
 #nav {
@@ -286,4 +294,43 @@ body{
 #remove-exercise-text{
   color: red;
   float: right;
+}
+
+#stats{
+  text-align: center;
+  padding-top: 20px;
+}
+
+#workout-stats{
+  font-size: 40px;
+  color: gray;
+}
+
+#redo-workout {
+  color: gray;
+  font-size: 25px;
+}
+
+#arrow{
+  color: #A8FC00;
+}
+
+#log-in{
+  color: white;
+  background-color: gray;
+  opacity: 1.0;
+}
+
+#sign-up{
+  background-color: blue;
+  color: white;
+  opacity: 1.0;
+}
+
+#login-page{
+  background-image: url("https://images.pexels.com/photos/1117493/pexels-photo-1117493.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 600px;
 }
