@@ -52,7 +52,7 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <div style={{minHeight: "100vh"}}>
+      <div id="sign-up-div" style={{minHeight: "100vh"}}>
         <Container id="signup">
           <div className="ui one column stackable center aligned page grid">
             <div id="column-login" className="column twelve wide">

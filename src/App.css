@@ -49,11 +49,26 @@ body{
   opacity: 1.0;
 }
 
+#sign-up-div{
+  background-image: url("https://images.pexels.com/photos/1117493/pexels-photo-1117493.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 600px;
+}
+
 #signup {
+  opacity: 0.5;
   position: fixed;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
+  font-weight: bold;
+}
+
+#signup:hover {
+  opacity: 1.0;
+
 }
 
 #footer {
@@ -150,8 +165,13 @@ body{
 }
 
 #workout-options {
+  opacity: 1.0;
+  background-image: url("https://images.pexels.com/photos/1430827/pexels-photo-1430827.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 600px;
   padding-top: 230px;
-  font-size: 30px;
 }
 
 
@@ -310,8 +330,7 @@ body{
 }
 
 #redo-workout {
-  color: gray;
-  font-size: 25px;
+  color: white;
   text-align: center;
 }
 
@@ -341,4 +360,10 @@ body{
 
 #account-information{
   padding-top: 25px;
+}
+
+#cancel-workout-button{
+  display: block;
+  margin: 10px auto;
+
 }

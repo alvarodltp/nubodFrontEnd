@@ -73,6 +73,8 @@ class OldWorkoutDetail extends React.Component {
               </Table.HeaderCell>
             </Table.Row>
           </Table.Footer>
+          <br/>
+          <br/>
         </Table>
 
 

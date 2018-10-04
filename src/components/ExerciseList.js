@@ -46,8 +46,8 @@ class ExerciseList extends React.Component {
             { this.props.clickedExercise ? <p>Instructions: {this.props.clickedExercise.instructions}</p> :null }
             { this.props.clickedExercise ? <p>Equipment: {this.props.clickedExercise.equipment_needed}</p> :null }
             { this.props.clickedExercise && !newWorkoutArrIds.includes(this.props.clickedExercise.id) ?
-              <Button style={{paddingButton: "10px", backgroundColor: "blue", color: "white"}} size='tiny' floated="right" id={this.props.clickedExercise.id} onClick={() => {this.props.getLastSetStats(this.props.clickedExercise); this.props.addExerciseToWorkout(this.props.clickedExercise); this.close();}}>Add To Workout</Button>
-              : <h2 id="remove-exercise-text" onClick={() => {this.props.removeExercise(this.props.clickedExercise); this.close()}}>Remove Exercise</h2> }
+              <Button style={{paddingButton: "10px", backgroundColor: "#A8FC00", color: "gray"}} size='tiny' floated="right" id={this.props.clickedExercise.id} onClick={() => {this.props.getLastSetStats(this.props.clickedExercise); this.props.addExerciseToWorkout(this.props.clickedExercise); this.close();}}>Add To Workout</Button>
+              : <h3 id="remove-exercise-text" onClick={() => {this.props.removeExercise(this.props.clickedExercise); this.close()}}>Remove Exercise</h3> }
           </Modal.Description>
         </Modal.Content>
         </Modal>

@@ -141,6 +141,8 @@ getUserWorkouts = () => {
   fetch("http://localhost:3001/workouts")
   .then(response => response.json())
   .then(workouts => {
+    // debugger
+    // let sortedArr =
     let reversedArr = workouts.reverse()
     this.setState({
       lastTwoWorkouts: workouts.slice(Math.max(workouts.length - 2, 0)),
@@ -183,6 +185,7 @@ addExerciseToWorkout = (exercise) => {
 }
 
 displayWorkout = (e, workoutData) => {
+  // debugger
   let workoutObj = workoutData.value
   this.setState({
     selectedWorkoutHistory: workoutObj

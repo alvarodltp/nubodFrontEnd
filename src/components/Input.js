@@ -108,7 +108,7 @@ class Input extends React.Component {
 
 
           <Modal
-              trigger={<Checkbox onClick={() => {this.completeSet(); this.startCountDown(); this.handleOpen()}} checked={this.state.checked} label='Done'/>}
+              trigger={this.state.weight != "" && this.state.reps != "" ? <Checkbox onClick={() => {this.completeSet(); this.startCountDown(); this.handleOpen()}} checked={this.state.checked} label='Done'/> : null}
               open={this.state.modalOpen}
               onClose={this.handleClose}
               basic

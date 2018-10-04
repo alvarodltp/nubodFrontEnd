@@ -7,8 +7,10 @@ class WorkoutOptions extends React.Component {
 
     return(
       <div id="workout-options" style={{minHeight: "100vh"}}>
-        <Link to="/all-exercises"><h1 id="redo-workout">Create Your Own Workout<FontAwesomeIcon id="arrow" icon="angle-double-right" size="2x"/></h1></Link>
-        <Link to="/workout-history"><h1 id="redo-workout">Redo A Previous Workout<FontAwesomeIcon id="arrow" icon="angle-double-right" size="2x"/></h1></Link>
+        <div id="text-redo-workout">
+          <Link to="/all-exercises"><h1 id="redo-workout">Create Your Own Workout<FontAwesomeIcon id="arrow" icon="angle-double-right" size="2x"/></h1></Link>
+          <Link to="/workout-history"><h1 id="redo-workout">Redo A Previous Workout<FontAwesomeIcon id="arrow" icon="angle-double-right" size="2x"/></h1></Link>
+        </div>
       </div>
     )
   }
