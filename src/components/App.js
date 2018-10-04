@@ -141,10 +141,11 @@ getUserWorkouts = () => {
   fetch("http://localhost:3001/workouts")
   .then(response => response.json())
   .then(workouts => {
+    let reversedArr = workouts.reverse()
     this.setState({
       lastTwoWorkouts: workouts.slice(Math.max(workouts.length - 2, 0)),
       workouts: workouts,
-      workoutHistory: workouts
+      workoutHistory: reversedArr
     }, () => this.workoutsCompleted())
   })
 }

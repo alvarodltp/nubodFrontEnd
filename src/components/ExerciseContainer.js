@@ -34,7 +34,7 @@ class ExerciseContainer extends React.Component {
     <div id="all-exercises" style={{minHeight: "100vh"}}>
       {this.props.newWorkout.length > 0 ?
         <Modal
-          trigger={<Button onClick={this.handleOpen}>Go To Workout</Button>}
+          trigger={<Button id="on-list-button" style={{marginBottom: "30px"}} onClick={this.handleOpen}>Go To Workout</Button>}
           open={this.state.modalOpen}
           onClose={this.handleClose}
           basic
@@ -45,7 +45,7 @@ class ExerciseContainer extends React.Component {
             <Input id="wo-name-input" transparent placeholder='Workout Name...' onChange={this.getName} value={this.state.workoutName}/>
           </Modal.Content>
           <Modal.Actions>
-            <Button id="on-list-button" color='green' onClick={() => {this.handleClose(); this.props.saveWorkout(this.state.workoutName); this.props.myCurrentWorkout(); this.props.history.push('/workout')}} inverted>
+            <Button color='green' onClick={() => {this.handleClose(); this.props.saveWorkout(this.state.workoutName); this.props.myCurrentWorkout(); this.props.history.push('/workout')}} inverted>
               <Icon name='checkmark' /> Start
             </Button>
           </Modal.Actions>

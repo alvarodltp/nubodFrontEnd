@@ -16,7 +16,7 @@ body{
 
 #navbar {
   background-color: gray;
-  position: fixed;
+  /* position: fixed; */
 }
 
 #form-group {
@@ -34,6 +34,7 @@ body{
 #date-container{
   width: 70%;
   margin: 0 auto;
+  padding-top: 40px;
 }
 
 #login-card {
@@ -50,7 +51,7 @@ body{
 
 #signup {
   position: fixed;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -104,10 +105,11 @@ body{
   padding-top: 40px;
 }
 
-#edit-button:hover {
-  background-color: #5400FC;
-  color: white;
+#edit-button{
+  background-image: linear-gradient(to bottom right, #5400FC, #A8FC00);
+  font-style: italic;
 }
+
 
 #exercise-page {
   text-align: center;
@@ -116,7 +118,7 @@ body{
 }
 
 #all-exercises {
-  padding-top: 60px;
+  padding-top: 40px;
 }
 
 .dimmed.dimmable > .ui.animating.dimmer, .dimmed.dimmable > .ui.visible.dimmer, .ui.active.dimmer {
@@ -135,7 +137,8 @@ body{
 }
 
 #header-site{
-   background-color: #D3D3D3;
+  background-image: linear-gradient(to bottom right, #5400FC, #A8FC00);
+   /* background-color: #D3D3D3; */
    background-position: 100% 100%;
    background-repeat: no-repeat;
 }
@@ -309,6 +312,7 @@ body{
 #redo-workout {
   color: gray;
   font-size: 25px;
+  text-align: center;
 }
 
 #arrow{
@@ -333,4 +337,8 @@ body{
   background-repeat: no-repeat;
   background-size: cover;
   height: 600px;
+}
+
+#account-information{
+  padding-top: 25px;
 }

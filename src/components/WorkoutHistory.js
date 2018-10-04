@@ -5,7 +5,7 @@ import { Dropdown } from 'semantic-ui-react'
 class WorkoutHistory extends React.Component {
 
   render(){
-  
+
     let options = this.props.workoutHistory ? this.props.workoutHistory.map(workout => ({key: workout.id, text: `${workout.name}-${workout.date}`, value: workout})) : [{}]
 
     return(
