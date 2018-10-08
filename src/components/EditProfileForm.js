@@ -3,7 +3,7 @@ import { Form, Grid, Button } from 'semantic-ui-react'
 
 class EditProfileForm extends React.Component {
   render (){
-  
+
     return(
     <React.Fragment>
     <Form>
@@ -26,17 +26,17 @@ class EditProfileForm extends React.Component {
               <Form.Input label="Email" name="email" onChange={this.props.handleChange} defaultValue={this.props.user.email}/>
             </Grid.Column>
             <Grid.Column>
-              <Form.Input label="Age" name="age" onChange={this.props.handleChange} defaultValue={this.props.user.age}/>
+              <Form.Input label="Age" type="number" name="age" onChange={this.props.handleChange} defaultValue={this.props.user.age}/>
             </Grid.Column>
             <Grid.Column>
-              <Form.Input label="Weight" name="weight" onChange={this.props.handleChange} defaultValue={this.props.user.weight}/>
+              <Form.Input label="Weight" name="weight" type="number" onChange={this.props.handleChange} defaultValue={this.props.user.weight}/>
 
             </Grid.Column>
           </Grid.Row>
 
           <Grid.Row>
             <Grid.Column>
-            <Form.Input label="Body Fat" name="body_fat" onChange={this.props.handleChange} defaultValue={this.props.user.body_fat}/>
+            <Form.Input label="Body Fat" name="body_fat" type="number" onChange={this.props.handleChange} defaultValue={this.props.user.body_fat}/>
 
             </Grid.Column>
             <Grid.Column>
@@ -54,7 +54,7 @@ class EditProfileForm extends React.Component {
               <Form.Input label="Activity Frecuency" name="activity_level" onChange={this.props.handleChange} defaultValue={this.props.user.activity_level}/>
             </Grid.Column>
             <Grid.Column>
-              <Form.Input label="Bmr" name="bmr" onChange={this.props.handleChange} defaultValue={this.props.user.bmr}/>
+              <Form.Input label="Bmr" name="bmr" type="number" onChange={this.props.handleChange} defaultValue={this.props.user.bmr}/>
             </Grid.Column>
             <Grid.Column>
               <Form.Input label="Gender" name="gender" onChange={this.props.handleChange} defaultValue={this.props.user.gender}/>
