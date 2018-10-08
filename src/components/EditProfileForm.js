@@ -60,7 +60,7 @@ class EditProfileForm extends React.Component {
               <Form.Input label="Gender" name="gender" onChange={this.props.handleChange} defaultValue={this.props.user.gender}/>
             </Grid.Column>
           </Grid.Row>
-          <Button id="edit-button" color="gray" onClick={this.props.updateUser}>Save</Button>
+          <Button id="edit-button" color="gray" onClick={(e) => {this.props.updateUser(e); this.props.convertBackToText(e)}}>Save</Button>
         </Grid>
       </Form>
 

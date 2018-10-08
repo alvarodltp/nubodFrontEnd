@@ -19,6 +19,12 @@ class Profile extends React.Component {
     })
   }
 
+  convertBackToText = (e) => {
+    this.setState({
+      edit: false,
+    })
+  }
+
   handleChange = (e) => {
   this.setState({
     [e.target.name]: e.target.value
@@ -177,7 +183,7 @@ updateUser = (e) => {
 
 
         </Grid>
-          : <EditProfileForm user={this.props.user} handleChange={this.handleChange} updateUser={this.updateUser} />}
+          : <EditProfileForm user={this.props.user} handleChange={this.handleChange} convertBackToText={this.convertBackToText} updateUser={this.updateUser} />}
           <br />
           <br />
         </React.Fragment>
