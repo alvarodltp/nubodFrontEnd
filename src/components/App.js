@@ -18,7 +18,6 @@ import { Button, Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from "react-router-dom"
 
-
 library.add(fas)
 
 const requestHelper = url =>
@@ -141,12 +140,11 @@ getUserWorkouts = () => {
   fetch("http://localhost:3001/workouts")
   .then(response => response.json())
   .then(workouts => {
-    // debugger
-    // let sortedArr =
+    let userWorkouts = workouts.filter(workout => workout.user_id === this.state.user.id)
     let reversedArr = workouts.reverse()
     this.setState({
-      lastTwoWorkouts: workouts.slice(Math.max(workouts.length - 2, 0)),
-      workouts: workouts,
+      // lastTwoWorkouts: workouts.slice(Math.max(workouts.length - 2, 0)),
+      workouts: userWorkouts,
       workoutHistory: reversedArr
     }, () => this.workoutsCompleted())
   })
