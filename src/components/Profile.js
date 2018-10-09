@@ -10,6 +10,9 @@ class Profile extends React.Component {
     super()
     this.state = {
       edit: false,
+      bmr: "",
+      gender: "",
+      activityLevel: ""
     }
   }
 
@@ -31,7 +34,7 @@ class Profile extends React.Component {
   })
 }
 
-updateUser = (e) => {
+  updateUser = (e) => {
   fetch(`http://localhost:3001/user-update`, {
       method: "PATCH",
       headers: {
@@ -50,13 +53,59 @@ updateUser = (e) => {
           location: e.target.parentElement.parentElement.elements[7].value,
           goal: e.target.parentElement.parentElement.elements[8].value,
           activity_level: e.target.parentElement.parentElement.elements[9].value,
-          bmr: e.target.parentElement.parentElement.elements[10].value,
-          gender: e.target.parentElement.parentElement.elements[11].value
+          bmr: this.state.bmr,
+          gender: e.target.parentElement.parentElement.elements[11].value,
+          height: e.target.parentElement.parentElement.elements[12].value
         }
       })
     }).then(response => response.json())
     .then(user => this.props.updateUser(user))
 }
+
+  getGender = (e) => {
+  this.setState({
+    gender: e.target.parentElement.parentElement.elements[11].value
+  })
+}
+
+getActivityLevel = (e) => {
+  this.setState({
+    activityLevel: e.target.parentElement.parentElement.elements[9].value
+  })
+}
+
+  calculateBmr = (e) => {
+    let weight = e.target.parentElement.parentElement.elements[5].value
+    let height = (e.target.parentElement.parentElement.elements[12].value * 12).toFixed(2)
+    let age = e.target.parentElement.parentElement.elements[4].value
+    let bmr;
+    this.state.gender === "Male" ? bmr = (66 + 6.23 * weight + 12.7 * height - 6.8 * age).toFixed(2) : bmr = (655 + 4.35 * weight + 4.7 * height - 4.7 * age).toFixed(2)
+    this.setState({
+      bmr: bmr
+    })
+  }
+
+  calculateCalories = () => {
+    let bmr = this.state.bmr
+    let gender = this.state.gender
+    let activityLevel;
+    debugger
+    if(activityLevel === "Sedentary (little or no exercise)") {
+      activityLevel = 1.2
+    } else if (activityLevel === "Lightly active (light exercise/sports 1-3 days/week)") {
+      activityLevel = 1.375
+    } else if (activityLevel === "Moderately active (moderate exercise/sports 3-5 days/week)") {
+      activityLevel = 1.55
+    } else if (activityLevel === "Very active (hard exercise/sports 6-7 days a week)") {
+      activityLevel = 1.725
+    } else {
+      activityLevel = 1.9
+    }
+    debugger
+    this.setState({
+      activityLevel: activityLevel
+    })
+  }
 
 
   render() {
@@ -174,6 +223,9 @@ updateUser = (e) => {
             <Grid.Column>
               {this.props.user ? <h3>Gender: {this.props.user.gender}</h3> : null}
             </Grid.Column>
+            <Grid.Column>
+              {this.props.user ? <h3>Height: {this.props.user.height}</h3> : null}
+            </Grid.Column>
           </Grid.Row>
 
 
@@ -181,9 +233,8 @@ updateUser = (e) => {
             <Button id="edit-button" color="grey" size="small" onClick={this.convertToInput} user={this.state.user}>Edit Profile</Button>
           </div>
 
-
         </Grid>
-          : <EditProfileForm user={this.props.user} handleChange={this.handleChange} convertBackToText={this.convertBackToText} updateUser={this.updateUser} />}
+          : <EditProfileForm calculateCalories={this.calculateCalories} getActivityLevel={this.getActivityLevel} bmr={this.state.bmr} getGender={this.getGender} calculateBmr={this.calculateBmr} user={this.props.user} handleChange={this.handleChange} convertBackToText={this.convertBackToText} updateUser={this.updateUser} />}
           <br />
           <br />
         </React.Fragment>

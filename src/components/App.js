@@ -120,6 +120,8 @@ getAllSets = () => {
   fetch("http://localhost:3001/exercise_sets")
   .then(response => response.json())
   .then(json => {
+    let workouts = json.map(set => set.workout)
+    // debugger
     this.setState({
       allSets: json
     }, () => this.calculateRepsAndSets())
@@ -140,11 +142,12 @@ getUserWorkouts = () => {
   fetch("http://localhost:3001/workouts")
   .then(response => response.json())
   .then(workouts => {
-    let userWorkouts = workouts.filter(workout => workout.user_id === this.state.user.id)
+    // let userWorkouts;
+    // this.state.user ? userWorkouts = workouts.filter(workout => workout.user_id === this.state.user.id) : null
     let reversedArr = workouts.reverse()
     this.setState({
       // lastTwoWorkouts: workouts.slice(Math.max(workouts.length - 2, 0)),
-      workouts: userWorkouts,
+      workouts: workouts,
       workoutHistory: reversedArr
     }, () => this.workoutsCompleted())
   })
