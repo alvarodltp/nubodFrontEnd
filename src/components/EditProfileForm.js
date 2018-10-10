@@ -1,14 +1,15 @@
 import React from 'react'
-import { Form, Grid, Button } from 'semantic-ui-react'
+import { Form, Grid, Button, Select } from 'semantic-ui-react'
 
 class EditProfileForm extends React.Component {
   render (){
     const genderOptions = [{key: 'male', text: 'Male', value: 'male' }, { key: 'female', text: 'Female', value: 'female' }]
+    const activityOptions = [{key: 'sedentary', text: 'Sedentary (little or no exercise)', value: 1.2}, {key: 'light', text: 'Lightly active (light exercise/sports 1-3 days/week)', value: 1.375}, {key: 'moderate', text: 'Moderately active (moderate exercise/sports 3-5 days/week)', value: 1.55}, {key: 'very active', text: 'Very active (hard exercise/sports 6-7 days a week)', value: 1.725}, {key: 'extra active', text: 'Extra active (very hard exercise/sports & physical job or 2x training)', value: 1.9}]
+    const goalOptions = [{key: 'lose weight', text: 'Lose Weight', value: 'lose'}, {key: 'maintain', text: 'Maintain Current Weight', value: 'maintain'}, {key: 'gain', text: 'Gain Muscle', value: 'gain'}]
     return(
     <React.Fragment>
     <Form>
       <Grid id="profile-info" columns='three' divided>
-
           <Grid.Row>
             <Grid.Column>
               <Form.Input label="First Name" name='first_name' onChange={this.props.handleChange} defaultValue={this.props.user.first_name}/>
@@ -41,19 +42,19 @@ class EditProfileForm extends React.Component {
               <Form.Input label="Location" name="location" onChange={this.props.handleChange} defaultValue={this.props.user.location}/>
             </Grid.Column>
             <Grid.Column>
-              <Form.Input label="Goal" name="goal" onChange={this.props.handleChange} defaultValue={this.props.user.goal}/>
+              <Form.Select label="Goal" name="goal" onChange={this.props.getGoal} placeholder={this.props.user.goal} options={goalOptions}/>
             </Grid.Column>
           </Grid.Row>
 
           <Grid.Row>
             <Grid.Column>
-              <Form.Input label="Activity Frecuency" name="activity_level" onChange={this.props.handleChange} defaultValue={this.props.user.activity_level}/>
+              <Form.Select label="Activity Frecuency" name="activity_level" onChange={this.props.getActivityLevel} placeholder={this.props.user.activity_level} options={activityOptions}/>
             </Grid.Column>
             <Grid.Column>
-              <Form.Input label="Bmr" name="bmr" type="number" onChange={this.props.handleChange} defaultValue={this.props.user.bmr} disabled/>
+              <Form.Input label="Bmr" name="bmr" type="number" onChange={this.props.handleChange} defaultValue={this.props.bmr} disabled/>
             </Grid.Column>
             <Grid.Column>
-              <Form.Input label='Gender' name="gender" onChange={this.props.handleChange} defaultValue={this.props.user.gender} options={genderOptions} />
+              <Form.Select label='Gender' name="gender" onChange={this.props.getGender} placeholder={this.props.user.gender} options={genderOptions} />
             </Grid.Column>
             <Grid.Column>
               <Form.Input label='Height' name="height" onChange={this.props.handleChange} defaultValue={this.props.user.height} />
@@ -62,8 +63,6 @@ class EditProfileForm extends React.Component {
           <Button id="edit-button" color="gray" onClick={(e) => {this.props.calculateCalories(); this.props.getActivityLevel(e); this.props.calculateBmr(e); this.props.getGender(e); this.props.updateUser(e); this.props.convertBackToText(e)}}>Save</Button>
         </Grid>
       </Form>
-
-
       </React.Fragment>
 
     )

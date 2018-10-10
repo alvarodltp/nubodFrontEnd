@@ -84,6 +84,7 @@ componentDidMount() {
   }
 
 updateUser = user => {
+  console.log(user)
   this.setState({
     user: user
   });

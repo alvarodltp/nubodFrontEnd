@@ -12,7 +12,8 @@ class Profile extends React.Component {
       edit: false,
       bmr: "",
       gender: "",
-      activityLevel: ""
+      activityLevel: "",
+      goal: ""
     }
   }
 
@@ -51,11 +52,11 @@ class Profile extends React.Component {
           weight: e.target.parentElement.parentElement.elements[5].value,
           body_fat: e.target.parentElement.parentElement.elements[6].value,
           location: e.target.parentElement.parentElement.elements[7].value,
-          goal: e.target.parentElement.parentElement.elements[8].value,
-          activity_level: e.target.parentElement.parentElement.elements[9].value,
+          goal: this.state.goal,
+          activity_level: this.state.activityLevel,
           bmr: this.state.bmr,
-          gender: e.target.parentElement.parentElement.elements[11].value,
-          height: e.target.parentElement.parentElement.elements[12].value
+          gender: this.state.gender,
+          height: e.target.parentElement.parentElement.elements[9].value
         }
       })
     }).then(response => response.json())
@@ -64,19 +65,27 @@ class Profile extends React.Component {
 
   getGender = (e) => {
   this.setState({
-    gender: e.target.parentElement.parentElement.elements[11].value
+    gender: e.target.innerText
   })
 }
 
-getActivityLevel = (e) => {
-  this.setState({
-    activityLevel: e.target.parentElement.parentElement.elements[9].value
-  })
-}
+  getActivityLevel = (e) => {
+    console.log(e.target.innerText)
+    this.setState({
+      activityLevel: e.target.innerText
+    })
+  }
+
+  getGoal = (e) => {
+    this.setState({
+      goal: e.target.innerText
+    })
+  }
+
 
   calculateBmr = (e) => {
     let weight = e.target.parentElement.parentElement.elements[5].value
-    let height = (e.target.parentElement.parentElement.elements[12].value * 12).toFixed(2)
+    let height = (e.target.parentElement.parentElement.elements[9].value * 12).toFixed(2)
     let age = e.target.parentElement.parentElement.elements[4].value
     let bmr;
     this.state.gender === "Male" ? bmr = (66 + 6.23 * weight + 12.7 * height - 6.8 * age).toFixed(2) : bmr = (655 + 4.35 * weight + 4.7 * height - 4.7 * age).toFixed(2)
@@ -89,7 +98,6 @@ getActivityLevel = (e) => {
     let bmr = this.state.bmr
     let gender = this.state.gender
     let activityLevel;
-    debugger
     if(activityLevel === "Sedentary (little or no exercise)") {
       activityLevel = 1.2
     } else if (activityLevel === "Lightly active (light exercise/sports 1-3 days/week)") {
@@ -101,7 +109,6 @@ getActivityLevel = (e) => {
     } else {
       activityLevel = 1.9
     }
-    debugger
     this.setState({
       activityLevel: activityLevel
     })
@@ -173,58 +180,58 @@ getActivityLevel = (e) => {
       <Grid id="profile-info" columns='two' divided>
           <Grid.Row>
             <Grid.Column>
-              {this.props.user ? <h3>Name: {this.props.user.first_name}</h3> : null}
+              {this.props.user ? <p>Name: {this.props.user.first_name}</p> : null}
             </Grid.Column>
             <Grid.Column>
-              {this.props.user ? <h3>Last Name: {this.props.user.last_name}</h3> : null}
+              {this.props.user ? <p>Last Name: {this.props.user.last_name}</p> : null}
             </Grid.Column>
           </Grid.Row>
 
          <Grid.Row>
          <Grid.Column>
-           {this.props.user ? <h3>Username: {this.props.user.user_name}</h3> : null}
+           {this.props.user ? <p>Username: {this.props.user.user_name}</p> : null}
          </Grid.Column>
           <Grid.Column>
-            {this.props.user ? <h3>Email: {this.props.user.email}</h3> : null}
+            {this.props.user ? <p>Email: {this.props.user.email}</p> : null}
           </Grid.Column>
          </Grid.Row>
 
          <Grid.Row>
            <Grid.Column>
-             {this.props.user ? <h3>Age: {this.props.user.age}</h3> : null}
+             {this.props.user ? <p>Age: {this.props.user.age}</p> : null}
            </Grid.Column>
            <Grid.Column>
-             {this.props.user ? <h3>Weight: {this.props.user.weight}</h3> : null}
+             {this.props.user ? <p>Weight: {this.props.user.weight}</p> : null}
            </Grid.Column>
          </Grid.Row>
 
          <Grid.Row>
            <Grid.Column>
-             {this.props.user ? <h3>Body Fat: {this.props.user.body_fat}%</h3> : null}
+             {this.props.user ? <p>Body Fat: {this.props.user.body_fat}%</p> : null}
            </Grid.Column>
            <Grid.Column>
-             {this.props.user ? <h3>Location: {this.props.user.location}</h3> : null}
+             {this.props.user ? <p>Location: {this.props.user.location}</p> : null}
            </Grid.Column>
         </Grid.Row>
 
           <Grid.Row>
             <Grid.Column>
-              {this.props.user ? <h3>Activity Level: {this.props.user.activity_level}</h3> : null}
+              {this.props.user ? <p>Activity Level: {this.props.user.activity_level}</p> : null}
             </Grid.Column>
             <Grid.Column>
-              {this.props.user ? <h3>Goal: {this.props.user.goal}</h3> : null}
+              {this.props.user ? <p>Goal: {this.props.user.goal}</p> : null}
             </Grid.Column>
           </Grid.Row>
 
           <Grid.Row>
             <Grid.Column>
-              {this.props.user ? <h3>Bmr: {this.props.user.bmr}</h3> : null}
+              {this.props.user ? <p>Bmr: {this.props.user.bmr}</p> : null}
             </Grid.Column>
             <Grid.Column>
-              {this.props.user ? <h3>Gender: {this.props.user.gender}</h3> : null}
+              {this.props.user ? <p>Gender: {this.props.user.gender}</p> : null}
             </Grid.Column>
             <Grid.Column>
-              {this.props.user ? <h3>Height: {this.props.user.height}</h3> : null}
+              {this.props.user ? <p>Height: {this.props.user.height}</p> : null}
             </Grid.Column>
           </Grid.Row>
 
@@ -234,7 +241,7 @@ getActivityLevel = (e) => {
           </div>
 
         </Grid>
-          : <EditProfileForm calculateCalories={this.calculateCalories} getActivityLevel={this.getActivityLevel} bmr={this.state.bmr} getGender={this.getGender} calculateBmr={this.calculateBmr} user={this.props.user} handleChange={this.handleChange} convertBackToText={this.convertBackToText} updateUser={this.updateUser} />}
+          : <EditProfileForm gender={this.state.gender} activityLevel={this.state.activityLevel} goal={this.state.goal} getGoal={this.getGoal} calculateCalories={this.calculateCalories} getActivityLevel={this.getActivityLevel} bmr={this.state.bmr} getGender={this.getGender} calculateBmr={this.calculateBmr} user={this.props.user} handleChange={this.handleChange} convertBackToText={this.convertBackToText} updateUser={this.updateUser} />}
           <br />
           <br />
         </React.Fragment>
