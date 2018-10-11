@@ -4,8 +4,6 @@ import EditProfileForm from './EditProfileForm'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import swal from 'sweetalert'
 
-
-
 class Profile extends React.Component {
   constructor() {
     super()
@@ -36,7 +34,7 @@ class Profile extends React.Component {
   })
 }
 
-  updateUser = (e) => {
+  updateUser = (user) => {
   fetch(`http://localhost:3001/user-update`, {
       method: "PATCH",
       headers: {
@@ -45,25 +43,26 @@ class Profile extends React.Component {
       },
       body: JSON.stringify({
         user: {
-          first_name: e.target.parentElement.parentElement.elements[0].value,
-          last_name: e.target.parentElement.parentElement.elements[1].value,
-          user_name: e.target.parentElement.parentElement.elements[2].value,
-          email: e.target.parentElement.parentElement.elements[3].value,
-          age: e.target.parentElement.parentElement.elements[4].value,
-          weight: e.target.parentElement.parentElement.elements[5].value,
-          body_fat: e.target.parentElement.parentElement.elements[6].value,
-          location: e.target.parentElement.parentElement.elements[7].value,
+          first_name: user[0].value,
+          last_name: user[1].value,
+          user_name: user[2].value,
+          email: user[3].value,
+          age: user[4].value,
+          weight: user[5].value,
+          body_fat: user[6].value,
+          location: user[7].value,
           goal: this.state.goal,
           activity_level: this.state.activityLevel,
           bmr: this.state.bmr,
           gender: this.state.gender,
-          height: e.target.parentElement.parentElement.elements[9].value
+          height: user[9].value
         }
       })
     }).then(response => response.json())
     .then(user => this.props.updateUser(user))
     swal("Success!", "Your Profile Has Been Updated!", "success")
 }
+
 
   getGender = (e) => {
   this.setState({
@@ -86,14 +85,15 @@ class Profile extends React.Component {
 
 
   calculateBmr = (e) => {
-    let weight = e.target.parentElement.parentElement.elements[5].value
-    let height = (e.target.parentElement.parentElement.elements[9].value * 12).toFixed(2)
-    let age = e.target.parentElement.parentElement.elements[4].value
+    let user = e.target.parentElement.parentElement.elements
+    let weight = user[5].value
+    let height = (user[9].value * 12).toFixed(2)
+    let age = user[4].value
     let bmr;
     this.state.gender === "Male" ? bmr = (66 + 6.23 * weight + 12.7 * height - 6.8 * age).toFixed(2) : bmr = (655 + 4.35 * weight + 4.7 * height - 4.7 * age).toFixed(2)
     this.setState({
       bmr: bmr
-    })
+    }, () => this.updateUser(user))
   }
 
   calculateCalories = () => {
@@ -122,7 +122,7 @@ class Profile extends React.Component {
       <React.Fragment>
       <div id='header-site'>
         <div id="profile-image-container">
-              <Image id="profile-pic" src='https://static.thumbtackstatic.com/pictures/11025/6tp34bha0k1nf4o3jhrbh4iojt_400.jpg' size='small' circular />
+          <Image id="profile-pic" src='https://static.thumbtackstatic.com/pictures/11025/6tp34bha0k1nf4o3jhrbh4iojt_400.jpg' size='small' circular />
         </div>
       </div>
 
@@ -179,7 +179,7 @@ class Profile extends React.Component {
       </div>
 
     {this.state.edit === false ?
-      <Grid id="profile-info" columns='two' divided>
+      <Grid id="profile-info" columns='two'>
           <Grid.Row>
             <Grid.Column>
               {this.props.user ? <p>Name: {this.props.user.first_name}</p> : null}
