@@ -30,7 +30,6 @@ class ExerciseList extends React.Component {
   render(){
     let newWorkoutArrIds = this.props.newWorkout.map(exercise => exercise.id)
     return(
-
       <div  id="exercise-page">
         <Modal id="exercise-modal" open={this.state.open} trigger={
         <List divided selection>

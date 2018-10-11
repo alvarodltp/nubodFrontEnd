@@ -2,6 +2,7 @@ import React from 'react'
 import { Image, Button, Grid } from 'semantic-ui-react'
 import EditProfileForm from './EditProfileForm'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import swal from 'sweetalert'
 
 
 
@@ -61,6 +62,7 @@ class Profile extends React.Component {
       })
     }).then(response => response.json())
     .then(user => this.props.updateUser(user))
+    swal("Success!", "Your Profile Has Been Updated!", "success")
 }
 
   getGender = (e) => {

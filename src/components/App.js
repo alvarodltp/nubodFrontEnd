@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import '../App.css'
+import swal from 'sweetalert'
 import Signup from './Signup'
 import Login from './Login'
 import Profile from './Profile'
@@ -339,7 +340,7 @@ this.setState({
 
 
       <div id="nav">
-       <FontAwesomeIcon id="bar" icon='bars' size="2x" onClick={this.handleButtonClick}/>
+       {this.state.user ? <FontAwesomeIcon id="bar" icon='bars' size="2x" onClick={this.handleButtonClick}/> : null}
        <Sidebar.Pushable as={Segment}>
          <Sidebar
            id="sidebar"
@@ -428,7 +429,7 @@ this.setState({
 
             {this.state.quote ? <Route exact path='/workout' render={props=> <WorkoutContainer {...props} emptyCurrentWorkout={this.emptyCurrentWorkout} emptyNewWorkoutArr={this.emptyNewWorkoutArr} lastSets={this.state.lastSets} saveWorkout={this.saveWorkout} emptyCurrentWorkout={this.emptyCurrentWorkout} updateMyCurrentWorkout={this.updateMyCurrentWorkout} pushCurrentWorkoutToWorkouts={this.pushCurrentWorkoutToWorkouts} calculateRepsAndSets={this.calculateRepsAndSets} emptyNewWorkoutArr={this.emptyNewWorkoutArr} removeWorkout={this.removeWorkout} getTotalWorkoutTime={this.getTotalWorkoutTime} totalDuration={this.state.totalDuration} endWorkoutTime={this.endWorkoutTime} newWorkout={this.state.newWorkout} workouts={this.state.workouts} newWorkoutId={this.state.newWorkoutId} quoteOfTheDay={this.state.quote} user={this.state.user}/>} /> : null}
 
-            {this.state.lastTwoWorkouts && this.state.user ? <Route exact path='/new-workout' render={props=> <WorkoutOptions {...props} lastTwoWorkouts={this.state.lastTwoWorkouts}/>} /> : null}
+            {this.state.user ? <Route exact path='/new-workout' render={props=> <WorkoutOptions {...props} lastTwoWorkouts={this.state.lastTwoWorkouts}/>} /> : null}
 
             {this.state.workouts ? <Route exact path='/workout-history' render={props=> <WorkoutHistory {...props} workoutHistory={this.state.workoutHistory} updateWorkoutHistory={this.updateWorkoutHistory} myCurrentWorkout={this.myCurrentWorkout} saveWorkout={this.saveWorkout} removeWorkout={this.removeWorkout} getInfoToRedoWorkout={this.getInfoToRedoWorkout} workouts={this.state.workouts} displayWorkout={this.displayWorkout} selectedWorkoutHistory={this.state.selectedWorkoutHistory}/>} /> : null}
 

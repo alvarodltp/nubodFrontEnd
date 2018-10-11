@@ -2,6 +2,7 @@ import React from 'react'
 import WorkoutDetail from './WorkoutDetail'
 import {Button} from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import swal from 'sweetalert'
 
 class WorkoutContainer extends React.Component {
 

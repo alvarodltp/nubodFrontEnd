@@ -22,6 +22,8 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.5",
     "semantic-ui-react": "^0.82.5",
+    "sweetalert": "^2.1.0",
+    "sweetalert-react": "^0.4.11",
     "webfontloader": "^1.6.28"
   },
   "scripts": {
