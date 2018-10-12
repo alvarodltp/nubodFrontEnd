@@ -11,9 +11,10 @@ class Profile extends React.Component {
       edit: false,
       bmr: "",
       gender: "",
-      activityLevel: "",
+      activityLevel: {},
       goal: "",
-      caloriesToMaintain: ""
+      caloriesToMaintain: "",
+      caloriesToAccomplishGoal: ""
     }
   }
 
@@ -54,11 +55,11 @@ class Profile extends React.Component {
           body_fat: user[6].value,
           location: user[7].value,
           goal: this.state.goal,
-          activity_level: this.state.activityLevel,
+          activity_level: this.state.activityLevel["name"],
           bmr: this.state.bmr,
           gender: this.state.gender,
           height: user[9].value,
-          calories: this.state.caloriesToMaintain
+          calories: this.state.caloriesToAccomplishGoal
         }
       })
     }).then(response => response.json())
@@ -74,8 +75,21 @@ class Profile extends React.Component {
 }
 
   getActivityLevel = (e) => {
+    let activityLevelValue;
+    if(this.state.activityLevel === "Sedentary (little or no exercise)") {
+      activityLevelValue = 1.2
+    } else if (this.state.activityLevel === "Lightly active (light exercise/sports 1-3 days/week)") {
+      activityLevelValue = 1.375
+    } else if (this.state.activityLevel === "Moderately active (moderate exercise/sports 3-5 days/week)") {
+      activityLevelValue = 1.55
+    } else if (this.state.activityLevel === "Very active (hard exercise/sports 6-7 days a week)") {
+      activityLevelValue = 1.725
+    } else {
+      activityLevelValue = 1.9
+    }
+    let activityLevel = e.target.innerText
     this.setState({
-      activityLevel: e.target.innerText
+      activityLevel: {name: activityLevel, value: activityLevelValue}
     })
   }
 
@@ -85,29 +99,35 @@ class Profile extends React.Component {
     })
   }
 
+  caloriesToAccomplishGoal = () => {
+    let caloriesForGoal;
+
+    debugger
+    this.setState({
+      caloriesToAccomplishGoal: caloriesForGoal
+    })
+  }
+
   calculateBmrAndCalories = (e) => {
     let user = e.target.parentElement.parentElement.elements
     let weight = user[5].value
     let height = (user[9].value * 12).toFixed(2)
     let age = user[4].value
     let bmr;
-    let activityLevel;
+    let caloriesForGoal;
     this.state.gender === "Male" ? bmr = (66 + 6.23 * weight + 12.7 * height - 6.8 * age).toFixed(2) : bmr = (655 + 4.35 * weight + 4.7 * height - 4.7 * age).toFixed(2)
-    if(activityLevel === "Sedentary (little or no exercise)") {
-      activityLevel = 1.2
-    } else if (activityLevel === "Lightly active (light exercise/sports 1-3 days/week)") {
-      activityLevel = 1.375
-    } else if (activityLevel === "Moderately active (moderate exercise/sports 3-5 days/week)") {
-      activityLevel = 1.55
-    } else if (activityLevel === "Very active (hard exercise/sports 6-7 days a week)") {
-      activityLevel = 1.725
-    } else {
-      activityLevel = 1.9
+    let calories = Math.round(bmr * this.state.activityLevel["value"])
+    if(this.state.goal === "Lose Weight"){
+      caloriesForGoal = calories - 500
+    } else if (this.state.goal === "Maintain Current Weight") {
+      caloriesForGoal = calories
+    } else if (this.state.goal === "Gain Muscle") {
+      caloriesForGoal = calories + 300
     }
-    let calories = Math.round(bmr * activityLevel)
     this.setState({
       bmr: bmr,
-      caloriesToMaintain: calories
+      caloriesToMaintain: calories,
+      caloriesToAccomplishGoal: caloriesForGoal
     }, () => this.updateUser(user))
   }
 
