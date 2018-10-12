@@ -60,7 +60,7 @@ class EditProfileForm extends React.Component {
               <Form.Input label='Height' name="height" onChange={this.props.handleChange} defaultValue={this.props.user.height} />
             </Grid.Column>
           </Grid.Row>
-          <Button id="edit-button" color="gray" onClick={(e) => {this.props.calculateCalories(); this.props.getActivityLevel(e); this.props.calculateBmr(e); this.props.getGender(e); this.props.convertBackToText(e)}}>Save</Button>
+          <Button id="edit-button" color="gray" onChange={(e) => {this.props.getActivityLevel(e); this.props.getGender(e); this.props.getGoal(e)}} onClick={(e) => {this.props.calculateBmrAndCalories(e); this.props.convertBackToText(e)}}>Save</Button>
         </Grid>
       </Form>
       </React.Fragment>

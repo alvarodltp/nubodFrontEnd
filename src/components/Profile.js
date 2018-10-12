@@ -12,7 +12,8 @@ class Profile extends React.Component {
       bmr: "",
       gender: "",
       activityLevel: "",
-      goal: ""
+      goal: "",
+      caloriesToMaintain: ""
     }
   }
 
@@ -35,6 +36,7 @@ class Profile extends React.Component {
 }
 
   updateUser = (user) => {
+    debugger
   fetch(`http://localhost:3001/user-update`, {
       method: "PATCH",
       headers: {
@@ -55,7 +57,8 @@ class Profile extends React.Component {
           activity_level: this.state.activityLevel,
           bmr: this.state.bmr,
           gender: this.state.gender,
-          height: user[9].value
+          height: user[9].value,
+          calories: this.state.caloriesToMaintain
         }
       })
     }).then(response => response.json())
@@ -71,7 +74,6 @@ class Profile extends React.Component {
 }
 
   getActivityLevel = (e) => {
-    console.log(e.target.innerText)
     this.setState({
       activityLevel: e.target.innerText
     })
@@ -83,23 +85,14 @@ class Profile extends React.Component {
     })
   }
 
-
-  calculateBmr = (e) => {
+  calculateBmrAndCalories = (e) => {
     let user = e.target.parentElement.parentElement.elements
     let weight = user[5].value
     let height = (user[9].value * 12).toFixed(2)
     let age = user[4].value
     let bmr;
-    this.state.gender === "Male" ? bmr = (66 + 6.23 * weight + 12.7 * height - 6.8 * age).toFixed(2) : bmr = (655 + 4.35 * weight + 4.7 * height - 4.7 * age).toFixed(2)
-    this.setState({
-      bmr: bmr
-    }, () => this.updateUser(user))
-  }
-
-  calculateCalories = () => {
-    let bmr = this.state.bmr
-    let gender = this.state.gender
     let activityLevel;
+    this.state.gender === "Male" ? bmr = (66 + 6.23 * weight + 12.7 * height - 6.8 * age).toFixed(2) : bmr = (655 + 4.35 * weight + 4.7 * height - 4.7 * age).toFixed(2)
     if(activityLevel === "Sedentary (little or no exercise)") {
       activityLevel = 1.2
     } else if (activityLevel === "Lightly active (light exercise/sports 1-3 days/week)") {
@@ -111,11 +104,12 @@ class Profile extends React.Component {
     } else {
       activityLevel = 1.9
     }
+    let calories = Math.round(bmr * activityLevel)
     this.setState({
-      activityLevel: activityLevel
-    })
+      bmr: bmr,
+      caloriesToMaintain: calories
+    }, () => this.updateUser(user))
   }
-
 
   render() {
     return (
@@ -243,7 +237,7 @@ class Profile extends React.Component {
           </div>
 
         </Grid>
-          : <EditProfileForm gender={this.state.gender} activityLevel={this.state.activityLevel} goal={this.state.goal} getGoal={this.getGoal} calculateCalories={this.calculateCalories} getActivityLevel={this.getActivityLevel} bmr={this.state.bmr} getGender={this.getGender} calculateBmr={this.calculateBmr} user={this.props.user} handleChange={this.handleChange} convertBackToText={this.convertBackToText} updateUser={this.updateUser} />}
+          : <EditProfileForm gender={this.state.gender} activityLevel={this.state.activityLevel} goal={this.state.goal} getGoal={this.getGoal} getActivityLevel={this.getActivityLevel} getGender={this.getGender} bmr={this.state.bmr} calculateBmrAndCalories={this.calculateBmrAndCalories} user={this.props.user} handleChange={this.handleChange} convertBackToText={this.convertBackToText} />}
           <br />
           <br />
         </React.Fragment>
