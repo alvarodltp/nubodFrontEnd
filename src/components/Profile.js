@@ -14,7 +14,11 @@ class Profile extends React.Component {
       activityLevel: {},
       goal: "",
       caloriesToMaintain: "",
-      caloriesToAccomplishGoal: ""
+      caloriesToAccomplishGoal: "",
+      bodyType: "",
+      protein: "",
+      carbs: "",
+      fats: ""
     }
   }
 
@@ -37,7 +41,7 @@ class Profile extends React.Component {
 }
 
   updateUser = (user) => {
-    debugger
+    // debugger
   fetch(`http://localhost:3001/user-update`, {
       method: "PATCH",
       headers: {
@@ -59,14 +63,17 @@ class Profile extends React.Component {
           bmr: this.state.bmr,
           gender: this.state.gender,
           height: user[9].value,
-          calories: this.state.caloriesToAccomplishGoal
+          calories: this.state.caloriesToAccomplishGoal,
+          body_type: this.state.bodyType,
+          daily_protein: this.state.protein,
+          daily_carbs: this.state.carbs,
+          daily_fats: this.state.fats
         }
       })
     }).then(response => response.json())
     .then(user => this.props.updateUser(user))
     swal("Success!", "Your Profile Has Been Updated!", "success")
 }
-
 
   getGender = (e) => {
   this.setState({
@@ -75,19 +82,19 @@ class Profile extends React.Component {
 }
 
   getActivityLevel = (e) => {
+    let activityLevel = e.target.innerText
     let activityLevelValue;
-    if(this.state.activityLevel === "Sedentary (little or no exercise)") {
+    if(activityLevel === "Sedentary (little or no exercise)") {
       activityLevelValue = 1.2
-    } else if (this.state.activityLevel === "Lightly active (light exercise/sports 1-3 days/week)") {
+    } else if (activityLevel === "Lightly active (light exercise/sports 1-3 days/week)") {
       activityLevelValue = 1.375
-    } else if (this.state.activityLevel === "Moderately active (moderate exercise/sports 3-5 days/week)") {
+    } else if (activityLevel === "Moderately active (moderate exercise/sports 3-5 days/week)") {
       activityLevelValue = 1.55
-    } else if (this.state.activityLevel === "Very active (hard exercise/sports 6-7 days a week)") {
+    } else if (activityLevel === "Very active (hard exercise/sports 6-7 days a week)") {
       activityLevelValue = 1.725
     } else {
       activityLevelValue = 1.9
     }
-    let activityLevel = e.target.innerText
     this.setState({
       activityLevel: {name: activityLevel, value: activityLevelValue}
     })
@@ -99,16 +106,13 @@ class Profile extends React.Component {
     })
   }
 
-  caloriesToAccomplishGoal = () => {
-    let caloriesForGoal;
-
-    debugger
+  getBodyType = (e) => {
     this.setState({
-      caloriesToAccomplishGoal: caloriesForGoal
+      bodyType: e.target.innerText
     })
   }
 
-  calculateBmrAndCalories = (e) => {
+  calculateBmrMacrosCalories = (e) => {
     let user = e.target.parentElement.parentElement.elements
     let weight = user[5].value
     let height = (user[9].value * 12).toFixed(2)
@@ -117,6 +121,7 @@ class Profile extends React.Component {
     let caloriesForGoal;
     this.state.gender === "Male" ? bmr = (66 + 6.23 * weight + 12.7 * height - 6.8 * age).toFixed(2) : bmr = (655 + 4.35 * weight + 4.7 * height - 4.7 * age).toFixed(2)
     let calories = Math.round(bmr * this.state.activityLevel["value"])
+    // debugger
     if(this.state.goal === "Lose Weight"){
       caloriesForGoal = calories - 500
     } else if (this.state.goal === "Maintain Current Weight") {
@@ -124,10 +129,32 @@ class Profile extends React.Component {
     } else if (this.state.goal === "Gain Muscle") {
       caloriesForGoal = calories + 300
     }
+    // debugger
+    let protein;
+    let carbs;
+    let fats;
+    if (this.state.bodyType === "Ectomorph") {
+      protein = parseInt(caloriesForGoal * 0.25 / 4)
+      carbs =  parseInt(caloriesForGoal * 0.55 / 4)
+      fats = parseInt(caloriesForGoal * 0.20 / 9)
+    } else if (this.state.bodyType === "Mesomorph") {
+      protein = parseInt(caloriesForGoal * 0.30 / 4)
+      carbs =  parseInt(caloriesForGoal * 0.40 / 4)
+      fats = parseInt(caloriesForGoal * 0.30 / 9)
+    } else if (this.state.bodyType === "Endomorph") {
+      protein = parseInt(caloriesForGoal * 0.35 / 4)
+      carbs =  parseInt(caloriesForGoal * 0.25 / 4)
+      fats = parseInt(caloriesForGoal * 0.40 / 9)
+    }
+
+    // debugger
     this.setState({
       bmr: bmr,
       caloriesToMaintain: calories,
-      caloriesToAccomplishGoal: caloriesForGoal
+      caloriesToAccomplishGoal: caloriesForGoal,
+      protein: protein,
+      carbs: carbs,
+      fats: fats
     }, () => this.updateUser(user))
   }
 
@@ -188,6 +215,12 @@ class Profile extends React.Component {
         </Grid.Row>
       </Grid>
 
+
+      
+
+
+
+
       <div id="account-information">
         <h1>Account Information</h1>
       </div>
@@ -204,12 +237,12 @@ class Profile extends React.Component {
           </Grid.Row>
 
          <Grid.Row>
-         <Grid.Column>
-           {this.props.user ? <p>Username: {this.props.user.user_name}</p> : null}
-         </Grid.Column>
-          <Grid.Column>
-            {this.props.user ? <p>Email: {this.props.user.email}</p> : null}
-          </Grid.Column>
+           <Grid.Column>
+             {this.props.user ? <p>Username: {this.props.user.user_name}</p> : null}
+           </Grid.Column>
+            <Grid.Column>
+              {this.props.user ? <p>Email: {this.props.user.email}</p> : null}
+            </Grid.Column>
          </Grid.Row>
 
          <Grid.Row>
@@ -246,8 +279,14 @@ class Profile extends React.Component {
             <Grid.Column>
               {this.props.user ? <p>Gender: {this.props.user.gender}</p> : null}
             </Grid.Column>
+          </Grid.Row>
+
+          <Grid.Row>
             <Grid.Column>
               {this.props.user ? <p>Height: {this.props.user.height}</p> : null}
+            </Grid.Column>
+            <Grid.Column>
+              {this.props.user ? <p>Body Type: {this.props.user.body_type}</p> : null}
             </Grid.Column>
           </Grid.Row>
 
@@ -257,7 +296,7 @@ class Profile extends React.Component {
           </div>
 
         </Grid>
-          : <EditProfileForm gender={this.state.gender} activityLevel={this.state.activityLevel} goal={this.state.goal} getGoal={this.getGoal} getActivityLevel={this.getActivityLevel} getGender={this.getGender} bmr={this.state.bmr} calculateBmrAndCalories={this.calculateBmrAndCalories} user={this.props.user} handleChange={this.handleChange} convertBackToText={this.convertBackToText} />}
+          : <EditProfileForm gender={this.state.gender} activityLevel={this.state.activityLevel} goal={this.state.goal} getGoal={this.getGoal} getActivityLevel={this.getActivityLevel} getGender={this.getGender} getBodyType={this.getBodyType} bmr={this.state.bmr} calculateBmrMacrosCalories={this.calculateBmrMacrosCalories} user={this.props.user} handleChange={this.handleChange} convertBackToText={this.convertBackToText} />}
           <br />
           <br />
         </React.Fragment>
