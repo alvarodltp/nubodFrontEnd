@@ -18,6 +18,7 @@ import SearchBar from './SearchBar'
 import { Button, Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from "react-router-dom"
+import MacrosPieChart from './MacrosPieChart'
 
 library.add(fas)
 
@@ -98,12 +99,7 @@ userToUpdateOnForm = (data) => {
 logOut = () => {
   localStorage.clear()
   this.setState({
-    user: null,
-    // workouts: null,
-    // workoutHistory: null,
-    // allWeightLifted: "",
-    // allRepsLifted: "",
-    // workoutsCompleted: ""
+    user: null
   })
 }
 
@@ -405,12 +401,12 @@ this.setState({
             </Link>
            </Menu.Item>
 
-           <Menu.Item >
+           <Menu.Item onClick={this.logOut}>
             <Link to="/login">
             <FontAwesomeIcon id="slide-button" icon="sign-out-alt" size="2x"/>
             <br />
             <br />
-            <label onClick={this.logOut} id="menu-text">Logout</label>
+            <label id="menu-text">Logout</label>
             </Link>
            </Menu.Item>
          </Sidebar>
@@ -432,7 +428,7 @@ this.setState({
             {this.state.user ? <Route exact path='/new-workout' render={props=> <WorkoutOptions {...props} lastTwoWorkouts={this.state.lastTwoWorkouts}/>} /> : null}
 
             {this.state.workouts ? <Route exact path='/workout-history' render={props=> <WorkoutHistory {...props} workoutHistory={this.state.workoutHistory} updateWorkoutHistory={this.updateWorkoutHistory} myCurrentWorkout={this.myCurrentWorkout} saveWorkout={this.saveWorkout} removeWorkout={this.removeWorkout} getInfoToRedoWorkout={this.getInfoToRedoWorkout} workouts={this.state.workouts} displayWorkout={this.displayWorkout} selectedWorkoutHistory={this.state.selectedWorkoutHistory}/>} /> : null}
-
+            
           </Sidebar.Pusher>
         </Sidebar.Pushable>
         </div>

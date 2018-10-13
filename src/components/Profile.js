@@ -3,6 +3,9 @@ import { Image, Button, Grid } from 'semantic-ui-react'
 import EditProfileForm from './EditProfileForm'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import swal from 'sweetalert'
+import MacrosPieChart from './MacrosPieChart'
+import WorkoutStatsChart from './WorkoutStatsChart'
+
 
 class Profile extends React.Component {
   constructor() {
@@ -168,58 +171,34 @@ class Profile extends React.Component {
       </div>
 
       <Grid id="stats" columns="two">
-      <Grid.Row>
-        <Grid.Column>
-          <FontAwesomeIcon id="slide-button" icon="dumbbell" size="4x"/>
-        </Grid.Column>
-        <Grid.Column>
-          <FontAwesomeIcon id="slide-button" icon="apple-alt" size="4x"/>
-        </Grid.Column>
-      </Grid.Row>
-
         <Grid.Row>
           <Grid.Column>
+            <FontAwesomeIcon icon="dumbbell" size="3x"/>
             <h1 id="workout-stats">Workout Stats</h1>
-          </Grid.Column>
-          <Grid.Column>
-            <h1 id="workout-stats">Nutrition Needs</h1>
-          </Grid.Column>
-        </Grid.Row>
-
-        <Grid.Row>
-          <Grid.Column>
+            {this.props.user ? <h2>{this.props.workoutsCompleted} Workouts Completed</h2> : null}
             {this.props.user ? <h2>{this.props.allWeightLifted} lb. Lifted</h2> : null}
-          </Grid.Column>
-          <Grid.Column>
-            {this.props.user ? <h2>{this.props.user.calories} Kcal</h2> : null}
-          </Grid.Column>
-        </Grid.Row>
-
-        <Grid.Row>
-          <Grid.Column>
-            {this.props.user ? <h2>{this.props.workoutsCompleted} Workouts Killed</h2> : null}
-          </Grid.Column>
-          <Grid.Column>
-            {this.props.user ? <h2>{this.props.user.daily_protein}g Protein</h2> : null}
-          </Grid.Column>
-        </Grid.Row>
-
-        <Grid.Row>
-          <Grid.Column>
             {this.props.user ? <h2>{this.props.allRepsLifted} Reps Completed</h2> : null}
           </Grid.Column>
           <Grid.Column>
-            {this.props.user ? <h2>{this.props.user.daily_carbs}g of Carbs</h2> : null}
-            {this.props.user ? <h2>{this.props.user.daily_fats}g of Fats</h2> : null}
+            { this.props.user ? <WorkoutStatsChart allWeightLifted={this.props.allWeightLifted} workoutsCompleted={this.props.workoutsCompleted} allRepsLifted={this.props.allRepsLifted}/> : null }
+          </Grid.Column>
+        </Grid.Row>
+
+
+        <Grid.Row>
+          <Grid.Column>
+              { this.props.user ? <MacrosPieChart user={this.props.user}/> : null }
+          </Grid.Column>
+          <Grid.Column>
+          <FontAwesomeIcon icon="utensils" size="3x"/>
+            <h1 id="workout-stats">Nutrition Needs</h1>
+              {this.props.user ? <h2>{this.props.user.calories} Kcal</h2> : null}
+              {this.props.user ? <h2>{this.props.user.daily_protein}g Protein</h2> : null}
+              {this.props.user ? <h2>{this.props.user.daily_carbs}g of Carbs</h2> : null}
+              {this.props.user ? <h2>{this.props.user.daily_fats}g of Fats</h2> : null}
           </Grid.Column>
         </Grid.Row>
       </Grid>
-
-
-      
-
-
-
 
       <div id="account-information">
         <h1>Account Information</h1>
@@ -299,11 +278,11 @@ class Profile extends React.Component {
           : <EditProfileForm gender={this.state.gender} activityLevel={this.state.activityLevel} goal={this.state.goal} getGoal={this.getGoal} getActivityLevel={this.getActivityLevel} getGender={this.getGender} getBodyType={this.getBodyType} bmr={this.state.bmr} calculateBmrMacrosCalories={this.calculateBmrMacrosCalories} user={this.props.user} handleChange={this.handleChange} convertBackToText={this.convertBackToText} />}
           <br />
           <br />
+
         </React.Fragment>
     )
   }
 }
-
 
 
 export default Profile
