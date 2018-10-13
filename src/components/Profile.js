@@ -78,6 +78,37 @@ class Profile extends React.Component {
     swal("Success!", "Your Profile Has Been Updated!", "success")
 }
 
+saveMeasurements = (e) => {
+  let user = e.target.parentElement.parentElement.elements
+  let today = new Date(); ((today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear());
+  let user_id = this.props.user.id
+  // debugger
+  fetch("http://localhost:3001/measurements", {
+    method: 'POST',
+    headers: {
+       Authorization: `Bearer ${localStorage.getItem("token")}`,
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify({
+      user_id: user_id,
+      date: today,
+      body_weight: user[5].value,
+      body_fat: user[6].value,
+      bmr: this.state.bmr,
+      neck: "",
+      shoulder: "",
+      chest: "",
+      bicep: "",
+      waist: "",
+      hip: "",
+      thigh: ""
+      })
+    }).then(response => response.json())
+    .then(json => {
+    })
+}
+
   getGender = (e) => {
   this.setState({
     gender: e.target.innerText
@@ -173,11 +204,11 @@ class Profile extends React.Component {
       <Grid id="stats" columns="two">
         <Grid.Row>
           <Grid.Column>
-            <FontAwesomeIcon icon="dumbbell" size="3x"/>
+            <FontAwesomeIcon style={{color: "#A8FC00"}} icon="dumbbell" size="3x"/>
             <h1 id="workout-stats">Workout Stats</h1>
-            {this.props.user ? <h2>{this.props.workoutsCompleted} Workouts Completed</h2> : null}
-            {this.props.user ? <h2>{this.props.allWeightLifted} lb. Lifted</h2> : null}
-            {this.props.user ? <h2>{this.props.allRepsLifted} Reps Completed</h2> : null}
+            {this.props.user ? <h3>{this.props.workoutsCompleted} Workouts Completed</h3> : null}
+            {this.props.user ? <h3>{this.props.allWeightLifted} lb. Lifted</h3> : null}
+            {this.props.user ? <h3>{this.props.allRepsLifted} Reps Completed</h3> : null}
           </Grid.Column>
           <Grid.Column>
             { this.props.user ? <WorkoutStatsChart allWeightLifted={this.props.allWeightLifted} workoutsCompleted={this.props.workoutsCompleted} allRepsLifted={this.props.allRepsLifted}/> : null }
@@ -190,12 +221,12 @@ class Profile extends React.Component {
               { this.props.user ? <MacrosPieChart user={this.props.user}/> : null }
           </Grid.Column>
           <Grid.Column>
-          <FontAwesomeIcon icon="utensils" size="3x"/>
+          <FontAwesomeIcon style={{color: "#A8FC00"}} icon="utensils" size="3x"/>
             <h1 id="workout-stats">Nutrition Needs</h1>
-              {this.props.user ? <h2>{this.props.user.calories} Kcal</h2> : null}
-              {this.props.user ? <h2>{this.props.user.daily_protein}g Protein</h2> : null}
-              {this.props.user ? <h2>{this.props.user.daily_carbs}g of Carbs</h2> : null}
-              {this.props.user ? <h2>{this.props.user.daily_fats}g of Fats</h2> : null}
+              {this.props.user ? <h3>{this.props.user.calories} Kcal</h3> : null}
+              {this.props.user ? <h3>{this.props.user.daily_protein}g Protein</h3> : null}
+              {this.props.user ? <h3>{this.props.user.daily_carbs}g of Carbs</h3> : null}
+              {this.props.user ? <h3>{this.props.user.daily_fats}g of Fats</h3> : null}
           </Grid.Column>
         </Grid.Row>
       </Grid>
@@ -275,7 +306,7 @@ class Profile extends React.Component {
           </div>
 
         </Grid>
-          : <EditProfileForm gender={this.state.gender} activityLevel={this.state.activityLevel} goal={this.state.goal} getGoal={this.getGoal} getActivityLevel={this.getActivityLevel} getGender={this.getGender} getBodyType={this.getBodyType} bmr={this.state.bmr} calculateBmrMacrosCalories={this.calculateBmrMacrosCalories} user={this.props.user} handleChange={this.handleChange} convertBackToText={this.convertBackToText} />}
+          : <EditProfileForm saveMeasurements={this.saveMeasurements} gender={this.state.gender} activityLevel={this.state.activityLevel} goal={this.state.goal} getGoal={this.getGoal} getActivityLevel={this.getActivityLevel} getGender={this.getGender} getBodyType={this.getBodyType} bmr={this.state.bmr} calculateBmrMacrosCalories={this.calculateBmrMacrosCalories} user={this.props.user} handleChange={this.handleChange} convertBackToText={this.convertBackToText} />}
           <br />
           <br />
 

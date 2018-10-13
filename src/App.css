@@ -3,8 +3,6 @@
  text-align: center;
 }
 
-
-
 body{
   background-color: white;
   font-family: 'Open Sans', sans-serif;
@@ -105,10 +103,6 @@ body{
   padding-top: 30px;
   margin: 0 auto;
   padding-bottom: 30px;
-}
-
-#profile-icons {
-  padding-top: 60px;
 }
 
 #profile-info {

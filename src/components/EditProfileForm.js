@@ -70,7 +70,7 @@ class EditProfileForm extends React.Component {
 
 
 
-          <Button id="edit-button" color="gray" onChange={(e) => {this.props.getActivityLevel(e); this.props.getBodyType(e); this.props.getGender(e); this.props.getGoal(e)}} onClick={(e) => {this.props.calculateBmrMacrosCalories(e); this.props.convertBackToText(e)}}>Save</Button>
+          <Button id="edit-button" color="gray" onChange={(e) => {this.props.getActivityLevel(e); this.props.getBodyType(e); this.props.getGender(e); this.props.getGoal(e)}} onClick={(e) => {this.props.calculateBmrMacrosCalories(e); this.props.convertBackToText(e); this.props.saveMeasurements(e)}}>Save</Button>
           <Button onClick={this.props.convertBackToText}>Cancel</Button>
         </Grid>
       </Form>
