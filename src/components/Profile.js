@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import swal from 'sweetalert'
 import MacrosPieChart from './MacrosPieChart'
 import WorkoutStatsChart from './WorkoutStatsChart'
+import WeightChart from './WeightChart'
 
 
 class Profile extends React.Component {
@@ -82,7 +83,7 @@ saveMeasurements = (e) => {
   let user = e.target.parentElement.parentElement.elements
   let today = new Date(); ((today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear());
   let user_id = this.props.user.id
-  // debugger
+  debugger
   fetch("http://localhost:3001/measurements", {
     method: 'POST',
     headers: {
@@ -201,11 +202,12 @@ saveMeasurements = (e) => {
         </div>
       </div>
 
+
+      <h1 id="workout-stats">Workout Stats</h1>
       <Grid id="stats" columns="two">
         <Grid.Row>
-          <Grid.Column>
-            <FontAwesomeIcon style={{color: "#A8FC00"}} icon="dumbbell" size="3x"/>
-            <h1 id="workout-stats">Workout Stats</h1>
+          <Grid.Column id="workout-column">
+            <FontAwesomeIcon icon="dumbbell" size="2x"/>
             {this.props.user ? <h3>{this.props.workoutsCompleted} Workouts Completed</h3> : null}
             {this.props.user ? <h3>{this.props.allWeightLifted} lb. Lifted</h3> : null}
             {this.props.user ? <h3>{this.props.allRepsLifted} Reps Completed</h3> : null}
@@ -216,17 +218,17 @@ saveMeasurements = (e) => {
         </Grid.Row>
 
 
+        <h1 id="workout-stats">Nutrition Needs</h1>
         <Grid.Row>
-          <Grid.Column>
-              { this.props.user ? <MacrosPieChart user={this.props.user}/> : null }
-          </Grid.Column>
-          <Grid.Column>
-          <FontAwesomeIcon style={{color: "#A8FC00"}} icon="utensils" size="3x"/>
-            <h1 id="workout-stats">Nutrition Needs</h1>
+          <Grid.Column id="nutrition-column">
+              <FontAwesomeIcon icon="utensils" size="2x"/>
               {this.props.user ? <h3>{this.props.user.calories} Kcal</h3> : null}
               {this.props.user ? <h3>{this.props.user.daily_protein}g Protein</h3> : null}
               {this.props.user ? <h3>{this.props.user.daily_carbs}g of Carbs</h3> : null}
               {this.props.user ? <h3>{this.props.user.daily_fats}g of Fats</h3> : null}
+          </Grid.Column>
+          <Grid.Column>
+              { this.props.user ? <MacrosPieChart user={this.props.user}/> : null }
           </Grid.Column>
         </Grid.Row>
       </Grid>
@@ -307,6 +309,7 @@ saveMeasurements = (e) => {
 
         </Grid>
           : <EditProfileForm saveMeasurements={this.saveMeasurements} gender={this.state.gender} activityLevel={this.state.activityLevel} goal={this.state.goal} getGoal={this.getGoal} getActivityLevel={this.getActivityLevel} getGender={this.getGender} getBodyType={this.getBodyType} bmr={this.state.bmr} calculateBmrMacrosCalories={this.calculateBmrMacrosCalories} user={this.props.user} handleChange={this.handleChange} convertBackToText={this.convertBackToText} />}
+          {this.props.user ? <WeightChart user={this.props.user}/> : null}
           <br />
           <br />
 

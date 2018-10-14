@@ -359,3 +359,11 @@ body{
   display: block;
   margin: 10px auto;
 }
+
+#workout-column {
+  margin-top: 70px;
+}
+
+#nutrition-column {
+  margin-top: 40px;
+}
