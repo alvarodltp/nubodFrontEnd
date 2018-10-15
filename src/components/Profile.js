@@ -309,7 +309,7 @@ saveMeasurements = (e) => {
 
         </Grid>
           : <EditProfileForm saveMeasurements={this.saveMeasurements} gender={this.state.gender} activityLevel={this.state.activityLevel} goal={this.state.goal} getGoal={this.getGoal} getActivityLevel={this.getActivityLevel} getGender={this.getGender} getBodyType={this.getBodyType} bmr={this.state.bmr} calculateBmrMacrosCalories={this.calculateBmrMacrosCalories} user={this.props.user} handleChange={this.handleChange} convertBackToText={this.convertBackToText} />}
-          {this.props.user ? <WeightChart user={this.props.user}/> : null}
+          {this.props.user ? <WeightChart user={this.props.user}/> : null }
           <br />
           <br />
 

@@ -29,10 +29,16 @@ body{
   margin: 0 auto
 }
 
-#date-container{
+#date-container {
   width: 70%;
   margin: 0 auto;
   padding-top: 40px;
+}
+
+#workout-options-dropdown {
+    width: 70%;
+    margin: 0 auto;
+    padding-top: 40px;
 }
 
 #login-card {
@@ -319,7 +325,7 @@ body{
 }
 
 #workout-stats{
-  color: gray;
+  color: black;
 }
 
 #redo-workout {
@@ -366,4 +372,9 @@ body{
 
 #nutrition-column {
   margin-top: 40px;
+}
+
+#weight-analytics {
+  padding-left: 20px;
+  padding-right: 20px;
 }

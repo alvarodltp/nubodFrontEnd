@@ -5,7 +5,6 @@ class WeightChart extends React.Component {
   render() {
     let dateArr = this.props.user.measurements.map(measurement => measurement.date)
     let bodyWeight = this.props.user.measurements.map(measurement => measurement.body_weight)
-    debugger
     const data = {
       labels: dateArr,
       datasets: [
@@ -36,7 +35,7 @@ class WeightChart extends React.Component {
     return (
       <div>
         <h2>Weight Analytics</h2>
-        <Line data={data} />
+        <Line id="weight-analytics" data={data} />
       </div>
     );
   }
