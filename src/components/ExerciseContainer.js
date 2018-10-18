@@ -10,8 +10,15 @@ class ExerciseContainer extends React.Component {
       clickedExercise: null,
       modalOpen: false,
       workoutName: "",
-      selectedPart: ""
+      selectedPart: "",
+      showFilterOptions: false
     }
+  }
+
+  showOptions = () => {
+    this.setState({
+      showFilterOptions: !this.state.showFilterOptions
+    })
   }
 
   handleChange = (e, {value}) =>
@@ -38,6 +45,85 @@ class ExerciseContainer extends React.Component {
     render(){
     return(
     <div id="all-exercises" style={{minHeight: "100vh"}}>
+
+    <Button style={{marginBottom: "20px"}} onClick={this.showOptions}>Filter Exercises</Button>
+    {this.state.showFilterOptions === true ?
+      <Form style={{marginBottom: "20px"}}>
+        <Form.Field>
+          <Radio
+            label='All'
+            name='radioGroup'
+            value='all'
+            checked={this.state.selectedPart === 'all'}
+            onChange={(e, value) => {this.handleChange(e, value); this.props.getAllExercises()}}
+          />
+        </Form.Field>
+          <Form.Field>
+            <Radio
+              label='Chest'
+              name='radioGroup'
+              value='chest'
+              checked={this.state.selectedPart === 'chest'}
+              onChange={(e, value) => {this.handleChange(e, value); this.props.filterExerByMusGroup(e)}}
+            />
+          </Form.Field>
+          <Form.Field>
+            <Radio
+              label='Back'
+              name='radioGroup'
+              value='back'
+              checked={this.state.selectedPart === 'back'}
+              onChange={(e, value) => {this.handleChange(e, value); this.props.filterExerByMusGroup(e)}}
+            />
+          </Form.Field>
+          <Form.Field>
+            <Radio
+              label='Biceps'
+              name='radioGroup'
+              value='biceps'
+              checked={this.state.selectedPart === 'biceps'}
+              onChange={(e, value) => {this.handleChange(e, value); this.props.filterExerByMusGroup(e)}}
+            />
+          </Form.Field>
+          <Form.Field>
+            <Radio
+              label='Triceps'
+              name='radioGroup'
+              value='triceps'
+              checked={this.state.selectedPart === 'triceps'}
+              onChange={(e, value) => {this.handleChange(e, value); this.props.filterExerByMusGroup(e)}}
+            />
+          </Form.Field>
+          <Form.Field>
+            <Radio
+              label='Shoulders'
+              name='radioGroup'
+              value='shoulders'
+              checked={this.state.selectedPart === 'shoulders'}
+              onChange={(e, value) => {this.handleChange(e, value); this.props.filterExerByMusGroup(e)}}
+            />
+          </Form.Field>
+          <Form.Field>
+            <Radio
+              label='Legs'
+              name='radioGroup'
+              value='legs'
+              checked={this.state.selectedPart === 'legs'}
+              onChange={(e, value) => {this.handleChange(e, value); this.props.filterExerByMusGroup(e)}}
+            />
+          </Form.Field>
+          <Form.Field>
+            <Radio
+              label='Abs'
+              name='radioGroup'
+              value='abs'
+              checked={this.state.selectedPart === 'abs'}
+              onChange={(e, value) => {this.handleChange(e, value); this.props.filterExerByMusGroup(e)}}
+            />
+          </Form.Field>
+        </Form> : null}
+
+
       {this.props.newWorkout.length > 0 ?
         <Modal
           trigger={<Button id="on-list-button" style={{marginBottom: "30px"}} onClick={this.handleOpen}>Go To Workout</Button>}
@@ -58,80 +144,6 @@ class ExerciseContainer extends React.Component {
         </Modal>
          : null }
 
-      <Form>
-      <Form.Field>
-        <Radio
-          label='All'
-          name='radioGroup'
-          value='all'
-          checked={this.state.selectedPart === 'all'}
-          onChange={(e, value) => {this.handleChange(e, value); this.props.getAllExercises()}}
-        />
-      </Form.Field>
-        <Form.Field>
-          <Radio
-            label='Chest'
-            name='radioGroup'
-            value='chest'
-            checked={this.state.selectedPart === 'chest'}
-            onChange={(e, value) => {this.handleChange(e, value); this.props.filterExerByMusGroup(e)}}
-          />
-        </Form.Field>
-        <Form.Field>
-          <Radio
-            label='Back'
-            name='radioGroup'
-            value='back'
-            checked={this.state.selectedPart === 'back'}
-            onChange={(e, value) => {this.handleChange(e, value); this.props.filterExerByMusGroup(e)}}
-          />
-        </Form.Field>
-        <Form.Field>
-          <Radio
-            label='Biceps'
-            name='radioGroup'
-            value='biceps'
-            checked={this.state.selectedPart === 'biceps'}
-            onChange={(e, value) => {this.handleChange(e, value); this.props.filterExerByMusGroup(e)}}
-          />
-        </Form.Field>
-        <Form.Field>
-          <Radio
-            label='Triceps'
-            name='radioGroup'
-            value='triceps'
-            checked={this.state.selectedPart === 'triceps'}
-            onChange={(e, value) => {this.handleChange(e, value); this.props.filterExerByMusGroup(e)}}
-          />
-        </Form.Field>
-        <Form.Field>
-          <Radio
-            label='Shoulders'
-            name='radioGroup'
-            value='shoulders'
-            checked={this.state.selectedPart === 'shoulders'}
-            onChange={(e, value) => {this.handleChange(e, value); this.props.filterExerByMusGroup(e)}}
-          />
-        </Form.Field>
-        <Form.Field>
-          <Radio
-            label='Legs'
-            name='radioGroup'
-            value='legs'
-            checked={this.state.selectedPart === 'legs'}
-            onChange={(e, value) => {this.handleChange(e, value); this.props.filterExerByMusGroup(e)}}
-          />
-        </Form.Field>
-        <Form.Field>
-          <Radio
-            label='Abs'
-            name='radioGroup'
-            value='abs'
-            checked={this.state.selectedPart === 'abs'}
-            onChange={(e, value) => {this.handleChange(e, value); this.props.filterExerByMusGroup(e)}}
-          />
-        </Form.Field>
-      </Form>
 
       {this.props.newWorkout.length > 0 ? <Button id="on-list-button" onClick={this.props.emptyNewWorkoutArr}>Cancel</Button> :null }
       <Input id="seach-bar" onChange={this.props.filterExercises} icon='search' placeholder='Search...' />
