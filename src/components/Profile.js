@@ -202,37 +202,6 @@ saveMeasurements = (e) => {
         </div>
       </div>
 
-
-      <h1 id="workout-stats">Workout Stats</h1>
-      <Grid id="stats" columns="two">
-        <Grid.Row>
-          <Grid.Column id="workout-column">
-            <FontAwesomeIcon icon="dumbbell" size="2x"/>
-            {this.props.user ? <h3>{this.props.workoutsCompleted} Workouts Completed</h3> : null}
-            {this.props.user ? <h3>{this.props.allWeightLifted} lb. Lifted</h3> : null}
-            {this.props.user ? <h3>{this.props.allRepsLifted} Reps Completed</h3> : null}
-          </Grid.Column>
-          <Grid.Column>
-            { this.props.user ? <WorkoutStatsChart allWeightLifted={this.props.allWeightLifted} workoutsCompleted={this.props.workoutsCompleted} allRepsLifted={this.props.allRepsLifted}/> : null }
-          </Grid.Column>
-        </Grid.Row>
-
-
-        <h1 id="workout-stats">Nutrition Needs</h1>
-        <Grid.Row>
-          <Grid.Column id="nutrition-column">
-              <FontAwesomeIcon icon="utensils" size="2x"/>
-              {this.props.user ? <h3>{this.props.user.calories} Kcal</h3> : null}
-              {this.props.user ? <h3>{this.props.user.daily_protein}g Protein</h3> : null}
-              {this.props.user ? <h3>{this.props.user.daily_carbs}g of Carbs</h3> : null}
-              {this.props.user ? <h3>{this.props.user.daily_fats}g of Fats</h3> : null}
-          </Grid.Column>
-          <Grid.Column>
-              { this.props.user ? <MacrosPieChart user={this.props.user}/> : null }
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-
       <div id="account-information">
         <h1>Account Information</h1>
       </div>
@@ -309,9 +278,41 @@ saveMeasurements = (e) => {
 
         </Grid>
           : <EditProfileForm saveMeasurements={this.saveMeasurements} gender={this.state.gender} activityLevel={this.state.activityLevel} goal={this.state.goal} getGoal={this.getGoal} getActivityLevel={this.getActivityLevel} getGender={this.getGender} getBodyType={this.getBodyType} bmr={this.state.bmr} calculateBmrMacrosCalories={this.calculateBmrMacrosCalories} user={this.props.user} handleChange={this.handleChange} convertBackToText={this.convertBackToText} />}
-          {this.props.user ? <WeightChart user={this.props.user}/> : null }
           <br />
           <br />
+
+
+      <h1 id="workout-stats">Workout Stats</h1>
+      <Grid id="stats" columns="two">
+        <Grid.Row>
+          <Grid.Column id="workout-column">
+            <FontAwesomeIcon icon="dumbbell" size="2x"/>
+            {this.props.user ? <h3>{this.props.workoutsCompleted} Workouts Completed</h3> : null}
+            {this.props.user ? <h3>{this.props.allWeightLifted} lb. Lifted</h3> : null}
+            {this.props.user ? <h3>{this.props.allRepsLifted} Reps Completed</h3> : null}
+          </Grid.Column>
+          <Grid.Column>
+            { this.props.user ? <WorkoutStatsChart allWeightLifted={this.props.allWeightLifted} workoutsCompleted={this.props.workoutsCompleted} allRepsLifted={this.props.allRepsLifted}/> : null }
+          </Grid.Column>
+        </Grid.Row>
+
+
+        <h1 id="workout-stats">Nutrition Needs</h1>
+        <Grid.Row>
+          <Grid.Column id="nutrition-column">
+              <FontAwesomeIcon icon="utensils" size="2x"/>
+              {this.props.user ? <h3>{this.props.user.calories} Kcal</h3> : null}
+              {this.props.user ? <h3>{this.props.user.daily_protein}g Protein</h3> : null}
+              {this.props.user ? <h3>{this.props.user.daily_carbs}g of Carbs</h3> : null}
+              {this.props.user ? <h3>{this.props.user.daily_fats}g of Fats</h3> : null}
+          </Grid.Column>
+          <Grid.Column>
+              { this.props.user ? <MacrosPieChart user={this.props.user}/> : null }
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+
+      {this.props.user ? <WeightChart user={this.props.user}/> : null }
 
         </React.Fragment>
     )
