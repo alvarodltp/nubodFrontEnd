@@ -117,7 +117,7 @@ getAllExercises = () => {
 filterExerByMusGroup = (e) => {
   let bodyPart = e.target.innerText.toLowerCase()
   let filteredByGroup;
-  this.state.searchedExerciseArr != null ? filteredByGroup = this.state.searchedExerciseArr.filter(exercise =>
+  this.state.exercises != null ? filteredByGroup = this.state.exercises.filter(exercise =>
   exercise.muscle_group === bodyPart) : null
   this.setState({
     searchedExerciseArr: filteredByGroup
@@ -431,7 +431,7 @@ this.setState({
 
             <Route exact path='/login' render={props=> <Login {...props} updateUser={this.updateUser} />} />
 
-            { this.state.exercises ? <Route exact path='/all-exercises' render={props=> <ExerciseContainer {...props} filterExerByMusGroup={this.filterExerByMusGroup} getLastSetStats={this.getLastSetStats} saveWorkout={this.saveWorkout} myCurrentWorkout={this.myCurrentWorkout} removeExercise={this.removeExercise} fetchUser={this.fetchUser} startWorkoutTime={this.startWorkoutTime} emptyNewWorkoutArr={this.emptyNewWorkoutArr} user={this.state.user} saveWorkout={this.saveWorkout} newWorkout={this.state.newWorkout} changeColor={this.changeColor} displayNewWorkout={this.displayNewWorkout} addExerciseToWorkout={this.addExerciseToWorkout} exercises={this.state.exercises} filterExercises={this.filterExercises} searchedExerciseArr={this.state.searchedExerciseArr}/>} /> : null }
+            { this.state.exercises ? <Route exact path='/all-exercises' render={props=> <ExerciseContainer {...props} filterExerByMusGroup={this.filterExerByMusGroup} getLastSetStats={this.getLastSetStats} saveWorkout={this.saveWorkout} myCurrentWorkout={this.myCurrentWorkout} removeExercise={this.removeExercise} fetchUser={this.fetchUser} startWorkoutTime={this.startWorkoutTime} emptyNewWorkoutArr={this.emptyNewWorkoutArr} user={this.state.user} saveWorkout={this.saveWorkout} newWorkout={this.state.newWorkout} changeColor={this.changeColor} displayNewWorkout={this.displayNewWorkout} addExerciseToWorkout={this.addExerciseToWorkout} exercises={this.state.exercises} filterExercises={this.filterExercises} searchedExerciseArr={this.state.searchedExerciseArr} getAllExercises={this.getAllExercises}/>} /> : null }
 
             {this.state.quote ? <Route exact path='/workout' render={props=> <WorkoutContainer {...props} emptyCurrentWorkout={this.emptyCurrentWorkout} emptyNewWorkoutArr={this.emptyNewWorkoutArr} lastSets={this.state.lastSets} saveWorkout={this.saveWorkout} emptyCurrentWorkout={this.emptyCurrentWorkout} updateMyCurrentWorkout={this.updateMyCurrentWorkout} pushCurrentWorkoutToWorkouts={this.pushCurrentWorkoutToWorkouts} calculateRepsAndSets={this.calculateRepsAndSets} emptyNewWorkoutArr={this.emptyNewWorkoutArr} removeWorkout={this.removeWorkout} getTotalWorkoutTime={this.getTotalWorkoutTime} totalDuration={this.state.totalDuration} endWorkoutTime={this.endWorkoutTime} newWorkout={this.state.newWorkout} workouts={this.state.workouts} newWorkoutId={this.state.newWorkoutId} quoteOfTheDay={this.state.quote} user={this.state.user}/>} /> : null}
 

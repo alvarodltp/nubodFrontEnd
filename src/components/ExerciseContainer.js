@@ -59,6 +59,15 @@ class ExerciseContainer extends React.Component {
          : null }
 
       <Form>
+      <Form.Field>
+        <Radio
+          label='All'
+          name='radioGroup'
+          value='all'
+          checked={this.state.selectedPart === 'all'}
+          onChange={(e, value) => {this.handleChange(e, value); this.props.getAllExercises()}}
+        />
+      </Form.Field>
         <Form.Field>
           <Radio
             label='Chest'
