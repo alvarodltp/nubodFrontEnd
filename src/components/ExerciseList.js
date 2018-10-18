@@ -30,12 +30,14 @@ class ExerciseList extends React.Component {
   render(){
     let newWorkoutArrIds = this.props.newWorkout.map(exercise => exercise.id)
     return(
-      <div  id="exercise-page">
+      <div id="exercise-page">
         <Modal id="exercise-modal" open={this.state.open} trigger={
         <List divided selection>
           {this.props.searchedExerciseArr.map(exercise =>
-        <List.Item style={{fontSize: "16px"}} id={exercise.id} onClick={() => {this.props.exerciseInfo(exercise); this.open();}}> {exercise.name} {this.props.newWorkout.includes(exercise) ? <FontAwesomeIcon id="check" icon="check" size="1x"/> : null} </List.Item> )}
+          <List.Item style={{fontSize: "16px"}} id={exercise.id} onClick={() => {this.props.exerciseInfo(exercise); this.open();}}> {exercise.name} {this.props.newWorkout.includes(exercise) ? <FontAwesomeIcon id="check" icon="check" size="1x"/> : null} </List.Item> )}
         </List>}>
+
+
         { this.props.clickedExercise ? <Modal.Header>{this.props.clickedExercise.name} <FontAwesomeIcon onClick={this.close} id="close-icon-modal" icon="times" size="1x"/> </Modal.Header> :null }
         <Modal.Content image>
            { this.props.clickedExercise ? <Image wrapped size='medium' src={this.props.clickedExercise.instruction_image}/> :null }

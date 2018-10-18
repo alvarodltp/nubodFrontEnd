@@ -1,6 +1,6 @@
 import React from 'react'
 import ExerciseList from './ExerciseList'
-import { Input, Button, Modal, Icon } from 'semantic-ui-react'
+import { Input, Button, Modal, Icon, Radio, Form } from 'semantic-ui-react'
 
 class ExerciseContainer extends React.Component {
   constructor(){
@@ -9,9 +9,15 @@ class ExerciseContainer extends React.Component {
       show: false,
       clickedExercise: null,
       modalOpen: false,
-      workoutName: ""
+      workoutName: "",
+      selectedPart: ""
     }
   }
+
+  handleChange = (e, {value}) =>
+  this.setState({
+    selectedPart: value
+  })
 
   handleOpen = () => this.setState({ modalOpen: true })
 
@@ -52,9 +58,75 @@ class ExerciseContainer extends React.Component {
         </Modal>
          : null }
 
+      <Form>
+        <Form.Field>
+          <Radio
+            label='Chest'
+            name='radioGroup'
+            value='chest'
+            checked={this.state.selectedPart === 'chest'}
+            onChange={(e, value) => {this.handleChange(e, value); this.props.filterExerByMusGroup(e)}}
+          />
+        </Form.Field>
+        <Form.Field>
+          <Radio
+            label='Back'
+            name='radioGroup'
+            value='back'
+            checked={this.state.selectedPart === 'back'}
+            onChange={(e, value) => {this.handleChange(e, value); this.props.filterExerByMusGroup(e)}}
+          />
+        </Form.Field>
+        <Form.Field>
+          <Radio
+            label='Biceps'
+            name='radioGroup'
+            value='biceps'
+            checked={this.state.selectedPart === 'biceps'}
+            onChange={(e, value) => {this.handleChange(e, value); this.props.filterExerByMusGroup(e)}}
+          />
+        </Form.Field>
+        <Form.Field>
+          <Radio
+            label='Triceps'
+            name='radioGroup'
+            value='triceps'
+            checked={this.state.selectedPart === 'triceps'}
+            onChange={(e, value) => {this.handleChange(e, value); this.props.filterExerByMusGroup(e)}}
+          />
+        </Form.Field>
+        <Form.Field>
+          <Radio
+            label='Shoulders'
+            name='radioGroup'
+            value='shoulders'
+            checked={this.state.selectedPart === 'shoulders'}
+            onChange={(e, value) => {this.handleChange(e, value); this.props.filterExerByMusGroup(e)}}
+          />
+        </Form.Field>
+        <Form.Field>
+          <Radio
+            label='Legs'
+            name='radioGroup'
+            value='legs'
+            checked={this.state.selectedPart === 'legs'}
+            onChange={(e, value) => {this.handleChange(e, value); this.props.filterExerByMusGroup(e)}}
+          />
+        </Form.Field>
+        <Form.Field>
+          <Radio
+            label='Abs'
+            name='radioGroup'
+            value='abs'
+            checked={this.state.selectedPart === 'abs'}
+            onChange={(e, value) => {this.handleChange(e, value); this.props.filterExerByMusGroup(e)}}
+          />
+        </Form.Field>
+      </Form>
+
       {this.props.newWorkout.length > 0 ? <Button id="on-list-button" onClick={this.props.emptyNewWorkoutArr}>Cancel</Button> :null }
       <Input id="seach-bar" onChange={this.props.filterExercises} icon='search' placeholder='Search...' />
-      {this.props.exercises ? <ExerciseList getLastSetStats={this.props.getLastSetStats} removeExercise={this.props.removeExercise} changeColor={this.props.changeColor} user={this.props.user} newWorkout={this.props.newWorkout} displayNewWorkout={this.props.displayNewWorkout} addExerciseToWorkout={this.props.addExerciseToWorkout} searchedExerciseArr={this.props.searchedExerciseArr} exercises={this.props.exercises} exerciseInfo={this.exerciseInfo} clickedExercise={this.state.clickedExercise} /> : null }
+      {this.props.exercises ? <ExerciseList selectedPart={this.state.selectedPart} getLastSetStats={this.props.getLastSetStats} removeExercise={this.props.removeExercise} changeColor={this.props.changeColor} user={this.props.user} newWorkout={this.props.newWorkout} displayNewWorkout={this.props.displayNewWorkout} addExerciseToWorkout={this.props.addExerciseToWorkout} searchedExerciseArr={this.props.searchedExerciseArr} exercises={this.props.exercises} exerciseInfo={this.exerciseInfo} clickedExercise={this.state.clickedExercise} /> : null }
     </div>
     )
   }
