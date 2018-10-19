@@ -288,7 +288,7 @@ saveMeasurements = (e) => {
 
 
           <div id="profile-edit-button">
-            <Button id="edit-button" color="grey" size="small" onClick={this.convertToInput} user={this.state.user}>Edit Profile</Button>
+            <Button id="edit-button" color="grey" size="small" onClick={this.convertToInput} user={this.state.user}>Update Profile</Button>
           </div>
 
         </Grid>

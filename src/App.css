@@ -29,8 +29,8 @@ body{
   margin: 0 auto
 }
 
-#date-container {
-  width: 70%;
+#past-workouts {
+  width: 80%;
   margin: 0 auto;
   padding-top: 40px;
 }
@@ -179,8 +179,10 @@ body{
   float: right;
 }
 
-#old-workout-detail{
-
+#old-workout{
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 #html-input {

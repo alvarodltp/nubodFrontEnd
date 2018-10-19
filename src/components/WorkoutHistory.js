@@ -1,18 +1,24 @@
 import React from 'react'
 import OldWorkoutDetail from './OldWorkoutDetail'
-import { Dropdown } from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react'
 
 class WorkoutHistory extends React.Component {
 
   render(){
 
-    let options = this.props.workoutHistory ? this.props.workoutHistory.map(workout => ({key: workout.id, text: `${workout.name}-${workout.date}`, value: workout})) : [{}]
-
+    // let options = this.props.workoutHistory ? this.props.workoutHistory.map(workout => ({key: workout.id, header: `${workout.name}-${workout.date}`, value: workout})) : [{}]
     return(
       <div style={{minHeight: "100vh"}}>
-        <div id="date-container">
+        <div id="past-workouts">
           <h1>Your Past Workouts</h1>
-             <Dropdown placeholder="Past Workouts" fluid selection options={options} onChange={this.props.displayWorkout}/>
+          {this.props.workoutHistory ? this.props.workoutHistory.map(workout =>
+          <Card
+            id="old-workout"
+            onClick={() => this.props.displayWorkout(workout)}
+            header={workout.name}
+            meta={workout.date}
+            description=''
+            /> ) : null}
         </div>
 
         <div id="workout-info">

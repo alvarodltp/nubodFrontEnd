@@ -155,10 +155,10 @@ getUserWorkouts = () => {
     // debugger
     // let userWorkouts;
     // this.state.user ? userWorkouts = workouts.filter(workout => workout.user_id === this.state.user.id) : null
-    // let reversedArr = workouts.reverse()
+    let reversedArr = workouts.reverse()
     this.setState({
       workouts: workouts,
-      // workoutHistory: reversedArr
+      workoutHistory: reversedArr
     }, () => this.workoutsCompleted())
   })
 }
@@ -195,11 +195,10 @@ addExerciseToWorkout = (exercise) => {
   )
 }
 
-displayWorkout = (e, workoutData) => {
-  // debugger
-  let workoutObj = workoutData.value
+displayWorkout = (workoutData) => {
+  debugger
   this.setState({
-    selectedWorkoutHistory: workoutObj
+    selectedWorkoutHistory: workoutData
   })
 }
 
