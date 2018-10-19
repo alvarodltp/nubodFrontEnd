@@ -278,6 +278,12 @@ body{
   margin: 0 auto;
 }
 
+#menu-dots {
+  color: gray;
+  margin-left: 350px;
+  margin-top:10px;
+}
+
 #sidebar{
   background-color: blue;
   opacity: 0.8;

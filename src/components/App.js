@@ -15,7 +15,7 @@ import WorkoutHistory from './WorkoutHistory'
 import WorkoutOptions from './WorkoutOptions'
 import Home from './Home'
 import SearchBar from './SearchBar'
-import { Button, Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react'
+import { Button, Header, Icon, Image, Menu, Segment, Sidebar, Dropdown } from 'semantic-ui-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from "react-router-dom"
 import MacrosPieChart from './MacrosPieChart'
@@ -63,7 +63,9 @@ class App extends Component {
         visible: false,
         myCurrentWorkout: null,
         lastSets: [],
-        workoutHistory: null
+        workoutHistory: null,
+        sideDropdown: false,
+        activeItem: "edit profile"
       };
     }
 
@@ -334,19 +336,34 @@ this.setState({
   workoutHistory: updatedAfterDelete,
   workouts: updatedAfterDelete
 })
-
 }
 
+handleDropdownClick = () => {
+  this.setState({
+  sideDropdown: !this.state.sideDropdown
+  })
+}
+
+handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
   render() {
+
     const { visible } = this.state
+    const { activeItem } = this.state
+
     return (
-      <div className="App">
-        <BrowserRouter>
-          <React.Fragment>
-
-
+<div className="App">
+  <BrowserRouter>
+    <React.Fragment>
       <div id="nav">
        {this.state.user ? <FontAwesomeIcon id="bar" icon='bars' size="2x" onClick={this.handleButtonClick}/> : null}
+       {this.state.user ? <FontAwesomeIcon id="menu-dots" icon="ellipsis-v" size="2x" onClick={this.handleDropdownClick}/> : null}
+       {this.state.sideDropdown === true ?
+         <Menu style={{position:"relative"}}>
+          <Menu.Item name='edit profile' active={activeItem === 'edit profile'} onClick={this.handleItemClick} />
+         </Menu>
+         : null}
+
        <Sidebar.Pushable as={Segment}>
          <Sidebar
            id="sidebar"
