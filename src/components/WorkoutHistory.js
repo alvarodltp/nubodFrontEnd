@@ -19,12 +19,15 @@ class WorkoutHistory extends React.Component {
             meta={workout.date}
             description=''
             /> ) : null}
-        </div>
+
 
         <div id="workout-info">
           {this.props.selectedWorkoutHistory ? <OldWorkoutDetail {...this.props} updateWorkoutHistory={this.props.updateWorkoutHistory} myCurrentWorkout={this.props.myCurrentWorkout} removeWorkout={this.props.removeWorkout} saveWorkout={this.props.saveWorkout} getInfoToRedoWorkout={this.props.getInfoToRedoWorkout} selectedWorkoutHistory={this.props.selectedWorkoutHistory} /> : null}
         </div>
+
       </div>
+    </div>
+
 
     )
   }

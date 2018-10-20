@@ -327,7 +327,7 @@ saveMeasurements = (e) => {
         </Grid.Row>
       </Grid>
 
-      {this.props.user ? <WeightChart user={this.props.user}/> : null }
+      {this.props.measurements ? <WeightChart measurements={this.props.measurements}/> : null }
 
         </React.Fragment>
     )

@@ -65,7 +65,8 @@ class App extends Component {
         lastSets: [],
         workoutHistory: null,
         sideDropdown: false,
-        activeItem: "edit profile"
+        activeItem: "edit profile",
+        measurements: null
       };
     }
 
@@ -85,6 +86,7 @@ componentDidMount() {
     this.getUserWorkouts()
     this.quoteOfTheDay()
     this.getAllSets()
+    this.getUserMeasurements()
 
   }
 
@@ -116,6 +118,16 @@ getAllExercises = () => {
   })
 }
 
+getUserMeasurements = () => {
+  fetch("http://localhost:3001/measurements")
+  .then(response => response.json())
+  .then(measurements => {
+    this.setState({
+      measurements: measurements
+    })
+  })
+}
+
 filterExerByMusGroup = (e) => {
   let bodyPart = e.target.innerText.toLowerCase()
   let filteredByGroup;
@@ -130,8 +142,7 @@ getAllSets = () => {
   fetch("http://localhost:3001/exercise_sets")
   .then(response => response.json())
   .then(json => {
-    let workouts = json.map(set => set.workout)
-    // debugger
+    // let workouts = json.map(set => set.workout)
     this.setState({
       allSets: json
     }, () => this.calculateRepsAndSets())
@@ -152,13 +163,13 @@ getUserWorkouts = () => {
   fetch("http://localhost:3001/workouts")
   .then(response => response.json())
   .then(workouts => {
-    // debugger
-    // let userWorkouts;
-    // this.state.user ? userWorkouts = workouts.filter(workout => workout.user_id === this.state.user.id) : null
-    let reversedArr = workouts.reverse()
+    let userWorkouts;
+    this.state.user ? userWorkouts = workouts.filter(workout => workout.user_id === this.state.user.id) : null
+    // let reversedArr = userWorkouts.reverse()
+    debugger
     this.setState({
       workouts: workouts,
-      workoutHistory: reversedArr
+      workoutHistory: userWorkouts
     }, () => this.workoutsCompleted())
   })
 }
@@ -196,7 +207,6 @@ addExerciseToWorkout = (exercise) => {
 }
 
 displayWorkout = (workoutData) => {
-  debugger
   this.setState({
     selectedWorkoutHistory: workoutData
   })
@@ -443,7 +453,7 @@ handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
             <Route exact path='/signup' render={props=> <Signup {...props} updateUser= {this.updateUser} />} />
 
-            <Route exact path="/profile" render={props=> <Profile {...props} workoutsCompleted={this.state.workoutsCompleted} allRepsLifted={this.state.allRepsLifted} allWeightLifted={this.state.allWeightLifted} user={this.state.user} first_name={this.state.first_name} updateUser={this.updateUser} workouts={this.state.workouts} />}/>
+            <Route exact path="/profile" render={props=> <Profile {...props} workoutsCompleted={this.state.workoutsCompleted} allRepsLifted={this.state.allRepsLifted} allWeightLifted={this.state.allWeightLifted} user={this.state.user} first_name={this.state.first_name} updateUser={this.updateUser} workouts={this.state.workouts} measurements={this.state.measurements}/>}/>
 
             <Route exact path='/login' render={props=> <Login {...props} updateUser={this.updateUser} />} />
 

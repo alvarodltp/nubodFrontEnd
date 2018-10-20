@@ -3,8 +3,8 @@ import {Line} from 'react-chartjs-2';
 
 class WeightChart extends React.Component {
   render() {
-    let dateArr = this.props.user.measurements.map(measurement => measurement.date)
-    let bodyWeight = this.props.user.measurements.map(measurement => measurement.body_weight)
+    let dateArr = this.props.measurements.map(measurement => measurement.date)
+    let bodyWeight = this.props.measurements.map(measurement => measurement.body_weight)
     const data = {
       labels: dateArr,
       datasets: [
@@ -33,6 +33,7 @@ class WeightChart extends React.Component {
     }
 
     return (
+
       <div>
         <h2>Weight Analytics</h2>
         <Line id="weight-analytics" data={data} />
