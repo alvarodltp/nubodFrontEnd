@@ -20,6 +20,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from "react-router-dom"
 import MacrosPieChart from './MacrosPieChart'
 import SmartWorkout from './SmartWorkout'
+import Measurements from './Measurements'
 
 library.add(fas)
 
@@ -471,6 +472,7 @@ handleItemClick = (e, { name }) => this.setState({ activeItem: name })
             {this.state.workouts ? <Route exact path='/workout-history' render={props=> <WorkoutHistory {...props} workoutHistory={this.state.workoutHistory} updateWorkoutHistory={this.updateWorkoutHistory} myCurrentWorkout={this.myCurrentWorkout} saveWorkout={this.saveWorkout} removeWorkout={this.removeWorkout} getInfoToRedoWorkout={this.getInfoToRedoWorkout} workouts={this.state.workouts} displayWorkout={this.displayWorkout} selectedWorkoutHistory={this.state.selectedWorkoutHistory}/>} /> : null}
 
             {this.state.workouts ? <Route exact path='/smart-workout' render={props=> <SmartWorkout {...props} workouts={this.state.workouts} /> } /> : null }
+            {this.state.measurements ? <Route exact path='/measurements' render={props=> <Measurements {...props} measurements={this.state.measurements} /> } /> : null}
 
           </Sidebar.Pusher>
         </Sidebar.Pushable>

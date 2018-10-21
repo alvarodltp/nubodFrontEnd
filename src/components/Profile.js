@@ -210,9 +210,6 @@ saveMeasurements = (e) => {
 
         <Menu secondary>
           <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
-          <Menu.Item name='workout plan' active={activeItem === 'workouts'} onClick={this.handleItemClick}/>
-          <Menu.Item name='nutrition plan' active={activeItem === 'nutrition'} onClick={this.handleItemClick}/>
-          <Menu.Item name='lifestyle plan' active={activeItem === 'lifestyle'} onClick={this.handleItemClick} />
           <Menu.Item name='measurements' active={activeItem === 'measurements'} onClick={this.handleItemClick} />
         </Menu>
 
