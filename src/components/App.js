@@ -83,17 +83,15 @@ componentDidMount() {
       this.fetchUser();
     }
     this.getAllExercises()
-    this.getUserWorkouts()
+    // this.getUserWorkouts()
     this.quoteOfTheDay()
-    this.getAllSets()
-    this.getUserMeasurements()
-
+    // this.getAllSets()
   }
 
 updateUser = user => {
   this.setState({
     user: user
-  });
+  }, () => this.getUserWorkouts(), this.getUserMeasurements())
 };
 
 userToUpdateOnForm = (data) => {
@@ -122,8 +120,10 @@ getUserMeasurements = () => {
   fetch("http://localhost:3001/measurements")
   .then(response => response.json())
   .then(measurements => {
+      // debugger
+    let userMeasurements = measurements.filter(measurement => measurement.user_id === this.state.user.id)
     this.setState({
-      measurements: measurements
+      measurements: userMeasurements
     })
   })
 }
@@ -138,16 +138,18 @@ filterExerByMusGroup = (e) => {
   })
 }
 
-getAllSets = () => {
-  fetch("http://localhost:3001/exercise_sets")
-  .then(response => response.json())
-  .then(json => {
-    // let workouts = json.map(set => set.workout)
-    this.setState({
-      allSets: json
-    }, () => this.calculateRepsAndSets())
-  })
-}
+
+// getAllSets = () => {
+//   fetch("http://localhost:3001/exercise_sets")
+//   .then(response => response.json())
+//   .then(json => {
+//     // let workouts = json.map(set => set.workout)
+//     console.log(json)
+//     this.setState({
+//       allSets: json
+//     }, () => this.calculateRepsAndSets())
+//   })
+// }
 
 quoteOfTheDay = () => {
   fetch("https://quotes.rest/qod")
@@ -164,12 +166,15 @@ getUserWorkouts = () => {
   .then(response => response.json())
   .then(workouts => {
     let userWorkouts;
-    this.state.user ? userWorkouts = workouts.filter(workout => workout.user_id === this.state.user.id) : null
+    userWorkouts = workouts.filter(workout => workout.user_id === this.state.user.id)
+    // debugger
+    let sets = userWorkouts.map(workout => workout.exercise_sets).flat()
+
     // let reversedArr = userWorkouts.reverse()
-    debugger
     this.setState({
-      workouts: workouts,
-      workoutHistory: userWorkouts
+      workouts: userWorkouts,
+      workoutHistory: userWorkouts,
+      allSets: sets
     }, () => this.workoutsCompleted())
   })
 }
@@ -278,7 +283,7 @@ workoutsCompleted = () => {
   let totalWorkouts = [...this.state.workouts].length
   this.setState({
     workoutsCompleted: totalWorkouts
-  })
+  }, () => this.calculateRepsAndSets())
 }
 
 getInfoToRedoWorkout = (workoutObj) => {
@@ -318,7 +323,7 @@ pushCurrentWorkoutToWorkouts = () => {
   // debugger
   this.setState({
     workouts: workouts
-  })
+  }, () => this.getUserWorkouts())
 }
 
 emptyCurrentWorkout = () => {

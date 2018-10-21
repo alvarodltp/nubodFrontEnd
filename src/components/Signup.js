@@ -17,7 +17,6 @@ class Signup extends React.Component {
   }
 
   handleChange = (e) => {
-
     this.setState({
       [e.target.name]: e.target.value
     })
@@ -29,7 +28,6 @@ class Signup extends React.Component {
 
   handleOnSubmit = (e) => {
     e.preventDefault();
-    // debugger
     let userData = {user: {
       first_name: this.state.name,
       last_name: this.state.lastName,

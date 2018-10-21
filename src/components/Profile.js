@@ -154,6 +154,7 @@ saveMeasurements = (e) => {
     let user = e.target.parentElement.parentElement.elements
     let weight = user[5].value
     let height = (user[9].value * 12).toFixed(2)
+    debugger
     let age = user[4].value
     let bmr;
     let caloriesForGoal;
@@ -161,7 +162,7 @@ saveMeasurements = (e) => {
     let calories = Math.round(bmr * this.state.activityLevel["value"])
     // debugger
     if(this.state.goal === "Lose Weight"){
-      caloriesForGoal = calories - 500
+      caloriesForGoal = calories - 300
     } else if (this.state.goal === "Maintain Current Weight") {
       caloriesForGoal = calories
     } else if (this.state.goal === "Gain Muscle") {
