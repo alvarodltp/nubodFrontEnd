@@ -18,9 +18,6 @@ class EditProfileForm extends React.Component {
             <Grid.Column>
               <Form.Input label="Last Name" name="last_name" onChange={this.props.handleChange} defaultValue={this.props.user.last_name}/>
             </Grid.Column>
-            <Grid.Column>
-              <Form.Input label="Username" name="user_name" onChange={this.props.handleChange} defaultValue={this.props.user.user_name}/>
-            </Grid.Column>
           </Grid.Row>
 
           <Grid.Row>
@@ -29,6 +26,12 @@ class EditProfileForm extends React.Component {
             </Grid.Column>
             <Grid.Column>
               <Form.Input label="Age" type="number" name="age" onChange={this.props.handleChange} defaultValue={this.props.user.age}/>
+            </Grid.Column>
+          </Grid.Row>
+
+          <Grid.Row>
+            <Grid.Column>
+              <Form.Input label="Username" name="user_name" onChange={this.props.handleChange} defaultValue={this.props.user.user_name}/>
             </Grid.Column>
             <Grid.Column>
               <Form.Input label="Weight" name="weight" type="number" onChange={this.props.handleChange} defaultValue={this.props.user.weight}/>
@@ -42,9 +45,6 @@ class EditProfileForm extends React.Component {
             <Grid.Column>
               <Form.Input label="Location" name="location" onChange={this.props.handleChange} defaultValue={this.props.user.location}/>
             </Grid.Column>
-            <Grid.Column>
-              <Form.Select label="Goal" name="goal" onChange={this.props.getGoal} placeholder={this.props.user.goal} options={goalOptions}/>
-            </Grid.Column>
           </Grid.Row>
 
           <Grid.Row>
@@ -54,8 +54,14 @@ class EditProfileForm extends React.Component {
             <Grid.Column>
               <Form.Input label="Bmr" name="bmr" type="number" onChange={this.props.handleChange} defaultValue={this.props.bmr} disabled/>
             </Grid.Column>
+          </Grid.Row>
+
+          <Grid.Row>
             <Grid.Column>
               <Form.Select label='Gender' name="gender" onChange={this.props.getGender} placeholder={this.props.user.gender} options={genderOptions} />
+            </Grid.Column>
+            <Grid.Column>
+              <Form.Select label="Goal" name="goal" onChange={this.props.getGoal} placeholder={this.props.user.goal} options={goalOptions}/>
             </Grid.Column>
           </Grid.Row>
 
@@ -67,8 +73,6 @@ class EditProfileForm extends React.Component {
               <Form.Select label='Body Type' name="body_type" onChange={this.props.getBodyType} options={bodyOptions}/>
             </Grid.Column>
           </Grid.Row>
-
-
 
           <Button id="edit-button" color="gray" onChange={(e) => {this.props.getActivityLevel(e); this.props.getBodyType(e); this.props.getGender(e); this.props.getGoal(e)}} onClick={(e) => {this.props.calculateBmrMacrosCalories(e); this.props.convertBackToText(e); this.props.saveMeasurements(e)}}>Save</Button>
           <Button onClick={this.props.convertBackToText}>Cancel</Button>
