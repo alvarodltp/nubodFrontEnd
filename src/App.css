@@ -386,3 +386,14 @@ body{
   padding-left: 20px;
   padding-right: 20px;
 }
+
+#measurements-message{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#measurement-form{
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}

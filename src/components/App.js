@@ -65,8 +65,6 @@ class App extends Component {
         myCurrentWorkout: null,
         lastSets: [],
         workoutHistory: null,
-        sideDropdown: false,
-        activeItem: "edit profile",
         measurements: null
       };
     }
@@ -353,13 +351,6 @@ this.setState({
 })
 }
 
-handleDropdownClick = () => {
-  this.setState({
-  sideDropdown: !this.state.sideDropdown
-  })
-}
-
-handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render() {
 
@@ -372,12 +363,6 @@ handleItemClick = (e, { name }) => this.setState({ activeItem: name })
     <React.Fragment>
       <div id="nav">
        {this.state.user ? <FontAwesomeIcon id="bar" icon='bars' size="2x" onClick={this.handleButtonClick}/> : null}
-       {this.state.user ? <FontAwesomeIcon id="menu-dots" icon="ellipsis-v" size="2x" onClick={this.handleDropdownClick}/> : null}
-       {this.state.sideDropdown === true ?
-         <Menu style={{position:"relative"}}>
-          <Menu.Item name='edit profile' active={activeItem === 'edit profile'} onClick={this.handleItemClick} />
-         </Menu>
-         : null}
 
        <Sidebar.Pushable as={Segment}>
          <Sidebar
