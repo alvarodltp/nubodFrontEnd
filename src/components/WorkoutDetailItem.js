@@ -78,7 +78,7 @@ render(){
     <div>
     <form>
       <h3>{this.props.exercise.name}</h3>
-      {lastSetForExercise != null ? <p style={{color: "green"}}>Last - Reps: {lastSetForExercise.reps} Weight:{lastSetForExercise.weight}lb</p> : null }
+      {lastSetForExercise != null ? <p style={{color: "green"}}>Last - Reps: {lastSetForExercise.reps} Weight: {lastSetForExercise.weight}lb</p> : null }
       {this.state.inputArr}
      <p id="add-set" onClick={this.addSet} onClick={this.inputArrNum} id="add-set">Add Set</p>
     </form>

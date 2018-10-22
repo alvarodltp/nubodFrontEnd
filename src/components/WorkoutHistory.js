@@ -3,6 +3,12 @@ import OldWorkoutDetail from './OldWorkoutDetail'
 import { Card } from 'semantic-ui-react'
 
 class WorkoutHistory extends React.Component {
+  // constructor {
+  //   super()
+  //   this.setState = {
+  //
+  //   }
+  // }
 
   render(){
 
@@ -22,9 +28,8 @@ class WorkoutHistory extends React.Component {
 
 
         <div id="workout-info">
-          {this.props.selectedWorkoutHistory ? <OldWorkoutDetail {...this.props} updateWorkoutHistory={this.props.updateWorkoutHistory} myCurrentWorkout={this.props.myCurrentWorkout} removeWorkout={this.props.removeWorkout} saveWorkout={this.props.saveWorkout} getInfoToRedoWorkout={this.props.getInfoToRedoWorkout} selectedWorkoutHistory={this.props.selectedWorkoutHistory} /> : null}
+          {this.props.selectedWorkoutHistory ? <OldWorkoutDetail {...this.props} setSelectedWorkoutHistoryNull={this.props.setSelectedWorkoutHistoryNull} updateWorkoutHistory={this.props.updateWorkoutHistory} myCurrentWorkout={this.props.myCurrentWorkout} removeWorkout={this.props.removeWorkout} saveWorkout={this.props.saveWorkout} getInfoToRedoWorkout={this.props.getInfoToRedoWorkout} selectedWorkoutHistory={this.props.selectedWorkoutHistory} /> : null}
         </div>
-
       </div>
     </div>
 

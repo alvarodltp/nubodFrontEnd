@@ -49,7 +49,7 @@ class OldWorkoutDetail extends React.Component {
             <Table.Row>
               <Table.HeaderCell />
               <Table.HeaderCell colSpan='4'>
-              <Button negative floated='right' size='tiny' onClick={(e) => {this.props.updateWorkoutHistory(oldWorkout.id); this.props.removeWorkout(e, oldWorkout.id)}}>Delete</Button>
+              <Button negative floated='right' size='tiny' onClick={(e) => {this.props.updateWorkoutHistory(oldWorkout.id); this.props.removeWorkout(e, oldWorkout.id); this.props.setSelectedWorkoutHistoryNull()}}>Delete</Button>
 
               <Modal
                 trigger={<Button floated='right' size='tiny' onClick={() => {this.props.getInfoToRedoWorkout(oldWorkout); this.handleOpen()}}>Redo</Button>}

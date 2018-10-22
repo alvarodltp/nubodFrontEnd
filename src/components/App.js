@@ -216,6 +216,12 @@ displayWorkout = (workoutData) => {
   })
 }
 
+setSelectedWorkoutHistoryNull = () => {
+  this.setState({
+    selectedWorkoutHistory: null
+  })
+}
+
 emptyNewWorkoutArr = () => {
   this.setState({
     newWorkout: []
@@ -263,7 +269,7 @@ removeWorkout = (e, woid) => {
     this.setState({
       workouts: workouts
     })
-  ))
+  ), () => this.getUserWorkouts())
 }
 
 calculateRepsAndSets = () => {
@@ -454,7 +460,7 @@ this.setState({
 
             {this.state.user ? <Route exact path='/new-workout' render={props=> <WorkoutOptions {...props} lastTwoWorkouts={this.state.lastTwoWorkouts}/>} /> : null }
 
-            {this.state.workouts ? <Route exact path='/workout-history' render={props=> <WorkoutHistory {...props} workoutHistory={this.state.workoutHistory} updateWorkoutHistory={this.updateWorkoutHistory} myCurrentWorkout={this.myCurrentWorkout} saveWorkout={this.saveWorkout} removeWorkout={this.removeWorkout} getInfoToRedoWorkout={this.getInfoToRedoWorkout} workouts={this.state.workouts} displayWorkout={this.displayWorkout} selectedWorkoutHistory={this.state.selectedWorkoutHistory}/>} /> : null}
+            {this.state.workouts ? <Route exact path='/workout-history' render={props=> <WorkoutHistory {...props} setSelectedWorkoutHistoryNull={this.setSelectedWorkoutHistoryNull} workoutHistory={this.state.workoutHistory} updateWorkoutHistory={this.updateWorkoutHistory} myCurrentWorkout={this.myCurrentWorkout} saveWorkout={this.saveWorkout} removeWorkout={this.removeWorkout} getInfoToRedoWorkout={this.getInfoToRedoWorkout} workouts={this.state.workouts} displayWorkout={this.displayWorkout} selectedWorkoutHistory={this.state.selectedWorkoutHistory}/>} /> : null}
 
             {this.state.workouts ? <Route exact path='/smart-workout' render={props=> <SmartWorkout {...props} workouts={this.state.workouts} /> } /> : null }
             {this.state.measurements ? <Route exact path='/measurements' render={props=> <Measurements {...props} measurements={this.state.measurements} /> } /> : null}
