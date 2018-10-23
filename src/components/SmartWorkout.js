@@ -53,19 +53,17 @@ class SmartWorkout extends React.Component {
       finalToExclude: finalToExclude
     }, () => this.filterExercises(finalToExclude))
   }
-
- filterExercises = (finalToExclude) => {
-    debugger
-    if (finalToExclude.length > 0) {
-      let currentMuscGroup = finalToExclude.pop()
-      let exclusions = exclusions.filter(bodyGroup => !bodyGroup.value.includes(currentMuscGroup))
-      // filterExercises(finalToExclude)
-    } else {
-      console.log(exclusions)
-    }
-  }
-
-
+ //
+ // filterExercises = (finalToExclude) => {
+ //    debugger
+ //    if (finalToExclude.length > 0) {
+ //      let currentMuscGroup = finalToExclude.pop()
+ //      let exclusions = exclusions.filter(bodyGroup => !bodyGroup.value.includes(currentMuscGroup))
+ //      // filterExercises(finalToExclude)
+ //    } else {
+ //      console.log(exclusions)
+ //    }
+ //  }
 
   render(){
 

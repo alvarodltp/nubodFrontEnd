@@ -9,12 +9,6 @@ class MeasurementsForm extends React.Component {
           <Grid.Row>
             <Grid.Column>
               <Form.Field inline>
-                <label>Body Fat</label>
-                <Input type="number" placeholder='Body Fat' />
-              </Form.Field>
-            </Grid.Column>
-            <Grid.Column>
-              <Form.Field inline>
                 <label>Chest</label>
                 <Input type="number" placeholder='Chest' />
               </Form.Field>

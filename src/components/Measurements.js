@@ -1,5 +1,4 @@
 import React from 'react'
-import BodyFatChart from './BodyFatChart'
 import ChestMeasurements from './ChestMeasurements'
 import ShoulderMeasurements from './ShoulderMeasurements'
 import NeckMeasurements from './NeckMeasurements'
@@ -27,7 +26,6 @@ class Measurements extends React.Component {
       measurementForm: !this.state.measurementForm
     })
   }
-
 
   render(){
 
@@ -59,7 +57,7 @@ class Measurements extends React.Component {
 
 
         <div>
-          <BodyFatChart measurements={this.props.measurements} />
+
           <ChestMeasurements measurements={this.props.measurements} />
           <ShoulderMeasurements measurements={this.props.measurements} />
           <NeckMeasurements measurements={this.props.measurements} />
