@@ -48,7 +48,7 @@ class Profile extends React.Component {
 }
 
   updateUser = (user) => {
-    // debugger
+    debugger
   fetch(`http://localhost:3001/user-update`, {
       method: "PATCH",
       headers: {
@@ -59,9 +59,9 @@ class Profile extends React.Component {
         user: {
           first_name: user[0].value,
           last_name: user[1].value,
-          user_name: user[2].value,
-          email: user[3].value,
-          age: user[4].value,
+          user_name: user[4].value,
+          email: user[2].value,
+          age: user[3].value,
           weight: user[5].value,
           body_fat: user[6].value,
           location: user[7].value,
@@ -155,7 +155,7 @@ saveMeasurements = (e) => {
     let weight = user[5].value
     let height = (user[9].value * 12).toFixed(2)
     debugger
-    let age = user[4].value
+    let age = user[3].value
     let bmr;
     let caloriesForGoal;
     this.state.gender === "Male" ? bmr = (66 + 6.23 * weight + 12.7 * height - 6.8 * age).toFixed(2) : bmr = (655 + 4.35 * weight + 4.7 * height - 4.7 * age).toFixed(2)
