@@ -21,6 +21,7 @@ import { Link } from "react-router-dom"
 import MacrosPieChart from './MacrosPieChart'
 import SmartWorkout from './SmartWorkout'
 import Measurements from './Measurements'
+import DrinkCalculator from './DrinkCalculator'
 
 library.add(fas)
 
@@ -464,6 +465,8 @@ this.setState({
 
             {this.state.workouts ? <Route exact path='/smart-workout' render={props=> <SmartWorkout {...props} workouts={this.state.workouts} /> } /> : null }
             {this.state.measurements ? <Route exact path='/measurements' render={props=> <Measurements {...props} measurements={this.state.measurements} /> } /> : null}
+
+            {this.state.user ? <Route exact path='/drink-calculator' render={props=> <DrinkCalculator {...props} user={this.state.user}/> } /> : null }
 
           </Sidebar.Pusher>
         </Sidebar.Pushable>
