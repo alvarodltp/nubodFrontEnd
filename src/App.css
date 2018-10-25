@@ -406,3 +406,26 @@ body{
   margin-right: 20px;
   margin-left: 20px;
 }
+
+#search-results {
+}
+
+#individual-show-item{
+  margin: 0 auto;
+  display: inline;
+}
+
+#macros-row {
+  text-align: center;
+  margin: 0 auto;
+  width: 80%;
+}
+
+#added-items-container {
+  margin-top: 30px;
+}
+
+.ui.menu {
+  border-bottom: 0 none !important;
+  box-shadow: none;
+}
