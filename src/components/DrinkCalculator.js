@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, Button, Menu, Popup, Input, Card, Feed, Grid} from 'semantic-ui-react'
+import { Image, Button, Menu, Popup, Input, Card, Feed, Grid, Form} from 'semantic-ui-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class DrinkCalculator extends React.Component {
@@ -77,9 +77,7 @@ class DrinkCalculator extends React.Component {
   }
 
   removeItemFromList = (itemObj) => {
-    debugger
     let afterDelete = this.state.addedItems.filter(item => item.id != itemObj.id)
-    debugger
     this.setState({
       addedItems: afterDelete
     })
@@ -110,13 +108,20 @@ class DrinkCalculator extends React.Component {
   }
 
   addArrOfMacros = () => {
-    console.log(this.state.caloriesArr.reduce((a, b) => a + b))
     this.setState({
       totalCalories: this.state.caloriesArr.reduce((a, b) => a + b),
       totalCarbs: this.state.carbsArr.reduce((a, b) => a + b),
       totalFats: this.state.fatsArr.reduce((a, b) => a + b),
       totalSugars: this.state.sugarsArr.reduce((a, b) => a + b)
     })
+  }
+
+  deleteLastArrVal = (e) => {
+    if(e.key === "Backspace"){
+      this.setState({
+        caloriesArr: this.state.caloriesArr.pop()
+      })
+    }
   }
 
   render(){
@@ -201,7 +206,9 @@ class DrinkCalculator extends React.Component {
           {this.state.addedItems != [] ? this.state.addedItems.map(item =>
               <Grid.Row columns={7}>
                 <Grid.Column>
-                  <Input onChange={(e, item) => this.addMacrosAddedItemArray(e, item)} transparent type="number" placeholder="Qty."></Input>
+                <div class="ui transparent input">
+                  <input type="text" maxLength="2" placeholder="Qty." onChange={(e, item) => this.addMacrosAddedItemArray(e, item)} onKeyDown={this.deleteLastArrVal}/>
+                </div>
                 </Grid.Column>
                 <Grid.Column>
                   <p>{item.item_name}</p>
