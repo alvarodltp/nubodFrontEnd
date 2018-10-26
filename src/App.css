@@ -408,6 +408,7 @@ body{
 }
 
 #search-results {
+  margin-bottom: 20px;
 }
 
 #individual-show-item{
@@ -417,8 +418,17 @@ body{
 
 #macros-row {
   text-align: center;
-  margin: 0 auto;
-  width: 80%;
+  width: 65%;
+  margin: 0 auto!important;
+  /* margin-left: 10px; */
+}
+
+#macros-row h4{
+  font-size: 12px;
+}
+
+#macros-row p {
+  font-size: 12px;
 }
 
 #added-items-container {
@@ -429,3 +439,17 @@ body{
   border-bottom: 0 none !important;
   box-shadow: none;
 }
+
+#add-icon{
+  margin-right: 5px;
+  font-size: 12px;
+}
+
+#substract-icon{
+  margin-right: 5px;
+  font-size: 12px;
+}
+
+/* #add-substract-delete {
+  display: inline;
+} */
