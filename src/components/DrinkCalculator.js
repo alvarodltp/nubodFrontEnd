@@ -205,8 +205,26 @@ class DrinkCalculator extends React.Component {
                 <Button onClick={this.calculateMacros} style={{width: "100%"}} size="tiny">Calculate</Button> : null}
           </Grid>
         </div>
-        {this.state.totalCalories ?
-        <GuiltPieChart totalCalories={this.state.totalCalories} totalFats={this.state.totalFats} totalCarbs={this.state.totalCarbs} totalSugars={this.state.totalSugars}/> : null }
+
+
+          { this.state.totalCalories ?
+          <h1 id="workout-stats">Total Guilt</h1> : null }
+          { this.state.totalCalories ?
+          <Grid id="stats" columns="two">
+            <Grid.Row>
+              <Grid.Column id="workout-column">
+                <h3>Calories: {this.state.totalCalories}</h3>
+                <h3>Carbs: {this.state.totalCarbs}</h3>
+                <h3>Sugars: {this.state.totalSugars}</h3>
+                <h3>Fats: {this.state.totalFats}</h3>
+              </Grid.Column>
+              <Grid.Column>
+                 <GuiltPieChart totalCalories={this.state.totalCalories} totalFats={this.state.totalFats} totalCarbs={this.state.totalCarbs} totalSugars={this.state.totalSugars}/>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid> : null }
+
+
       </div>
       </React.Fragment>
     )
