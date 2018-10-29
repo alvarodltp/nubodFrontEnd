@@ -402,11 +402,6 @@ body{
   font-size: 20px
 }
 
-#message-drink-calculator{
-  margin-right: 20px;
-  margin-left: 20px;
-}
-
 #search-results {
   margin-bottom: 20px;
 }
@@ -474,4 +469,8 @@ body{
   transform: translateY(-50%);
   float: right;
   margin-top: 9px;
+}
+
+#total-guilt-chart {
+  margin-top: 20px;
 }

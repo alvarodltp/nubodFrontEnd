@@ -31,8 +31,8 @@ class GuiltPieChart extends React.Component {
       <div>
         <Pie
         data={data}
-        width={300}
-        height={300}
+        width={200}
+        height={200}
         options={{
         maintainAspectRatio: false
         }}

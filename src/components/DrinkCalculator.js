@@ -41,11 +41,11 @@ class DrinkCalculator extends React.Component {
       drinksNames: null,
       searchTermWord: ''
     })
-}
+  }
 
   getSearchTerm = (e) => {
     let searchedWord = e.target.value.toLowerCase()
-    fetch(`https://api.nutritionix.com/v1_1/search/${e.target.value.toLowerCase()}?results=0%3A20&cal_min=50&cal_max=100&fields=item_name%2Cbrand_name%2Cnf_total_carbohydrate%2Cnf_sugars%2Cnf_protein%2Cnf_calories%2Cnf_total_fat%2Citem_id%2Cbrand_id&appId=9167a26d&appKey=700f3e0e67379b6a1132274f90065f70`)
+    fetch(`https://api.nutritionix.com/v1_1/search/${e.target.value.toLowerCase()}?results=0%3A20&cal_min=50&cal_max=100&fields=item_name%2Cbrand_name%2Cnf_serving_size_unit%2Cnf_total_carbohydrate%2Cnf_sugars%2Cimages_front_full_url%2Cnf_serving_size_qty%2Cnf_protein%2Cnf_calories%2Cnf_total_fat%2Citem_id%2Cbrand_id&appId=a8f79d5d&appKey=ad063534d80beb7b73e61da6a526265b`)
     .then(response => response.json())
     .then(json => {
       let results = json["hits"].map(results => results.fields)
@@ -66,7 +66,6 @@ class DrinkCalculator extends React.Component {
   }
 
   addItem = (itemObj) => {
-    console.log(this.state.addedItems)
     this.setState({
       addedItems: [...this.state.addedItems, itemObj]
     })
@@ -86,10 +85,15 @@ class DrinkCalculator extends React.Component {
   }
 
   calculateMacros = () => {
-    let totalCalories = this.state.addedItems.map(item => item.nf_calories).reduce((a, b) => a + b)
-    let totalCarbs = this.state.addedItems.map(item => item.nf_total_carbohydrate).reduce((a, b) => a + b)
-    let totalFats = this.state.addedItems.map(item => item.nf_total_fat).reduce((a, b) => a + b)
-    let totalSugars = this.state.addedItems.map(item => item.nf_sugars).reduce((a, b) => a + b)
+    let totalCalories;
+    this.state.addedItems.length > 1 ? totalCalories = this.state.addedItems.map(item => item.nf_calories).reduce((a, b) => a + b).toFixed(2) : totalCalories = 0
+    let totalCarbs;
+    this.state.addedItems.length > 1 ? totalCarbs = this.state.addedItems.map(item => item.nf_total_carbohydrate).reduce((a, b) => a + b).toFixed(2) : totalCarbs = 0
+    let totalFats;
+    this.state.addedItems > 1 ? totalFats = this.state.addedItems.map(item => item.nf_total_fat).reduce((a, b) => a + b).toFixed(2) : totalFats = 0
+    let totalSugars;
+    this.state.addedItems > 1 ? totalSugars = this.state.addedItems.map(item => item.nf_sugars).reduce((a, b) => a + b).toFixed(2) : totalSugars = 0
+    console.log(totalFats)
     this.setState({
       totalCalories: totalCalories,
       totalFats: totalFats,
@@ -134,11 +138,11 @@ class DrinkCalculator extends React.Component {
 
           {this.state.clickedItem != null ?
             <div id="individual-show-item">
-                 <h4>{this.state.clickedItem.item_name}</h4>
+                 <h3>{this.state.clickedItem.item_name}</h3>
                  <p>Calories: {this.state.clickedItem.nf_calories}</p>
                  <p>Carbs: {this.state.clickedItem.nf_total_carbohydrate}</p>
                  <p>Fats: {this.state.clickedItem.nf_total_fat}</p>
-                 <p>Sugars: {this.state.clickedItem.nf_sugars}</p>
+                 <p>Sugars: {this.state.clickedItem.nf_sugars ? this.state.clickedItem.nf_sugars : '-'}</p>
                  <Button size="mini" onClick={() => this.addItem(this.state.clickedItem)} basic color='green'>
                    Add
                  </Button>
@@ -200,30 +204,29 @@ class DrinkCalculator extends React.Component {
                   {<FontAwesomeIcon id="delete-item" onClick={() => this.removeItemFromList(item)} icon="trash" size="1x"/>}
                 </Grid.Column>
               </Grid.Row>) : null }
-
-                {this.state.addedItems != [] ?
-                <Button onClick={this.calculateMacros} style={{width: "100%"}} size="tiny">Calculate</Button> : null}
+                <Button onClick={this.calculateMacros} style={{width: "100%"}} size="tiny">Calculate</Button>
           </Grid>
         </div>
 
-
-          { this.state.totalCalories ?
-          <h1 id="workout-stats">Total Guilt</h1> : null }
-          { this.state.totalCalories ?
+        { this.state.totalCalories != '' ?
+        <div id="total-guilt-chart">
+          <h3 id="workout-stats">Total</h3>
           <Grid id="stats" columns="two">
             <Grid.Row>
-              <Grid.Column id="workout-column">
-                <h3>Calories: {this.state.totalCalories}</h3>
-                <h3>Carbs: {this.state.totalCarbs}</h3>
-                <h3>Sugars: {this.state.totalSugars}</h3>
-                <h3>Fats: {this.state.totalFats}</h3>
+              <Grid.Column id="total-guilt-info">
+                <h4>Total Items: {this.state.addedItems.length}</h4>
+                <h4>Calories: {this.state.totalCalories}</h4>
+                <h4>Carbs: {this.state.totalCarbs}</h4>
+                <h4>Sugars: {this.state.totalSugars === null ? this.state.totalSugars : '-'}</h4>
+                <h4>Fats: {this.state.totalFats}</h4>
               </Grid.Column>
               <Grid.Column>
-                 <GuiltPieChart totalCalories={this.state.totalCalories} totalFats={this.state.totalFats} totalCarbs={this.state.totalCarbs} totalSugars={this.state.totalSugars}/>
+                  <GuiltPieChart totalCalories={this.state.totalCalories} totalFats={this.state.totalFats} totalCarbs={this.state.totalCarbs} totalSugars={this.state.totalSugars}/>
               </Grid.Column>
             </Grid.Row>
-          </Grid> : null }
-
+          </Grid>
+        </div>
+      : null }
 
       </div>
       </React.Fragment>
