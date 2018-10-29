@@ -474,3 +474,12 @@ body{
 #total-guilt-chart {
   margin-top: 20px;
 }
+
+#activity-dropdown {
+  width: 50%;
+  margin-top: 20px;
+}
+
+#activity-information {
+  margin-top: 20px;
+}

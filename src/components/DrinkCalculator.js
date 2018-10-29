@@ -2,6 +2,7 @@ import React from 'react'
 import { Image, Button, Menu, Popup, Input, Card, Feed, Grid, Message} from 'semantic-ui-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import GuiltPieChart from './GuiltPieChart'
+import EnergyExpenditureCalculator from './EnergyExpenditureCalculator'
 
 class DrinkCalculator extends React.Component {
   constructor() {
@@ -21,7 +22,9 @@ class DrinkCalculator extends React.Component {
       totalCalories: '',
       totalCarbs: '',
       totalFats: '',
-      totalSugars: ''
+      totalSugars: '',
+      selectedActivity: null,
+      totalExerciseTime: ''
     }
   }
 
@@ -93,12 +96,26 @@ class DrinkCalculator extends React.Component {
     this.state.addedItems > 1 ? totalFats = this.state.addedItems.map(item => item.nf_total_fat).reduce((a, b) => a + b).toFixed(2) : totalFats = 0
     let totalSugars;
     this.state.addedItems > 1 ? totalSugars = this.state.addedItems.map(item => item.nf_sugars).reduce((a, b) => a + b).toFixed(2) : totalSugars = 0
-    console.log(totalFats)
     this.setState({
       totalCalories: totalCalories,
       totalFats: totalFats,
       totalCarbs: totalCarbs,
       totalSugars: totalSugars
+    })
+  }
+
+  handleDropdownClick = (e, data) => {
+
+    let userWeightKg = (this.props.user.weight / 2.2).toFixed(2)
+    let activityName = e.target.innerText
+    let filteredObj = data.options.filter(option => option.text === activityName)
+    let energyExpenditurePerMinute = (.0175 * filteredObj[0].value * userWeightKg).toFixed(2)
+    //divide total calories consumed by calories burned in a minute
+    let totalExerciseTime = Math.round(this.state.totalCalories / energyExpenditurePerMinute)
+
+    this.setState({
+      selectedActivity: filteredObj,
+      totalExerciseTime: totalExerciseTime
     })
   }
 
@@ -226,6 +243,12 @@ class DrinkCalculator extends React.Component {
             </Grid.Row>
           </Grid>
         </div>
+      : null }
+
+      {this.state.totalCalories != '' ?
+      <div>
+        <EnergyExpenditureCalculator totalCalories={this.state.totalCalories} totalExerciseTime={this.state.totalExerciseTime} selectedActivity={this.state.selectedActivity} handleDropdownClick={this.handleDropdownClick} />
+      </div>
       : null }
 
       </div>

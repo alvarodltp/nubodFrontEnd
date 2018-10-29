@@ -293,7 +293,6 @@ saveMeasurements = (e) => {
             </Grid.Column>
           </Grid.Row>
 
-
           <div id="profile-edit-button">
             <Button id="edit-button" color="grey" size="small" onClick={this.convertToInput} user={this.state.user}>Update Profile</Button>
           </div>
@@ -317,7 +316,6 @@ saveMeasurements = (e) => {
           </Grid.Column>
         </Grid.Row>
 
-
         <h1 id="workout-stats">Nutrition Needs</h1>
         <Grid.Row>
           <Grid.Column id="nutrition-column">
@@ -336,7 +334,7 @@ saveMeasurements = (e) => {
       {this.props.measurements ? <WeightChart measurements={this.props.measurements}/> : null }
       {this.props.measurements ? <BodyFatChart measurements={this.props.measurements} /> : null}
 
-        </React.Fragment>
+    </React.Fragment>
     )
   }
 }
