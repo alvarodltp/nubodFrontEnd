@@ -24,7 +24,8 @@ class DrinkCalculator extends React.Component {
       totalFats: '',
       totalSugars: '',
       selectedActivity: null,
-      totalExerciseTime: ''
+      totalExerciseTime: '',
+      userWeightKg: ''
     }
   }
 
@@ -89,13 +90,13 @@ class DrinkCalculator extends React.Component {
 
   calculateMacros = () => {
     let totalCalories;
-    this.state.addedItems.length > 1 ? totalCalories = this.state.addedItems.map(item => item.nf_calories).reduce((a, b) => a + b).toFixed(2) : totalCalories = 0
+    this.state.addedItems.length >= 1 ? totalCalories = this.state.addedItems.map(item => item.nf_calories).reduce((a, b) => a + b).toFixed(2) : totalCalories = 0
     let totalCarbs;
-    this.state.addedItems.length > 1 ? totalCarbs = this.state.addedItems.map(item => item.nf_total_carbohydrate).reduce((a, b) => a + b).toFixed(2) : totalCarbs = 0
+    this.state.addedItems.length >= 1 ? totalCarbs = this.state.addedItems.map(item => item.nf_total_carbohydrate).reduce((a, b) => a + b).toFixed(2) : totalCarbs = 0
     let totalFats;
-    this.state.addedItems > 1 ? totalFats = this.state.addedItems.map(item => item.nf_total_fat).reduce((a, b) => a + b).toFixed(2) : totalFats = 0
+    this.state.addedItems.length >= 1 ? totalFats = this.state.addedItems.map(item => item.nf_total_fat).reduce((a, b) => a + b).toFixed(2) : totalFats = 0
     let totalSugars;
-    this.state.addedItems > 1 ? totalSugars = this.state.addedItems.map(item => item.nf_sugars).reduce((a, b) => a + b).toFixed(2) : totalSugars = 0
+    this.state.addedItems.length >= 1 ? totalSugars = this.state.addedItems.map(item => item.nf_sugars).reduce((a, b) => a + b).toFixed(2) : totalSugars = 0
     this.setState({
       totalCalories: totalCalories,
       totalFats: totalFats,
@@ -105,19 +106,24 @@ class DrinkCalculator extends React.Component {
   }
 
   handleDropdownClick = (e, data) => {
-
     let userWeightKg = (this.props.user.weight / 2.2).toFixed(2)
     let activityName = e.target.innerText
-    let filteredObj = data.options.filter(option => option.text === activityName)
-    let energyExpenditurePerMinute = (.0175 * filteredObj[0].value * userWeightKg).toFixed(2)
-    //divide total calories consumed by calories burned in a minute
-    let totalExerciseTime = Math.round(this.state.totalCalories / energyExpenditurePerMinute)
-
+    let filteredObj = data.options.filter(option => option.text === activityName)[0]
     this.setState({
       selectedActivity: filteredObj,
+      userWeightKg: userWeightKg
+    }, () => this.calculateExerciseTime(filteredObj, userWeightKg))
+  }
+
+  calculateExerciseTime = (filteredObj, userWeightKg) => {
+    let energyExpenditurePerMinute = (0.0175 * filteredObj.value * userWeightKg).toFixed(2)
+    //divide total calories consumed by calories burned in a minute
+    let totalExerciseTime = Math.round(this.state.totalCalories / energyExpenditurePerMinute)
+    this.setState({
       totalExerciseTime: totalExerciseTime
     })
   }
+
 
   render(){
 
@@ -138,7 +144,7 @@ class DrinkCalculator extends React.Component {
             <Menu.Item name='guilt calculator' active={activeItem === 'guilt calculator'} onClick={(e, name) => {this.handleItemClick(e, name); this.props.history.push('/drink-calculator')}}/>
           </Menu>
           </div>
-            <h4 id="message-drink-calculator">Here again, {this.props.user.first_name}?... Let's find out how many bad calories you have consumed and how much exercise you need to do to burn those calories. I just wish I didn't have to do this again, you know?</h4>
+            <p id="message-drink-calculator">Here again, {this.props.user.first_name}?... Let's find out how many bad calories you have consumed and how much exercise you need to do to burn those calories. I just wish I didn't have to do this again, you know?</p>
             <Input placeholder='Search Item...' onChange={this.getSearchTerm}/>
           <div>
 

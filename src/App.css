@@ -454,7 +454,12 @@ body{
   width: 60%;
   height: 20px;
   margin: 0 auto;
+}
 
+#message-drink-calculator {
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 #text-message {
@@ -476,10 +481,17 @@ body{
 }
 
 #activity-dropdown {
-  width: 50%;
-  margin-top: 20px;
+  width: 70%;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 #activity-information {
+  margin-top: 20px;
+  margin-bottom: 50px;
+  margin: 0 auto;
+}
+
+#exercise-calorie-info {
   margin-top: 20px;
 }
