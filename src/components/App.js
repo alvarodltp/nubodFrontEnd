@@ -22,6 +22,7 @@ import MacrosPieChart from './MacrosPieChart'
 import SmartWorkout from './SmartWorkout'
 import Measurements from './Measurements'
 import DrinkCalculator from './DrinkCalculator'
+import NutritionContainer from './NutritionContainer'
 
 library.add(fas)
 
@@ -467,6 +468,8 @@ this.setState({
             {this.state.measurements ? <Route exact path='/measurements' render={props=> <Measurements {...props} measurements={this.state.measurements} /> } /> : null}
 
             {this.state.user ? <Route exact path='/drink-calculator' render={props=> <DrinkCalculator {...props} user={this.state.user} /> } /> : null }
+
+            {this.state.user ? <Route exact path="/nutrition" render={props => <NutritionContainer {...props} user={this.state.user} /> } /> :null }
 
           </Sidebar.Pusher>
         </Sidebar.Pushable>

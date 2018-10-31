@@ -50,7 +50,7 @@ class Profile extends React.Component {
 }
 
   updateUser = (user) => {
-    debugger
+    // debugger
   fetch(`http://localhost:3001/user-update`, {
       method: "PATCH",
       headers: {
@@ -88,7 +88,7 @@ saveMeasurements = (e) => {
   let user = e.target.parentElement.parentElement.elements
   let today = new Date(); ((today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear());
   let user_id = this.props.user.id
-  debugger
+  // debugger
   fetch("http://localhost:3001/measurements", {
     method: 'POST',
     headers: {
@@ -156,7 +156,7 @@ saveMeasurements = (e) => {
     let user = e.target.parentElement.parentElement.elements
     let weight = user[5].value
     let height = (user[9].value * 12).toFixed(2)
-    debugger
+    // debugger
     let age = user[3].value
     let bmr;
     let caloriesForGoal;
@@ -218,6 +218,7 @@ saveMeasurements = (e) => {
         <Popup trigger={<FontAwesomeIcon onClick={this.showAccountInfo} id="edit-profile-icon" icon="edit" size="2x"/>} content='Edit Profile' />
         <Menu secondary>
           <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
+          <Menu.Item name='nutrition' active={activeItem === 'nutrition'} onClick={(e, name) => {this.handleItemClick(e, name); this.props.history.push('/nutrition')}} />
           <Menu.Item name='measurements' active={activeItem === 'measurements'} onClick={(e, name) => {this.handleItemClick(e, name); this.props.history.push('/measurements')}}/>
           <Menu.Item name='drink calcultor' active={activeItem === 'drink calculator'} onClick={(e, name) => {this.handleItemClick(e, name); this.props.history.push('/drink-calculator')}}/>
         </Menu>
