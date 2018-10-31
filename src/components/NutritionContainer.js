@@ -5,6 +5,7 @@ import TotalCaloriesChart from './TotalCaloriesChart'
 import TotalProteinsChart from './TotalProteinsChart'
 import TotalCarbsChart from './TotalCarbsChart'
 import TotalFatsChart from './TotalFatsChart'
+import Calendar from './Calendar'
 
 class NutritionContainer extends React.Component {
   constructor() {
@@ -40,6 +41,7 @@ class NutritionContainer extends React.Component {
           <TotalProteinsChart user={this.props.user} />
           <TotalCarbsChart user={this.props.user} />
           <TotalFatsChart user={this.props.user} />
+          <Calendar />
 
         </div>
     </React.Fragment>
