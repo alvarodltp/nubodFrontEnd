@@ -1,6 +1,10 @@
 import React from 'react'
 import { Image, Button, Menu, Input, Popup} from 'semantic-ui-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import TotalCaloriesChart from './TotalCaloriesChart'
+import TotalProteinsChart from './TotalProteinsChart'
+import TotalCarbsChart from './TotalCarbsChart'
+import TotalFatsChart from './TotalFatsChart'
 
 class NutritionContainer extends React.Component {
   constructor() {
@@ -17,7 +21,6 @@ class NutritionContainer extends React.Component {
     const { activeItem } = this.state
 
     return(
-
       <React.Fragment>
         <div style={{minHeight: "100vh"}}>
           <div id='header-site'>
@@ -32,6 +35,12 @@ class NutritionContainer extends React.Component {
               <Menu.Item name='guilt calculator' active={activeItem === 'guilt calculator'} onClick={(e, name) => {this.handleItemClick(e, name); this.props.history.push('/drink-calculator')}}/>
             </Menu>
           </div>
+
+          <TotalCaloriesChart user={this.props.user}/>
+          <TotalProteinsChart user={this.props.user} />
+          <TotalCarbsChart user={this.props.user} />
+          <TotalFatsChart user={this.props.user} />
+
         </div>
     </React.Fragment>
 
