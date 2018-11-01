@@ -131,9 +131,10 @@ getUserMeasurements = () => {
 
 filterExerByMusGroup = (e) => {
   let bodyPart = e.target.innerText.toLowerCase()
+  debugger
   let filteredByGroup;
-  this.state.exercises != null ? filteredByGroup = this.state.exercises.filter(exercise =>
-  exercise.muscle_group === bodyPart) : null
+  this.state.exercises != null && bodyPart != "all" ? filteredByGroup = this.state.exercises.filter(exercise =>
+  exercise.muscle_group === bodyPart) : filteredByGroup = this.state.exercises 
   this.setState({
     searchedExerciseArr: filteredByGroup
   })

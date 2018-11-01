@@ -55,7 +55,7 @@ class ExerciseContainer extends React.Component {
             name='radioGroup'
             value='all'
             checked={this.state.selectedPart === 'all'}
-            onChange={(e, value) => {this.handleChange(e, value); this.props.getAllExercises()}}
+            onChange={(e, value) => {this.handleChange(e, value); this.props.filterExerByMusGroup(e)}}
           />
         </Form.Field>
           <Form.Field>
