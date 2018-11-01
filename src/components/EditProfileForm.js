@@ -70,7 +70,7 @@ class EditProfileForm extends React.Component {
               <Form.Input label='Height' name="height" onChange={this.props.handleChange} defaultValue={this.props.user.height} />
             </Grid.Column>
             <Grid.Column>
-              <Form.Select label='Body Type' name="body_type" onChange={this.props.getBodyType} options={bodyOptions}/>
+              <Form.Select label='Body Type' name="body_type" onChange={this.props.getBodyType} placeholder={this.props.user.body_type} options={bodyOptions}/>
             </Grid.Column>
           </Grid.Row>
 

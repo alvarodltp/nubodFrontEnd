@@ -1,6 +1,6 @@
 import React from 'react'
 import OldWorkoutDetail from './OldWorkoutDetail'
-import { Card } from 'semantic-ui-react'
+import { Card, Segment } from 'semantic-ui-react'
 
 class WorkoutHistory extends React.Component {
   // constructor {
@@ -20,16 +20,11 @@ class WorkoutHistory extends React.Component {
           {this.props.workoutHistory ? this.props.workoutHistory.map(workout =>
           <Card
             id="old-workout"
-            onClick={() => this.props.displayWorkout(workout)}
+            onClick={() => {this.props.displayWorkout(workout); this.props.history.push('/workout-detail')}}
             header={workout.name}
             meta={workout.date}
             description=''
             /> ) : null}
-
-
-        <div id="workout-info">
-          {this.props.selectedWorkoutHistory ? <OldWorkoutDetail {...this.props} setSelectedWorkoutHistoryNull={this.props.setSelectedWorkoutHistoryNull} updateWorkoutHistory={this.props.updateWorkoutHistory} myCurrentWorkout={this.props.myCurrentWorkout} removeWorkout={this.props.removeWorkout} saveWorkout={this.props.saveWorkout} getInfoToRedoWorkout={this.props.getInfoToRedoWorkout} selectedWorkoutHistory={this.props.selectedWorkoutHistory} /> : null}
-        </div>
       </div>
     </div>
 
@@ -37,5 +32,9 @@ class WorkoutHistory extends React.Component {
     )
   }
 }
+
+// <div id="workout-info">
+//   {this.props.selectedWorkoutHistory ? <OldWorkoutDetail {...this.props} setSelectedWorkoutHistoryNull={this.props.setSelectedWorkoutHistoryNull} updateWorkoutHistory={this.props.updateWorkoutHistory} myCurrentWorkout={this.props.myCurrentWorkout} removeWorkout={this.props.removeWorkout} saveWorkout={this.props.saveWorkout} getInfoToRedoWorkout={this.props.getInfoToRedoWorkout} selectedWorkoutHistory={this.props.selectedWorkoutHistory} /> : null}
+// </div>
 
 export default WorkoutHistory

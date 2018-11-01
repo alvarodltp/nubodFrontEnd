@@ -23,6 +23,7 @@ import SmartWorkout from './SmartWorkout'
 import Measurements from './Measurements'
 import DrinkCalculator from './DrinkCalculator'
 import NutritionContainer from './NutritionContainer'
+import OldWorkoutDetail from './OldWorkoutDetail'
 
 library.add(fas)
 
@@ -131,10 +132,9 @@ getUserMeasurements = () => {
 
 filterExerByMusGroup = (e) => {
   let bodyPart = e.target.innerText.toLowerCase()
-  debugger
   let filteredByGroup;
   this.state.exercises != null && bodyPart != "all" ? filteredByGroup = this.state.exercises.filter(exercise =>
-  exercise.muscle_group === bodyPart) : filteredByGroup = this.state.exercises 
+  exercise.muscle_group === bodyPart) : filteredByGroup = this.state.exercises
   this.setState({
     searchedExerciseArr: filteredByGroup
   })
@@ -464,6 +464,8 @@ this.setState({
             {this.state.user ? <Route exact path='/new-workout' render={props=> <WorkoutOptions {...props} lastTwoWorkouts={this.state.lastTwoWorkouts}/>} /> : null }
 
             {this.state.workouts ? <Route exact path='/workout-history' render={props=> <WorkoutHistory {...props} setSelectedWorkoutHistoryNull={this.setSelectedWorkoutHistoryNull} workoutHistory={this.state.workoutHistory} updateWorkoutHistory={this.updateWorkoutHistory} myCurrentWorkout={this.myCurrentWorkout} saveWorkout={this.saveWorkout} removeWorkout={this.removeWorkout} getInfoToRedoWorkout={this.getInfoToRedoWorkout} workouts={this.state.workouts} displayWorkout={this.displayWorkout} selectedWorkoutHistory={this.state.selectedWorkoutHistory}/>} /> : null}
+
+            {this.state.selectedWorkoutHistory ? <Route exact path='/workout-detail' render={props=> <OldWorkoutDetail {...props} setSelectedWorkoutHistoryNull={this.setSelectedWorkoutHistoryNull} updateWorkoutHistory={this.updateWorkoutHistory} myCurrentWorkout={this.myCurrentWorkout} removeWorkout={this.removeWorkout} saveWorkout={this.saveWorkout} getInfoToRedoWorkout={this.getInfoToRedoWorkout} selectedWorkoutHistory={this.state.selectedWorkoutHistory} />} /> : null}
 
             {this.state.workouts ? <Route exact path='/smart-workout' render={props=> <SmartWorkout {...props} workouts={this.state.workouts} /> } /> : null }
             {this.state.measurements ? <Route exact path='/measurements' render={props=> <Measurements {...props} measurements={this.state.measurements} /> } /> : null}
