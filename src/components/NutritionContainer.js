@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, Button, Menu, Input, Popup} from 'semantic-ui-react'
+import { Image, Button, Menu, Input, Popup, Grid, Segment} from 'semantic-ui-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import TotalCaloriesChart from './TotalCaloriesChart'
 import TotalProteinsChart from './TotalProteinsChart'
@@ -37,11 +37,84 @@ class NutritionContainer extends React.Component {
             </Menu>
           </div>
 
-          <TotalCaloriesChart user={this.props.user}/>
-          <TotalProteinsChart user={this.props.user} />
-          <TotalCarbsChart user={this.props.user} />
-          <TotalFatsChart user={this.props.user} />
-          <Calendar />
+          <div id="calendar">
+            <Calendar />
+          </div>
+
+          <div id="macros-chart-container">
+            <Grid columns="two">
+              <Grid.Row id="chart-row">
+                <Grid.Column>
+                  <TotalCaloriesChart user={this.props.user}/>
+                </Grid.Column>
+                <Grid.Column>
+                  <TotalProteinsChart user={this.props.user} />
+                </Grid.Column>
+              </Grid.Row>
+              <Grid.Row id="chart-row">
+                <Grid.Column>
+                  <TotalCarbsChart user={this.props.user} />
+                </Grid.Column>
+                <Grid.Column>
+                  <TotalFatsChart user={this.props.user} />
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </div>
+
+          <Input id="search-food-input" transparent placeholder='Search Food...' />
+
+          <Segment>
+            <h4 id="type-meal">Breakfast</h4> | <h4 id="total-cal">0</h4>
+          </Segment>
+          <Segment>
+              <p id="food-name-diet">Name of The Food</p> |
+              <p id="food-serving-diet">Servings</p> |
+              <p id="food-calories-diet">Total Calories</p>
+          </Segment>
+          <Segment>
+            <FontAwesomeIcon id="add-food-icon" icon="plus" size="1x"/>
+            <p id="add-food">Add Food</p>
+          </Segment><br/>
+
+          <Segment>
+            <h4 id="type-meal">Lunch</h4> | <h4 id="total-cal">0</h4>
+          </Segment>
+          <Segment>
+              <p id="food-name-diet">Name of The Food</p> |
+              <p id="food-serving-diet">Servings</p> |
+              <p id="food-calories-diet">Total Calories</p>
+          </Segment>
+          <Segment>
+            <FontAwesomeIcon id="add-food-icon" icon="plus" size="1x"/>
+            <p id="add-food">Add Food</p>
+          </Segment><br/>
+
+          <Segment>
+            <h4 id="type-meal">Dinner</h4> | <h4 id="total-cal">0</h4>
+          </Segment>
+          <Segment>
+              <p id="food-name-diet">Name of The Food</p> |
+              <p id="food-serving-diet">Servings</p> |
+              <p id="food-calories-diet">Total Calories</p>
+          </Segment>
+          <Segment>
+            <FontAwesomeIcon id="add-food-icon" icon="plus" size="1x"/>
+            <p id="add-food">Add Food</p>
+          </Segment><br/>
+
+          <Segment>
+            <h4 id="type-meal">Snacks</h4> | <h4 id="total-cal">0</h4>
+          </Segment>
+          <Segment>
+              <p id="food-name-diet">Name of The Food</p> |
+              <p id="food-serving-diet">Servings</p> |
+              <p id="food-calories-diet">Total Calories</p>
+          </Segment>
+          <Segment>
+            <FontAwesomeIcon id="add-food-icon" icon="plus" size="1x"/>
+            <p id="add-food">Add Food</p>
+          </Segment>
 
         </div>
     </React.Fragment>

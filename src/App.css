@@ -495,3 +495,55 @@ body{
 #exercise-calorie-info {
   margin-top: 20px;
 }
+
+#chart-row {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+#macros-chart-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#calendar {
+  margin-top: 20px;
+}
+
+#search-food-input {
+  text-align: center;
+}
+
+#type-meal {
+  display: inline;
+}
+
+#total-cal {
+  display: inline;
+}
+
+.ui.segment {
+  margin: 0px;
+}
+
+#add-food-icon {
+  display: inline;
+  margin-right: 5px;
+}
+
+#add-food {
+  display: inline;
+  margin-left: 5px;
+}
+
+#food-name-diet {
+  display: inline;
+}
+
+#food-serving-diet {
+  display: inline;
+}
+
+#food-calories-diet {
+  display: inline;
+}
