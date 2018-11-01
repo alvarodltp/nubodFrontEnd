@@ -220,7 +220,7 @@ saveMeasurements = (e) => {
           <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
           <Menu.Item name='nutrition' active={activeItem === 'nutrition'} onClick={(e, name) => {this.handleItemClick(e, name); this.props.history.push('/nutrition')}} />
           <Menu.Item name='measurements' active={activeItem === 'measurements'} onClick={(e, name) => {this.handleItemClick(e, name); this.props.history.push('/measurements')}}/>
-          <Menu.Item name='drink calcultor' active={activeItem === 'drink calculator'} onClick={(e, name) => {this.handleItemClick(e, name); this.props.history.push('/drink-calculator')}}/>
+          <Menu.Item name='guilt calcultor' active={activeItem === 'guilt calculator'} onClick={(e, name) => {this.handleItemClick(e, name); this.props.history.push('/drink-calculator')}}/>
         </Menu>
       </div>
 
