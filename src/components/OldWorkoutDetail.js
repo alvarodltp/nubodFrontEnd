@@ -23,8 +23,8 @@ class OldWorkoutDetail extends React.Component {
   render(){
   let oldWorkout = this.props.selectedWorkoutHistory
     return(
-      <Table celled compact definition>
-          <Table.Header fullWidth>
+      <Table basic='very' celled collapsing>
+          <Table.Header>
             <Table.Row>
               <Table.HeaderCell id="table"/>
               <Table.HeaderCell id="table-cell">Exercise</Table.HeaderCell>

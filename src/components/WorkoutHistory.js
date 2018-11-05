@@ -17,18 +17,16 @@ class WorkoutHistory extends React.Component {
       <div style={{minHeight: "100vh"}}>
         <div id="past-workouts">
           <h1>Your Past Workouts</h1>
-          {this.props.workoutHistory ? this.props.workoutHistory.map(workout =>
+        {this.props.workoutHistory ? this.props.workoutHistory.map(workout =>
           <Card
             id="old-workout"
             onClick={() => {this.props.displayWorkout(workout); this.props.history.push('/workout-detail')}}
             header={workout.name}
             meta={workout.date}
             description=''
-            /> ) : null}
+            /> ) : null }
+        </div>
       </div>
-    </div>
-
-
     )
   }
 }
