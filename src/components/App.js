@@ -123,7 +123,8 @@ getUserMeasurements = () => {
   .then(response => response.json())
   .then(measurements => {
       // debugger
-    let userMeasurements = measurements.filter(measurement => measurement.user_id === this.state.user.id)
+    let userMeasurements;
+    this.state.user ? userMeasurements = measurements.filter(measurement => measurement.user_id === this.state.user.id) : userMeasurements = null
     this.setState({
       measurements: userMeasurements
     })
@@ -141,17 +142,18 @@ filterExerByMusGroup = (e) => {
 }
 
 
-// getAllSets = () => {
-//   fetch("http://localhost:3001/exercise_sets")
-//   .then(response => response.json())
-//   .then(json => {
-//     // let workouts = json.map(set => set.workout)
-//     console.log(json)
-//     this.setState({
-//       allSets: json
-//     }, () => this.calculateRepsAndSets())
-//   })
-// }
+getAllSets = () => {
+  fetch("http://localhost:3001/exercise_sets")
+  .then(response => response.json())
+  .then(json => {
+    debugger
+    // let workouts = json.map(set => set.workout)
+    console.log(json)
+    this.setState({
+      allSets: json
+    }, () => this.calculateRepsAndSets(this.state.allSets))
+  })
+}
 
 quoteOfTheDay = () => {
   fetch("https://quotes.rest/qod")
@@ -168,16 +170,17 @@ getUserWorkouts = () => {
   .then(response => response.json())
   .then(workouts => {
     let userWorkouts;
-    userWorkouts = workouts.filter(workout => workout.user_id === this.state.user.id)
+    this.state.user ? userWorkouts = workouts.filter(workout => workout.user_id === this.state.user.id) : userWorkouts = null
     // debugger
-    let sets = userWorkouts.map(workout => workout.exercise_sets).flat()
+    let sets;
+    this.state.user ? sets = userWorkouts.map(workout => workout.exercise_sets).flat() : sets = null
 
     // let reversedArr = userWorkouts.reverse()
     this.setState({
       workouts: userWorkouts,
       workoutHistory: userWorkouts,
       allSets: sets
-    }, () => this.workoutsCompleted())
+    }, () => this.workoutsCompleted(workouts))
   })
 }
 
@@ -275,7 +278,8 @@ removeWorkout = (e, woid) => {
   ), () => this.getUserWorkouts())
 }
 
-calculateRepsAndSets = () => {
+calculateRepsAndSets = (sets) => {
+  debugger
   let allSets = [...this.state.allSets]
   let allWeightArr = allSets.map(set => set.weight).flat()
   let allRepsArr = allSets.map(set => set.reps).flat()
@@ -287,8 +291,9 @@ calculateRepsAndSets = () => {
   })
 }
 
-workoutsCompleted = () => {
-  let totalWorkouts = [...this.state.workouts].length
+workoutsCompleted = (workouts) => {
+  debugger
+  let totalWorkouts = [...workouts].length
   this.setState({
     workoutsCompleted: totalWorkouts
   }, () => this.calculateRepsAndSets())
